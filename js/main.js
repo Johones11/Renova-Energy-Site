@@ -2,35 +2,67 @@
    Renova Energy LDA - Main Scripts (Premium Version - PT)
    ========================================================================== */
 
-/* --- Blog Content (Português) --- */
+/* --- Blog Content (Multilingue) --- */
 const blogContent = {
-    '1': {
-        category: 'Dicas Solares',
-        title: '3 Mitos Frequentes sobre Painéis Solares Nampula',
-        image: 'url(\'imagens/image-16.jpg\')',
-        text: `
-            <p><strong>Mito 1: Painéis solares não funcionam no inverno.</strong> Na verdade, eles dependem da luz, não do calor. Moçambique tem radiação solar excelente o ano todo.</p>
-            <p><strong>Mito 2: A manutenção é caríssima.</strong> Falso. A manutenção básica consiste em limpeza e inspeção visual, com custo muito reduzido comparado à economia gerada.</p>
-            <p><strong>Mito 3: Preciso de baterias para tudo.</strong> Em sistemas On-Grid, você pode usar a rede da EDM como "bateria virtual", reduzindo drasticamente o investimento inicial.</p>
-        `
+    pt: {
+        '1': {
+            category: 'Dicas Solares',
+            title: '3 Mitos Frequentes sobre Painéis Solares Nampula',
+            image: 'url(\'imagens/image-16.jpg\')',
+            text: `
+                <p><strong>Mito 1: Painéis solares não funcionam no inverno.</strong> Na verdade, eles dependem da luz, não do calor. Moçambique tem radiação solar excelente o ano todo.</p>
+                <p><strong>Mito 2: A manutenção é caríssima.</strong> Falso. A manutenção básica consiste em limpeza e inspeção visual, com custo muito reduzido comparado à economia gerada.</p>
+                <p><strong>Mito 3: Preciso de baterias para tudo.</strong> Em sistemas On-Grid, você pode usar a rede da EDM como "bateria virtual", reduzindo drasticamente o investimento inicial.</p>
+            `
+        },
+        '2': {
+            category: 'Mercado Financeiro',
+            title: 'Impacto Econômico: Retorno de Investimento Rápido',
+            image: 'url(\'imagens/image-19.jpg\')',
+            text: `
+                <p>Investir em energia renovável na Renova Energy garante um ROI entre 2 a 5 anos. Com a subida das tarifas elétricas, produzir a sua própria energia é o melhor ativo financeiro sustentável.</p>
+                <p>Nossos projetos Turnkey incluem tudo: do licenciamento à instalação, maximizando cada metical investido.</p>
+            `
+        },
+        '3': {
+            category: 'Tecnologia',
+            title: 'A Revolução Sustentável na Indústria Off-Grid',
+            image: 'url(\'imagens/image-26.jpg\')',
+            text: `
+                <p>A indústria mineira e agrícola em Moçambique está a mudar para o Off-Grid. Usamos inversores de alta frequência e baterias de lítio LiFePO4 para garantir energia 24/7 em locais remotos.</p>
+                <p>A Renova Energy lidera a implementação destas soluções robustas com monitorização remota via Wi-Fi/4G.</p>
+            `
+        }
     },
-    '2': {
-        category: 'Mercado Financeiro',
-        title: 'Impacto Econômico: Retorno de Investimento Rápido',
-        image: 'url(\'imagens/image-19.jpg\')',
-        text: `
-            <p>Investir em energia renovável na Renova Energy garante um ROI entre 2 a 5 anos. Com a subida das tarifas elétricas, produzir a sua própria energia é o melhor ativo financeiro sustentável.</p>
-            <p>Nossos projetos Turnkey incluem tudo: do licenciamento à instalação, maximizando cada metical investido.</p>
-        `
-    },
-    '3': {
-        category: 'Tecnologia',
-        title: 'A Revolução Sustentável na Indústria Off-Grid',
-        image: 'url(\'imagens/image-26.jpg\')',
-        text: `
-            <p>A indústria mineira e agrícola em Moçambique está a mudar para o Off-Grid. Usamos inversores de alta frequência e baterias de lítio LiFePO4 para garantir energia 24/7 em locais remotos.</p>
-            <p>A Renova Energy lidera a implementação destas soluções robustas com monitorização remota via Wi-Fi/4G.</p>
-        `
+    en: {
+        '1': {
+            category: 'Solar Tips',
+            title: '3 Common Myths about Solar Panels in Nampula',
+            image: 'url(\'imagens/image-16.jpg\')',
+            text: `
+                <p><strong>Myth 1: Solar panels do not work in winter.</strong> In fact, they rely on light, not heat. Mozambique has excellent solar radiation all year round.</p>
+                <p><strong>Myth 2: Maintenance is extremely expensive.</strong> False. Basic maintenance consists of cleaning and visual inspection, with a very low cost compared to the savings generated.</p>
+                <p><strong>Myth 3: I need batteries for everything.</strong> In On-Grid systems, you can use the EDM network as a "virtual battery", drastically reducing the initial investment.</p>
+            `
+        },
+        '2': {
+            category: 'Financial Market',
+            title: 'Economic Impact: Quick Return on Investment',
+            image: 'url(\'imagens/image-19.jpg\')',
+            text: `
+                <p>Investing in renewable energy with Renova Energy guarantees an ROI of 2 to 5 years. With rising electricity tariffs, producing your own energy is the best sustainable financial asset.</p>
+                <p>Our Turnkey projects include everything: from licensing to installation, maximizing every metical invested.</p>
+            `
+        },
+        '3': {
+            category: 'Technology',
+            title: 'The Sustainable Revolution in the Off-Grid Industry',
+            image: 'url(\'imagens/image-26.jpg\')',
+            text: `
+                <p>The mining and agricultural industry in Mozambique is moving to Off-Grid. We use high-frequency inverters and LiFePO4 lithium batteries to guarantee 24/7 energy in remote locations.</p>
+                <p>Renova Energy leads the implementation of these robust solutions with remote monitoring via Wi-Fi/4G.</p>
+            `
+        }
     }
 };
 
@@ -67,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Language Initialization ---
     initLanguage();
+
+    // --- Date Initialization (Tomorrow's Date as Default) ---
+    resetDefaultDate();
 
     // --- Cookie Consent Logic ---
     const cookieConsent = localStorage.getItem('cookieConsent');
@@ -167,7 +202,7 @@ function removeLoader() {
             // Trigger das animações globais e números na página inicial
             showSection('home', null, true);
         }
-    }, 2400); // 2.4s delay for premium Netflix cinematic intro
+    }, 1200); // 1.2s delay for corporate institutional loader
 }
 
 if (document.readyState === 'complete') {
@@ -277,41 +312,67 @@ function handleFormSubmit(event) {
     const data = dataInput.value.trim();
     const hora = document.getElementById('hora').value;
 
+    let displayDate = data;
+    let diaVal, mesVal, anoVal;
+    let isValid = false;
+
+    // Check if YYYY-MM-DD format (mobile native picker)
+    if (/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+        const partes = data.split('-');
+        anoVal = parseInt(partes[0], 10);
+        mesVal = parseInt(partes[1], 10);
+        diaVal = parseInt(partes[2], 10);
+        isValid = true;
+        displayDate = `${String(diaVal).padStart(2, '0')}/${String(mesVal).padStart(2, '0')}/${anoVal}`;
+    } 
+    // Check if DD/MM/YYYY format (desktop text mask)
+    else if (/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
+        const partes = data.split('/');
+        diaVal = parseInt(partes[0], 10);
+        mesVal = parseInt(partes[1], 10);
+        anoVal = parseInt(partes[2], 10);
+        isValid = true;
+    }
+
+    const lang = localStorage.getItem('lang') || 'pt';
+
     // --- DATA VALIDATION ---
-    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-    if (!dateRegex.test(data)) {
-        showToast("Por favor, introduza uma data válida no formato DD/MM/AAAA.");
+    if (!isValid) {
+        const msg = (translations[lang] && translations[lang]['toast_invalid_format']) || "Por favor, introduza uma data válida no formato DD/MM/AAAA.";
+        showToast(msg);
         dataInput.focus();
         return;
     }
 
-    const partes = data.split('/');
-    const diaVal = parseInt(partes[0], 10);
-    const mesVal = parseInt(partes[1], 10);
-    const anoVal = parseInt(partes[2], 10);
-
     if (diaVal < 1 || diaVal > 31 || mesVal < 1 || mesVal > 12 || anoVal < 2026) {
-        showToast("Data inválida. Verifique o dia, mês e ano.");
+        const msg = (translations[lang] && translations[lang]['toast_bad_date']) || "Data inválida. Verifique o dia, mês e ano.";
+        showToast(msg);
         dataInput.focus();
         return;
     }
     // -----------------------
 
     if (submitMethod === 'whatsapp') {
-        const message = `*NOVO AGENDAMENTO SITE*%0A%0A*Nome:* ${nome}%0A*Telefone:* ${telefone}%0A*Localização:* ${provincia} (${cidade})%0A*Serviço:* ${servico}%0A*Data:* ${data}%0A*Hora:* ${hora}`;
+        const message = `*NOVO AGENDAMENTO SITE*%0A%0A*Nome:* ${nome}%0A*Telefone:* ${telefone}%0A*Localização:* ${provincia} (${cidade})%0A*Serviço:* ${servico}%0A*Data:* ${displayDate}%0A*Hora:* ${hora}`;
         window.open(`https://wa.me/258841151961?text=${message}`, '_blank').focus();
-        showToast("Redirecionando para o WhatsApp...");
+        const msg = (translations[lang] && translations[lang]['toast_redirect_wa']) || "Redirecionando para o WhatsApp...";
+        showToast(msg);
         form.reset();
+        resetDefaultDate();
     } else {
         // --- TRADITIONAL MAILTO METHOD ---
         const subject = encodeURIComponent("Solicitação de Orçamento - Renova Energy");
-        const body = encodeURIComponent(`Olá Renova Energy,\n\nGostaria de solicitar um agendamento:\n\nNome: ${nome}\nTelefone: ${telefone}\nLocalização: ${provincia} (${cidade})\nServiço: ${servico}\nData: ${data}\nHora: ${hora}\n\nEnvio feito via Website.`);
+        const body = encodeURIComponent(`Olá Renova Energy,\n\nGostaria de solicitar um agendamento:\n\nNome: ${nome}\nTelefone: ${telefone}\nLocalização: ${provincia} (${cidade})\nServiço: ${servico}\nData: ${displayDate}\nHora: ${hora}\n\nEnvio feito via Website.`);
         
         window.location.href = `mailto:renovaenergylda@gmail.com?subject=${subject}&body=${body}`;
         
-        showToast("Abrindo o seu gestor de e-mail...");
+        const msg = (translations[lang] && translations[lang]['toast_redirect_mail']) || "Abrindo o seu gestor de e-mail...";
+        showToast(msg);
         // Delay reset slightly to let the browser start the protocol handler
-        setTimeout(() => form.reset(), 1000);
+        setTimeout(() => {
+            form.reset();
+            resetDefaultDate();
+        }, 1000);
     }
 }
 
@@ -326,7 +387,8 @@ function showToast(text) {
 
 function abrirModalBlog(id) {
     const modal = document.getElementById('blog-modal');
-    const item = blogContent[id];
+    const lang = localStorage.getItem('lang') || 'pt';
+    const item = blogContent[lang] ? blogContent[lang][id] : null;
     if (modal && item) {
         document.getElementById('modal-img').style.backgroundImage = item.image;
         document.getElementById('modal-category').innerText = item.category;
@@ -381,13 +443,27 @@ function initTypewriter() {
     const textElement = document.querySelector('.typing-text');
     if (!textElement) return;
 
-    const words = ["ECONOMIA", "EFICIÊNCIA", "AUTONOMIA", "SUSTENTABILIDADE"];
+    let typewriterLang = localStorage.getItem('lang') || 'pt';
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
     let typeSpeed = 150;
 
     function type() {
+        const lang = localStorage.getItem('lang') || 'pt';
+        if (lang !== typewriterLang) {
+            typewriterLang = lang;
+            wordIndex = 0;
+            charIndex = 0;
+            isDeleting = false;
+        }
+
+        const wordsStr = (typeof translations !== 'undefined' && translations[lang] && translations[lang]['typewriter_words']) || "ECONOMIA,EFICIÊNCIA,AUTONOMIA,SUSTENTABILIDADE";
+        const words = wordsStr.split(',');
+        
+        if (wordIndex >= words.length) {
+            wordIndex = 0;
+        }
         const currentWord = words[wordIndex];
         
         if (isDeleting) {
@@ -526,6 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dataInput = document.getElementById('data');
     if (dataInput) {
         dataInput.addEventListener('input', (e) => {
+            if (e.target.type === 'date') return;
             let value = e.target.value.replace(/\D/g, ""); // Remove não-dígitos
             if (value.length > 8) value = value.slice(0, 8);
             
@@ -557,11 +634,20 @@ function initLanguage() {
     setLanguage(lang);
 }
 
+function toggleLanguage() {
+    const currentLang = localStorage.getItem('lang') || 'pt';
+    const nextLang = currentLang === 'pt' ? 'en' : 'pt';
+    setLanguage(nextLang);
+}
+
 function setLanguage(lang) {
     if (typeof translations === 'undefined') return;
     
     const dic = translations[lang];
     if (!dic) return;
+    
+    // Atualiza a linguagem no HTML para SEO e acessibilidade
+    document.documentElement.lang = lang === 'pt' ? 'pt-PT' : 'en';
     
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -575,16 +661,52 @@ function setLanguage(lang) {
         }
     });
 
-    localStorage.setItem('lang', lang);
-
-    // Update active state of language buttons
-    const langBtns = document.querySelectorAll('.lang-btn');
-    langBtns.forEach(btn => {
-        if (btn.dataset.lang === lang) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (dic[key]) {
+            el.setAttribute('title', dic[key]);
         }
     });
+
+    localStorage.setItem('lang', lang);
+
+    // Atualiza o texto do botão único de idioma
+    document.querySelectorAll('.lang-btn-label').forEach(el => {
+        el.innerText = lang.toUpperCase();
+    });
+
+    // Mantém compatibilidade com botões normais se existirem
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => {
+        if (btn.dataset.lang) {
+            if (btn.dataset.lang === lang) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+    });
+}
+
+function resetDefaultDate() {
+    const dataInput = document.getElementById('data');
+    if (dataInput) {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        const yyyy = tomorrow.getFullYear();
+        const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        const dd = String(tomorrow.getDate()).padStart(2, '0');
+        
+        if (isMobile) {
+            dataInput.type = 'date';
+            dataInput.value = `${yyyy}-${mm}-${dd}`;
+        } else {
+            dataInput.type = 'text';
+            dataInput.value = `${dd}/${mm}/${yyyy}`;
+        }
+    }
 }
 

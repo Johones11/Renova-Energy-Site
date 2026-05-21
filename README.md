@@ -25,7 +25,7 @@ Bem-vindo ao projeto **Renova Energy**, uma plataforma moderna, dinâmica e resp
 ├── js/
 │   ├── main.js          # Lógica principal (SPA, Theme, Lang, Forms)
 │   └── translations.js  # Dicionário de traduções PT/EN
-├── logotipos/           # Imagens de marca
+├── logotipo/            # Imagens de marca
 └── imagens/             # Imagens ilustrativas
 ```
 

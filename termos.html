@@ -6,6 +6,7 @@
     <title>Termos de Uso - Renova Energy Lda</title>
     <link rel="icon" type="image/webp" href="logotipo/Favicon.webp">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --clr-primary: #0284c7;
@@ -55,7 +56,6 @@
             transition: transform 0.3s ease;
         }
         .back-btn:hover { transform: translateX(-5px); }
-        }
         
         /* Dark Mode Support */
         body.dark-theme {
@@ -80,19 +80,26 @@
         .lang-btn {
             background: transparent;
             border: 1px solid rgba(0,0,0,0.2);
-            padding: 2px 8px;
+            padding: 4px 12px;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 20px;
             color: var(--clr-text);
-            margin-left: 5px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
         body.dark-theme .lang-btn {
-            border-color: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.25);
+            color: #f9fafb;
         }
-        .lang-btn.active {
+        .lang-btn:hover {
             background: var(--clr-primary);
             color: white;
             border-color: var(--clr-primary);
+            transform: translateY(-1px);
         }
         @media (max-width: 600px) {
             body { padding: 1.5rem 1rem; }
@@ -104,8 +111,9 @@
 <body>
     <div class="container">
         <div class="page-lang-selector">
-            <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
-            <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="toggleLanguage()" data-i18n-title="tooltip_lang">
+                <i class="fas fa-globe"></i> <span class="lang-btn-label">PT</span>
+            </button>
         </div>
         <div style="text-align: center; margin-bottom: 2rem;">
             <a href="index.html">

@@ -165,15 +165,15 @@
 #loading-screen {
     position: fixed;
     inset: 0;
-    background: #060913 !important; /* Fundo preto/azul escuro ultra premium estilo cinema (Netflix) */
+    background: #0f172a !important; /* Cor cinza-escura/azul marinho ultra premium (Slate-900) */
     z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.8s cubic-bezier(0.7, 0, 0.3, 1), visibility 0.8s;
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s;
 }
 
-/* Garante o uso do logótipo com letras brancas no ecrã de carregamento escuro para contraste absoluto */
+/* Garante o uso do logótipo com letras brancas no ecrã de carregamento escuro */
 #loading-screen .logo-light {
     display: none !important;
 }
@@ -192,18 +192,16 @@ body.loading {
 }
 
 .loader-content {
-    text-align: center;
-    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
 }
 
 /* Wrapper principal do carregamento */
 .loader-wrapper {
     position: relative;
-    width: 300px;
-    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -212,156 +210,63 @@ body.loading {
     border: none !important;
 }
 
-/* Círculo do Logótipo transformado no efeito Netflix de Ondas Sonoras e Feixe Laser */
 .loader-circle {
-    position: absolute;
-    width: 270px;
-    height: 270px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
+    display: none !important;
 }
 
-/* Onda Concêntrica 1 - Explosão de Energia Azul/Laranja */
-.loader-circle::before {
-    content: '';
-    position: absolute;
-    inset: 30px; /* Começa colado ao R */
-    border: 4px solid transparent;
-    border-top-color: var(--clr-primary);
-    border-right-color: var(--clr-secondary);
-    border-radius: 50%;
-    animation: netflixRipple 2.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-}
-
-/* Feixe de Luz Vertical Laser (Estilo Linhas de Espectro da Netflix) */
-.loader-circle::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 100vh;
-    background: linear-gradient(to bottom, transparent, var(--clr-primary), var(--clr-secondary), transparent);
-    opacity: 0;
-    border-radius: 99px;
-    animation: netflixLaser 2.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-}
-
-/* Logótipo em Zoom-Through Cinematográfico (Netflix Tudum) */
 .loader-logo {
-    width: 270px !important;
+    width: 200px !important;
     height: auto !important;
-    margin-top: -30px !important;
-    margin-bottom: -30px !important;
     z-index: 2;
-    transform: scale(0.7);
     opacity: 0;
-    animation: netflixLogoIntro 2.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    animation: corporateLogoIntro 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* 🎥 Animação 1: Logótipo aproximando-se e depois explodindo através da camera */
-@keyframes netflixLogoIntro {
+/* Animação institucional e corporativa para o logótipo */
+@keyframes corporateLogoIntro {
     0% {
-        transform: scale(0.65);
         opacity: 0;
-        filter: blur(5px) drop-shadow(0 0 0px transparent);
+        transform: scale(0.95) translateY(10px);
+        filter: blur(4px);
     }
-    15% {
-        transform: scale(1.03);
+    100% {
         opacity: 1;
-        filter: blur(0px) drop-shadow(0 0 15px rgba(2, 132, 199, 0.3));
-    }
-    30% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.25));
-    }
-    /* Pequena pulsação dramática que prepara o zoom-through */
-    65% {
-        transform: scale(1.05);
-        opacity: 1;
-        filter: drop-shadow(0 0 25px var(--clr-primary));
-    }
-    /* O MOMENTO TUDUM: Zoom massivo penetrando a câmara */
-    100% {
-        transform: scale(18) rotate(4deg);
-        opacity: 0;
-        filter: blur(12px) drop-shadow(0 0 100px var(--clr-primary));
+        transform: scale(1) translateY(0);
+        filter: blur(0);
     }
 }
 
-/* 🎥 Animação 2: Ripple do círculo explodindo radialmente */
-@keyframes netflixRipple {
-    0% {
-        transform: scale(0.1) rotate(0deg);
-        opacity: 0;
-        filter: blur(5px);
-    }
-    20% {
-        opacity: 0.9;
-        filter: blur(0px);
-    }
-    60% {
-        transform: scale(1.2) rotate(180deg);
-        opacity: 0.6;
-    }
-    /* Expansão e desintegração total */
-    100% {
-        transform: scale(7) rotate(360deg);
-        opacity: 0;
-        filter: blur(20px);
-    }
-}
-
-/* 🎥 Animação 3: O Feixe Laser vertical estilo Netflix */
-@keyframes netflixLaser {
-    0% {
-        transform: scaleY(0);
-        opacity: 0;
-        filter: blur(6px);
-    }
-    25% {
-        transform: scaleY(1);
-        opacity: 0.8;
-        filter: blur(2px);
-    }
-    60% {
-        transform: scaleY(1.05) scaleX(2.5);
-        opacity: 0.5;
-    }
-    /* Expansão lateral massiva e fade out */
-    100% {
-        transform: scaleY(1.4) scaleX(30);
-        opacity: 0;
-        filter: blur(25px);
-    }
-}
-
-/* Ocultação total e limpa da barra de progresso antiga */
+/* Barra de progresso linear e profissional */
 .loader-bar {
-    display: none !important;
-}
-
-.dark-theme .loader-bar {
-    display: none !important;
+    display: block !important;
+    position: relative;
+    width: 180px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .loader-bar::after {
-    display: none !important;
+    content: '';
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--clr-primary) 0%, var(--clr-secondary) 100%);
+    border-radius: 4px;
+    animation: corporateBarLoad 1.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
 }
 
-@keyframes spinLoader {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes pulseLogo {
-    0%, 100% { transform: scale(0.96); opacity: 0.9; }
-    50% { transform: scale(1.04); opacity: 1; }
-}
-
-@keyframes loadingBar {
-    0% { left: -100%; }
-    100% { left: 100%; }
+@keyframes corporateBarLoad {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
 }
 
 /* ==========================================================================
@@ -487,13 +392,7 @@ body.loading {
     gap: 15px;
 }
 
-@media (max-width: 768px) {
-    .nav-actions {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 2rem;
-    }
-}
+/* .nav-actions responsiveness handled in mobile query at the bottom */
 
 .dark-theme #theme-toggle {
     background: rgba(255, 255, 255, 0.1);
@@ -836,6 +735,24 @@ header.scrolled {
     width: 270px;
     height: auto;
     overflow: visible;
+}
+
+.logo-link:focus,
+.logo-link:focus-visible,
+.logo-link:active,
+.logo-sticker:focus,
+.logo-sticker:focus-visible,
+.logo-sticker:active,
+.logo-link:focus img,
+.logo-link:focus-visible img,
+.logo-link:active img,
+.logo-sticker:focus img,
+.logo-sticker:focus-visible img,
+.logo-sticker:active img {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
 }
 
 /* Quando scrolled, encolhe ligeiramente */
@@ -3332,10 +3249,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
         margin-bottom: -26px !important;
     }
     
-    /* Desativa o zoom-through cinematográfico pesado em telemóveis, usando um fade elegante e leve */
+    /* Animação corporativa rápida e limpa no mobile também */
     .loader-logo {
-        animation: mobileLogoFade 2.2s ease-in-out forwards !important;
-        transform: scale(0.9) !important;
+        animation: corporateLogoIntro 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
     }
     
     .float-whatsapp {
@@ -3494,16 +3410,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
     position: fixed;
     bottom: 30px;
     left: 30px;
-    right: 30px;
-    max-width: 500px;
+    max-width: 600px;
     background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--br-xl);
-    padding: 1.5rem 2rem;
+    padding: 1.75rem 2.25rem;
     z-index: 12000;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
     display: none; /* Controlled by JS */
     opacity: 0;
     transform: translateY(30px);
@@ -3512,7 +3427,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .dark-theme .cookie-banner {
     background: rgba(15, 23, 42, 0.85);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
     color: var(--clr-white);
 }
 
@@ -3523,21 +3438,28 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .cookie-content {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.75rem 1.5rem;
     align-items: center;
-    gap: 1.5rem;
 }
 
 .cookie-icon {
-    font-size: 2rem;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    font-size: 2.5rem;
     color: var(--clr-secondary);
     filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.4));
+    align-self: center;
 }
 
 .cookie-content p {
-    font-size: 0.875rem;
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 0.95rem;
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.6;
     color: inherit;
 }
 
@@ -3547,11 +3469,17 @@ input[type="range"]::-webkit-slider-thumb:hover {
     text-decoration: underline;
 }
 
+.cookie-actions {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+}
+
 .btn-msg-cookie {
     background: var(--clr-primary);
     color: #fff;
     border: none;
-    padding: 0.6rem 1.5rem;
+    padding: 0.6rem 1.75rem;
     border-radius: var(--br-md);
     font-weight: 700;
     cursor: pointer;
@@ -3570,17 +3498,31 @@ input[type="range"]::-webkit-slider-thumb:hover {
         right: 15px;
         bottom: 15px;
         padding: 1rem;
+        max-width: none;
     }
     .cookie-content {
+        display: flex;
         flex-direction: row;
+        align-items: center;
         text-align: left;
         gap: 0.5rem;
     }
     .cookie-icon {
         font-size: 1.5rem;
+        grid-column: auto;
+        grid-row: auto;
+        align-self: auto;
     }
     .cookie-content p {
         font-size: 0.75rem;
+        line-height: 1.5;
+        grid-column: auto;
+        grid-row: auto;
+    }
+    .cookie-actions {
+        grid-column: auto;
+        grid-row: auto;
+        justify-self: auto;
     }
     .btn-msg-cookie {
         padding: 0.4rem 1rem;
@@ -3593,29 +3535,32 @@ input[type="range"]::-webkit-slider-thumb:hover {
    ========================================================================== */
 .lang-selector {
     display: flex;
-    gap: 0.5rem;
-    margin-left: 1rem;
     align-items: center;
+    margin-left: 1rem;
 }
 .lang-btn {
     background: transparent;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 4px;
-    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 20px;
+    padding: 0.35rem 0.8rem;
     cursor: pointer;
     font-size: 0.8rem;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--clr-text);
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 .dark-theme .lang-btn {
-    border-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
     color: var(--clr-white);
 }
-.lang-btn:hover, .lang-btn.active {
+.lang-btn:hover {
     background: var(--clr-primary);
-    color: white;
+    color: white !important;
     border-color: var(--clr-primary);
+    transform: translateY(-1px);
 }
 
 
@@ -3651,6 +3596,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
         display: none;
         z-index: 1000;
         border-top: 1px solid #e5e7eb;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
     }
     body.dark-theme #main-nav {
         background-color: #111827;
@@ -3678,9 +3625,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
         text-align: left;
     }
     .nav-actions {
-        flex-direction: column-reverse;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
         border-left: none;
         padding-left: 0;
         gap: 1rem;
@@ -3688,6 +3639,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .nav-actions .btn {
         width: 100%;
         text-align: center;
+        order: 1;
+    }
+    #theme-toggle {
+        order: 2;
+        margin: 0;
+    }
+    .nav-actions .lang-selector {
+        order: 3;
+        margin-left: 0;
     }
     
     .row {
@@ -4200,22 +4160,4 @@ body.dark-theme .mobile-sticky-cta {
     }
 }
 
-/* Animação simplificada de fade para o logótipo em ecrãs móveis (sem zoom) */
-@keyframes mobileLogoFade {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    15% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    70% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(1);
-    }
-}
+

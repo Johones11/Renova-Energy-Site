@@ -176,7 +176,54 @@ const translations = {
         "term_h4": "4. Propriedade Intelectual",
         "term_p5": "Todo o material, logotipos e imagens pertencem à Renova Energy, Lda. A reprodução não autorizada é proibida.",
         "term_h5": "5. Isenção de Responsabilidade",
-        "term_p6": "Não garantimos que o site estará sempre livre de erros ou interrupções, embora trabalhemos para mantê-lo com a máxima estabilidade."
+        "term_p6": "Não garantimos que o site estará sempre livre de erros ou interrupções, embora trabalhemos para mantê-lo com a máxima estabilidade.",
+
+        "blog_c1_cat": "Dicas Solares",
+        "blog_c1_title": "3 Mitos Frequentes sobre Painéis Solares Nampula",
+        "blog_c1_desc": "A transição para energia solar gera muitas dúvidas. Separamos o que é verdade do que é ficção...",
+        "blog_c2_cat": "Mercado Financeiro",
+        "blog_c2_title": "Impacto Econômico: Retorno de Investimento Rápido",
+        "blog_c2_desc": "Descubra como o sol pode ser o seu melhor ativo financeiro sustentável em 2026...",
+        "blog_c3_cat": "Tecnologia Off-Grid",
+        "blog_c3_title": "A Revolução Sustentável na Indústria Off-Grid",
+        "blog_c3_desc": "Sistemas independentes com baterias de lítio de última geração para fazendas agrárias...",
+        "blog_read_more": "Ler Artigo Completo <i class='fas fa-arrow-right'></i>",
+
+        "area_nampula_title": "Nampula (Sede)",
+        "area_nampula_desc": "Matriz operacional, logística centralizada e suporte regional imediato para todo o norte.",
+        "area_maputo_title": "Maputo",
+        "area_maputo_desc": "Hub comercial e fornecimento direto para grandes infraestruturas na capital do sul.",
+        "area_beira_title": "Beira",
+        "area_beira_desc": "Centro de assistência técnica e execução de projetos de eletrificação industrial.",
+        "area_zambezia_title": "Zambézia",
+        "area_zambezia_desc": "Expansão fotovoltaica estratégica com foco em agricultura e off-grid sustentável.",
+
+        "contact_lbl_country": "Moçambique",
+        "contact_val_address": "Bairro Copacabana, Nampula",
+        "contact_lbl_phone": "Linha Direta",
+        "contact_lbl_digital": "Digital",
+        "contact_lbl_hours": "Horário",
+        "contact_val_hours": "Seg - Sáb: 08:00 - 18:00",
+        "contact_trust_pill": "<i class='fas fa-shield-alt'></i> Dados 100% Seguros",
+        "contact_trust_desc": "A sua transição energética começa aqui com o suporte técnico mais rigoroso de Moçambique.",
+
+        "map_title": "Central Operacional Nampula",
+
+        "footer_copyright": "&copy; 2026 Renova Energy, Lda. Contribuindo para um mundo 100% sustentável. Todos os direitos reservados.",
+        "footer_terms": "Termos e Condições",
+        "footer_privacy": "Políticas de Privacidade",
+
+        "toast_invalid_format": "Por favor, introduza uma data válida no formato DD/MM/AAAA.",
+        "toast_bad_date": "Data inválida. Verifique o dia, mês e ano.",
+        "toast_redirect_wa": "Redirecionando para o WhatsApp...",
+        "toast_redirect_mail": "Abrindo o seu gestor de e-mail...",
+        "toast_success": "Mensagem enviada com sucesso!",
+
+        "tooltip_theme": "Alternar Modo Escuro",
+        "tooltip_wa": "Fale connosco pelo WhatsApp",
+        "tooltip_lang": "Alterar idioma (Mudar para Inglês)",
+        "ag_f_date_ph": "DD / MM / AAAA",
+        "typewriter_words": "ECONOMIA,EFICIÊNCIA,AUTONOMIA,SUSTENTABILIDADE"
     },
     en: {
         "nav_home": "Home",
@@ -355,6 +402,53 @@ const translations = {
         "term_h4": "4. Intellectual Property",
         "term_p5": "All material, logos, and images belong to Renova Energy, Lda. Unauthorized reproduction is prohibited.",
         "term_h5": "5. Disclaimer",
-        "term_p6": "We do not guarantee that the site will always be free of errors or interruptions, although we work to keep it with maximum stability."
+        "term_p6": "We do not guarantee that the site will always be free of errors or interruptions, although we work to keep it with maximum stability.",
+
+        "blog_c1_cat": "Solar Tips",
+        "blog_c1_title": "3 Common Myths about Solar Panels in Nampula",
+        "blog_c1_desc": "The transition to solar energy raises many questions. We separate truth from fiction...",
+        "blog_c2_cat": "Financial Market",
+        "blog_c2_title": "Economic Impact: Quick Return on Investment",
+        "blog_c2_desc": "Discover how the sun can be your best sustainable financial asset in 2026...",
+        "blog_c3_cat": "Off-Grid Technology",
+        "blog_c3_title": "The Sustainable Revolution in the Off-Grid Industry",
+        "blog_c3_desc": "Independent systems with latest-generation lithium batteries for agricultural farms...",
+        "blog_read_more": "Read Full Article <i class='fas fa-arrow-right'></i>",
+
+        "area_nampula_title": "Nampula (HQ)",
+        "area_nampula_desc": "Operational headquarters, centralized logistics and immediate regional support for the entire North.",
+        "area_maputo_title": "Maputo",
+        "area_maputo_desc": "Commercial hub and direct supply for large infrastructures in the southern capital.",
+        "area_beira_title": "Beira",
+        "area_beira_desc": "Technical assistance center and execution of industrial electrification projects.",
+        "area_zambezia_title": "Zambézia",
+        "area_zambezia_desc": "Strategic photovoltaic expansion focusing on agriculture and sustainable off-grid.",
+
+        "contact_lbl_country": "Mozambique",
+        "contact_val_address": "Copacabana Neighborhood, Nampula",
+        "contact_lbl_phone": "Direct Line",
+        "contact_lbl_digital": "Digital",
+        "contact_lbl_hours": "Hours",
+        "contact_val_hours": "Mon - Sat: 08:00 - 18:00",
+        "contact_trust_pill": "<i class='fas fa-shield-alt'></i> 100% Secure Data",
+        "contact_trust_desc": "Your energy transition starts here with the most rigorous technical support in Mozambique.",
+
+        "map_title": "Nampula Operational Headquarters",
+
+        "footer_copyright": "&copy; 2026 Renova Energy, Lda. Contributing to a 100% sustainable world. All rights reserved.",
+        "footer_terms": "Terms & Conditions",
+        "footer_privacy": "Privacy Policies",
+
+        "toast_invalid_format": "Please enter a valid date in the format DD/MM/YYYY.",
+        "toast_bad_date": "Invalid date. Please check the day, month, and year.",
+        "toast_redirect_wa": "Redirecting to WhatsApp...",
+        "toast_redirect_mail": "Opening your email client...",
+        "toast_success": "Message sent successfully!",
+
+        "tooltip_theme": "Toggle Dark Mode",
+        "tooltip_wa": "Chat with us on WhatsApp",
+        "tooltip_lang": "Change language (Switch to Portuguese)",
+        "ag_f_date_ph": "DD / MM / YYYY",
+        "typewriter_words": "ECONOMY,EFFICIENCY,AUTONOMY,SUSTAINABILITY"
     }
 };

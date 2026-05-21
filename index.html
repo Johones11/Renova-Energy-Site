@@ -25,13 +25,23 @@
     <!-- Translations -->
     <script src="js/translations.js"></script>
 
-    <!-- SEO & Social Media (WhatsApp/Facebook) -->
+    <!-- SEO & Social Media (WhatsApp/Facebook/Twitter) -->
     <meta property="og:title" content="Renova Energy, Lda | Painéis Solares e Energia Verde em Nampula">
     <meta property="og:description" content="Instalação de painéis solares em tempo recorde (máx 3 dias). Soluções de energia verde para Nampula e todo o Norte de Moçambique. Peça já o seu orçamento!">
     <meta property="og:image" content="https://renovaenergy.co.mz/imagens/image-12.jpg">
+    <meta property="og:image:secure_url" content="https://renovaenergy.co.mz/imagens/image-12.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Instalação de painéis solares em Moçambique pela Renova Energy">
     <meta property="og:url" content="https://renovaenergy.co.mz">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Renova Energy">
+    <meta property="og:locale" content="pt_MZ">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Renova Energy, Lda | Painéis Solares e Energia Verde em Nampula">
+    <meta name="twitter:description" content="Instalação de painéis solares em tempo recorde (máx 3 dias). Soluções de energia verde para Nampula e todo o Norte de Moçambique. Peça já o seu orçamento!">
+    <meta name="twitter:image" content="https://renovaenergy.co.mz/imagens/image-12.jpg">
 
     <!-- Schema.org for Google -->
     <script type="application/ld+json">
@@ -112,12 +122,13 @@
                 </ul>
                 <div class="nav-actions">
                     <a href="#agendamento" class="btn btn-primary btn-agendar-nav" onclick="showSection('agendamento', event)" data-i18n="nav_quote">Pedir Orçamento</a>
-                    <button id="theme-toggle" class="theme-toggle" title="Alternar Modo Escuro">
+                    <button id="theme-toggle" class="theme-toggle" data-i18n-title="tooltip_theme" title="Alternar Modo Escuro">
                         <i class="fas fa-moon"></i>
                     </button>
                     <div class="lang-selector">
-                        <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
-                        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                        <button class="lang-btn" onclick="toggleLanguage()" data-i18n-title="tooltip_lang">
+                            <i class="fas fa-globe"></i> <span class="lang-btn-label">PT</span>
+                        </button>
                     </div>
                 </div>
             </nav>
@@ -592,10 +603,10 @@
                             <div class="b-overlay"></div>
                         </div>
                         <div class="blog-body">
-                            <span class="blog-category">Dicas Solares</span>
-                            <h3>3 Mitos Frequentes sobre Painéis Solares Nampula</h3>
-                            <p>A transição para energia solar gera muitas dúvidas. Separamos o que é verdade do que é ficção...</p>
-                            <span class="blog-more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
+                            <span class="blog-category" data-i18n="blog_c1_cat">Dicas Solares</span>
+                            <h3 data-i18n="blog_c1_title">3 Mitos Frequentes sobre Painéis Solares Nampula</h3>
+                            <p data-i18n="blog_c1_desc">A transição para energia solar gera muitas dúvidas. Separamos o que é verdade do que é ficção...</p>
+                            <span class="blog-more" data-i18n="blog_read_more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
                     <!-- Blog Card 2 -->
@@ -605,10 +616,10 @@
                             <div class="b-overlay"></div>
                         </div>
                         <div class="blog-body">
-                            <span class="blog-category">Mercado Financeiro</span>
-                            <h3>Impacto Econômico: Retorno de Investimento Rápido</h3>
-                            <p>Descubra como o sol pode ser o seu melhor ativo financeiro sustentável em 2026...</p>
-                            <span class="blog-more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
+                            <span class="blog-category" data-i18n="blog_c2_cat">Mercado Financeiro</span>
+                            <h3 data-i18n="blog_c2_title">Impacto Econômico: Retorno de Investimento Rápido</h3>
+                            <p data-i18n="blog_c2_desc">Descubra como o sol pode ser o seu melhor ativo financeiro sustentável em 2026...</p>
+                            <span class="blog-more" data-i18n="blog_read_more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
                     <!-- Blog Card 3 -->
@@ -618,10 +629,10 @@
                             <div class="b-overlay"></div>
                         </div>
                         <div class="blog-body">
-                            <span class="blog-category">Tecnologia Off-Grid</span>
-                            <h3>A Revolução Sustentável na Indústria Off-Grid</h3>
-                            <p>Sistemas independentes com baterias de lítio de última geração para fazendas agrárias...</p>
-                            <span class="blog-more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
+                            <span class="blog-category" data-i18n="blog_c3_cat">Tecnologia Off-Grid</span>
+                            <h3 data-i18n="blog_c3_title">A Revolução Sustentável na Indústria Off-Grid</h3>
+                            <p data-i18n="blog_c3_desc">Sistemas independentes com baterias de lítio de última geração para fazendas agrárias...</p>
+                            <span class="blog-more" data-i18n="blog_read_more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
                 </div>
@@ -641,8 +652,8 @@
                             <div class="radar-ping"></div>
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h3>Nampula (Sede)</h3>
-                        <p>Matriz operacional, logística centralizada e suporte regional imediato para todo o norte.</p>
+                        <h3 data-i18n="area_nampula_title">Nampula (Sede)</h3>
+                        <p data-i18n="area_nampula_desc">Matriz operacional, logística centralizada e suporte regional imediato para todo o norte.</p>
                     </div>
                     <!-- Maputo -->
                     <div class="area-card hub-glass reveal-up delay-200ms">
@@ -650,8 +661,8 @@
                             <div class="radar-ping"></div>
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h3>Maputo</h3>
-                        <p>Hub comercial e fornecimento direto para grandes infraestruturas na capital do sul.</p>
+                        <h3 data-i18n="area_maputo_title">Maputo</h3>
+                        <p data-i18n="area_maputo_desc">Hub comercial e fornecimento direto para grandes infraestruturas na capital do sul.</p>
                     </div>
                     <!-- Beira -->
                     <div class="area-card hub-glass reveal-up delay-300ms">
@@ -659,8 +670,8 @@
                             <div class="radar-ping"></div>
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h3>Beira</h3>
-                        <p>Centro de assistência técnica e execução de projetos de eletrificação industrial.</p>
+                        <h3 data-i18n="area_beira_title">Beira</h3>
+                        <p data-i18n="area_beira_desc">Centro de assistência técnica e execução de projetos de eletrificação industrial.</p>
                     </div>
                     <!-- Zambézia -->
                     <div class="area-card hub-glass reveal-up delay-400ms">
@@ -668,8 +679,8 @@
                             <div class="radar-ping"></div>
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h3>Zambézia</h3>
-                        <p>Expansão fotovoltaica estratégica com foco em agricultura e off-grid sustentável.</p>
+                        <h3 data-i18n="area_zambezia_title">Zambézia</h3>
+                        <p data-i18n="area_zambezia_desc">Expansão fotovoltaica estratégica com foco em agricultura e off-grid sustentável.</p>
                     </div>
                 </div>
             </div>
@@ -693,37 +704,37 @@
                             <div class="m-contact-item-v2">
                                 <i class="fas fa-location-arrow pin-glow-v2"></i>
                                 <div class="m-text-v2">
-                                    <span class="label">Moçambique</span>
-                                    <p>Bairro Copacabana, Nampula</p>
+                                    <span class="label" data-i18n="contact_lbl_country">Moçambique</span>
+                                    <p data-i18n="contact_val_address">Bairro Copacabana, Nampula</p>
                                 </div>
                             </div>
                             <div class="m-contact-item-v2">
                                 <i class="fab fa-whatsapp whatsapp-glow-v2"></i>
                                 <div class="m-text-v2">
-                                    <span class="label">Linha Direta</span>
+                                    <span class="label" data-i18n="contact_lbl_phone">Linha Direta</span>
                                     <p>+258 84 115 1961</p>
                                 </div>
                             </div>
                             <div class="m-contact-item-v2">
                                 <i class="fas fa-envelope email-glow-v2"></i>
                                 <div class="m-text-v2">
-                                    <span class="label">Digital</span>
+                                    <span class="label" data-i18n="contact_lbl_digital">Digital</span>
                                     <p>renovaenergylda@gmail.com</p>
                                 </div>
                             </div>
                             <div class="m-contact-item-v2">
                                 <i class="far fa-clock time-glow-v2"></i>
                                 <div class="m-text-v2">
-                                    <span class="label">Horário</span>
-                                    <p>Seg - Sáb: 08:00 - 18:00</p>
+                                    <span class="label" data-i18n="contact_lbl_hours">Horário</span>
+                                    <p data-i18n="contact_val_hours">Seg - Sáb: 08:00 - 18:00</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Trusted Badge -->
                         <div class="trusted-footer mt-5 reveal-opacity delay-300ms">
-                             <div class="trust-pill"><i class="fas fa-shield-alt"></i> Dados 100% Seguros</div>
-                             <p class="small mt-2 text-muted">A sua transição energética começa aqui com o suporte técnico mais rigoroso de Moçambique.</p>
+                             <div class="trust-pill" data-i18n="contact_trust_pill"><i class="fas fa-shield-alt"></i> Dados 100% Seguros</div>
+                             <p class="small mt-2 text-muted" data-i18n="contact_trust_desc">A sua transição energética começa aqui com o suporte técnico mais rigoroso de Moçambique.</p>
                         </div>
                     </div>
 
@@ -776,7 +787,7 @@
                                 <div class="form-magia-row">
                                     <div class="form-magia-col">
                                         <label for="data" data-i18n="ag_f_date"><i class="far fa-calendar-alt mr-2"></i> Data Sugerida</label>
-                                        <input type="text" id="data" class="form-control-magia" placeholder="DD / MM / AAAA" maxlength="10" required>
+                                        <input type="text" id="data" class="form-control-magia" placeholder="DD / MM / AAAA" data-i18n="ag_f_date_ph" maxlength="10" required>
                                     </div>
                                     <div class="form-magia-col">
                                         <label for="hora" data-i18n="ag_f_time"><i class="far fa-clock mr-2"></i> Hora Estimada</label>
@@ -800,7 +811,7 @@
 
                 <!-- Google Maps -->
                 <div class="map-container-wrapper mt-5 reveal-up delay-400ms">
-                    <div class="map-overlay-title">Central Operacional Nampula</div>
+                    <div class="map-overlay-title" data-i18n="map_title">Central Operacional Nampula</div>
                     <iframe id="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31063.812239327508!2d39.248692518434695!3d-15.11186716942127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18c0df9bc9adfaad%3A0xe5a3acff0fdffbd6!2sNampula%2C%20Mo%C3%A7ambique!5e0!3m2!1spt-PT!2sbr!4v1700000000000!5m2!1spt-PT!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
@@ -854,14 +865,14 @@
         </div>
         <div class="footer-bottom">
             <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                <p>&copy; 2026 Renova Energy, Lda. Contribuindo para um mundo 100% sustentável. Todos os direitos reservados.</p>
-                <p style="font-size: 0.75rem;"><a href="termos.html" target="_blank" rel="noopener noreferrer">Termos e Condições</a> | <a href="privacidade.html" target="_blank" rel="noopener noreferrer">Políticas de Privacidade</a></p>
+                <p data-i18n="footer_copyright">&copy; 2026 Renova Energy, Lda. Contribuindo para um mundo 100% sustentável. Todos os direitos reservados.</p>
+                <p style="font-size: 0.75rem;"><a href="termos.html" target="_blank" rel="noopener noreferrer" data-i18n="footer_terms">Termos e Condições</a> | <a href="privacidade.html" target="_blank" rel="noopener noreferrer" data-i18n="footer_privacy">Políticas de Privacidade</a></p>
             </div>
         </div>
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/258841151961?text=Ol%C3%A1%21%20Visitei%20o%20site%20da%20Renova%20Energy%20Lda%20e%20gostaria%20de%20receber%20um%20atendimento%20pessoal." target="_blank" rel="noopener noreferrer" class="float-whatsapp" title="Fale connosco pelo WhatsApp">
+    <a href="https://wa.me/258841151961?text=Ol%C3%A1%21%20Visitei%20o%20site%20da%20Renova%20Energy%20Lda%20e%20gostaria%20de%20receber%20um%20atendimento%20pessoal." target="_blank" rel="noopener noreferrer" class="float-whatsapp" data-i18n-title="tooltip_wa" title="Fale connosco pelo WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -890,7 +901,7 @@
     <div class="toast-container">
         <div class="toast">
             <i class="fas fa-check-circle"></i>
-            <span>Mensagem enviada com sucesso!</span>
+            <span data-i18n="toast_success">Mensagem enviada com sucesso!</span>
         </div>
     </div>
 
