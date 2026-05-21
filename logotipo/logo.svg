@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 100" width="100%" height="100%">
+  <defs>
+    <!-- Embedding the specific fonts used so the SVG always renders them correctly even as an <img> -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Poppins:wght@700&amp;display=swap');
+      .brand-title { font-family: 'Bebas Neue', 'Arial Black', sans-serif; font-size: 46px; font-weight: 900; fill: #1f2937; letter-spacing: 1px; }
+      .brand-slogan { font-family: 'Poppins', 'Arial', sans-serif; font-size: 18px; font-weight: 700; fill: #6b7280; letter-spacing: 0.5px; }
+    </style>
+    
+    <linearGradient id="sunGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fde047; stop-opacity:1" /> <!-- Bright Yellow (same as sun) -->
+    </linearGradient>
+    <filter id="shadowFav" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Logo Icon Group -->
+  <g transform="translate(0, 5)">
+    <!-- Sun -->
+    <circle cx="35" cy="35" r="28" fill="url(#sunGrad)" />
+    
+    <!-- Solar Panel around the Sun -->
+    <path d="M 0 75 L 55 75 L 75 35 L 20 35 Z" fill="#0284c7" filter="url(#shadowFav)" />
+    
+    <!-- Panel Grid Lines (White) -->
+    <path d="M 9.5 55 L 65.5 55" stroke="#ffffff" stroke-width="2.5" />
+    <path d="M 18 75 L 36.5 35 M 36.5 75 L 55 35" stroke="#ffffff" stroke-width="2.5" />
+  </g>
+
+  <!-- Typography -->
+  <!-- RENOVA ENERGY, LDA (with ENERGY exactly the color of the sun) -->
+  <text x="85" y="52" class="brand-title">RENOVA <tspan fill="url(#sunGrad)">ENERGY</tspan><tspan fill="#4b5563" font-family="'Poppins', sans-serif" font-size="20">, LDA</tspan></text>
+
+  <!-- Big Official Slogan (Drastically Increased from 12px to 18px to ensure readability) -->
+  <text x="88" y="80" class="brand-slogan">ENERGIA LIMPA PARA UM FUTURO BRILHANTE</text>
+</svg>

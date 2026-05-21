@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Página Sem Energia | Renova Energy Lda</title>
+    <link rel="icon" type="image/webp" href="logotipo/Favicon.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --clr-primary: #0284c7;
+            --clr-secondary: #f59e0b;
+            --clr-dark: #0f172a;
+            --clr-white: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: var(--clr-dark);
+            color: var(--clr-white);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(2, 132, 199, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            animation: pulse 6s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.2); }
+        }
+        .error-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 4rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        .logo-box { margin-bottom: 2.5rem; }
+        .logo-svg { height: 60px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+        
+        .error-code {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12rem;
+            line-height: 0.8;
+            margin: 0;
+            color: var(--clr-secondary);
+            text-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+        }
+        h1 { font-size: 2.2rem; margin: 1.5rem 0 0.5rem; }
+        p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 3rem; line-height: 1.6; }
+        
+        .nav-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-fancy {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .btn-primary {
+            background: var(--clr-primary);
+            color: var(--clr-white);
+            box-shadow: 0 0 20px rgba(2, 132, 199, 0.4);
+        }
+        .btn-primary:hover {
+            background: var(--clr-white);
+            color: var(--clr-primary);
+            transform: translateY(-5px);
+        }
+        .btn-outline {
+            border: 2px solid rgba(255,255,255,0.2);
+            color: var(--clr-white);
+        }
+        .btn-outline:hover {
+            border-color: var(--clr-secondary);
+            color: var(--clr-secondary);
+            background: rgba(245, 158, 11, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        /* Mobile adjustment */
+        @media (max-width: 600px) {
+            .error-card { padding: 3rem 1.5rem; }
+            .error-code { font-size: 8rem; }
+            h1 { font-size: 1.8rem; }
+            .nav-options { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <div class="error-card">
+        <div class="logo-box">
+            <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="logo-svg" style="width: 270px; height: auto; margin-top: -24px; margin-bottom: -24px; object-fit: contain;">
+        </div>
+        
+        <h2 class="error-code">404</h2>
+        <h1>Circuito Interrompido.</h1>
+        <p>A página que tentou aceder não está a receber energia. <br>Vamos reconectar-nos à rede principal?</p>
+        
+        <div class="nav-options">
+            <a href="index.html" class="btn-fancy btn-primary">
+                <i class="fas fa-bolt"></i> Painel Inicial
+            </a>
+            <a href="index.html#servicos" class="btn-fancy btn-outline">
+                <i class="fas fa-solar-panel"></i> Serviços
+            </a>
+            <a href="index.html#agendamento" class="btn-fancy btn-outline">
+                <i class="fas fa-calendar-check"></i> Agendar
+            </a>
+        </div>
+    </div>
+</body>
+</html>

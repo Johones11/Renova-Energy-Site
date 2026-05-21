@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso - Renova Energy Lda</title>
+    <link rel="icon" type="image/webp" href="logotipo/Favicon.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --clr-primary: #0284c7;
+            --clr-secondary: #f59e0b;
+            --clr-text: #1f2937;
+            --clr-bg: #f3f4f6;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--clr-text);
+            background: var(--clr-bg);
+            margin: 0;
+            padding: 4rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        h1 { 
+            color: var(--clr-primary); 
+            margin-bottom: 2rem; 
+            font-weight: 700;
+            border-bottom: 3px solid var(--clr-secondary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        h2 { margin-top: 2rem; font-size: 1.25rem; color: var(--clr-primary); }
+        p { margin-bottom: 1.25rem; font-size: 1rem; color: #4b5563; }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            text-decoration: none;
+            color: var(--clr-primary);
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover { transform: translateX(-5px); }
+        }
+        
+        /* Dark Mode Support */
+        body.dark-theme {
+            --clr-text: #f9fafb;
+            --clr-bg: #111827;
+        }
+        body.dark-theme .container {
+            background: rgba(31, 41, 55, 0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.1);
+        }
+        body.dark-theme h1, body.dark-theme h2 { color: #38bdf8; }
+        body.dark-theme p { color: #d1d5db; }
+        body.dark-theme .back-btn { color: #38bdf8; }
+        
+        /* Lang Selector Minimal */
+        .page-lang-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(0,0,0,0.2);
+            padding: 2px 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            color: var(--clr-text);
+            margin-left: 5px;
+        }
+        body.dark-theme .lang-btn {
+            border-color: rgba(255,255,255,0.2);
+        }
+        .lang-btn.active {
+            background: var(--clr-primary);
+            color: white;
+            border-color: var(--clr-primary);
+        }
+        @media (max-width: 600px) {
+            body { padding: 1.5rem 1rem; }
+            .container { padding: 2rem 1.5rem; position: relative; }
+        }
+    </style>
+    <script src="js/translations.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="page-lang-selector">
+            <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+            <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <a href="index.html">
+                <img src="logotipo/Light Mode.webp" alt="Renova Energy" class="logo-light" style="width: 270px; height: auto; margin-top: -24px; margin-bottom: -24px; object-fit: contain;">
+                <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="logo-dark" style="width: 270px; height: auto; margin-top: -24px; margin-bottom: -24px; object-fit: contain; display: none;">
+            </a>
+        </div>
+        <a href="index.html" class="back-btn" data-i18n="term_back">← Voltar à Home</a>
+        <h1 data-i18n="term_title">Termos de Uso</h1>
+        
+        <h2 data-i18n="term_h1">1. Uso do Website</h2>
+        <p data-i18n="term_p1">Bem-vindo ao site da <strong>Renova Energy, Lda</strong>. Ao aceder e utilizar este site, concorda com os seguintes termos e condições:</p>
+        <p data-i18n="term_p2">O conteúdo deste site é apenas para informação geral e uso profissional. Está sujeito a alterações sem aviso prévio.</p>
+        
+        <h2 data-i18n="term_h2">2. Orçamentos e Agendamentos</h2>
+        <p data-i18n="term_p3">Os pedidos feitos através do nosso formulário estão sujeitos a confirmação técnica e disponibilidade da nossa equipa. O contacto inicial não estabelece vínculo contratual definitivo.</p>
+        
+        <h2 data-i18n="term_h3">3. Prazos de Instalação</h2>
+        <p data-i18n="term_p4">O prazo de 'máximo de 3 dias' aplica-se a montagens padronizadas, podendo variar dependendo da complexidade do projeto e condições climáticas.</p>
+        
+        <h2 data-i18n="term_h4">4. Propriedade Intelectual</h2>
+        <p data-i18n="term_p5">Todo o material, logotipos e imagens pertencem à Renova Energy, Lda. A reprodução não autorizada é proibida.</p>
+        
+        <h2 data-i18n="term_h5">5. Isenção de Responsabilidade</h2>
+        <p data-i18n="term_p6">Não garantimos que o site estará sempre livre de erros ou interrupções, embora trabalhemos para mantê-lo com a máxima estabilidade.</p>
+    </div>
+    
+    <style>
+        body.dark-theme .logo-light { display: none !important; }
+        body.dark-theme .logo-dark { display: inline-block !important; }
+    </style>
+    <script src="js/main.js"></script>
+</body>
+</html>

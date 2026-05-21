@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacidade - Renova Energy Lda</title>
+    <link rel="icon" type="image/webp" href="logotipo/Favicon.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --clr-primary: #10b981;
+            --clr-text: #1f2937;
+            --clr-bg: #f9fafb;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--clr-text);
+            background: var(--clr-bg);
+            margin: 0;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        h1 { color: var(--clr-primary); margin-bottom: 2rem; }
+        h2 { margin-top: 2rem; font-size: 1.25rem; }
+        p { margin-bottom: 1rem; }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            color: var(--clr-primary);
+            font-weight: 600;
+        }
+        }
+        
+        /* Dark Mode Support */
+        body.dark-theme {
+            --clr-text: #f9fafb;
+            --clr-bg: #111827;
+        }
+        body.dark-theme .container {
+            background: #1f2937;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        body.dark-theme .back-btn {
+            color: #34d399; /* slightly brighter primary for contrast */
+        }
+        
+        /* Lang Selector Minimal */
+        .page-lang-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(0,0,0,0.2);
+            padding: 2px 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            color: var(--clr-text);
+            margin-left: 5px;
+        }
+        body.dark-theme .lang-btn {
+            border-color: rgba(255,255,255,0.2);
+        }
+        .lang-btn.active {
+            background: var(--clr-primary);
+            color: white;
+            border-color: var(--clr-primary);
+        }
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .container { padding: 1.5rem; position: relative; }
+        }
+    </style>
+    
+    <script src="js/translations.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="page-lang-selector">
+            <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+            <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <a href="index.html">
+                <img src="logotipo/Light Mode.webp" alt="Renova Energy" class="logo-light" style="width: 270px; height: auto; margin-top: -24px; margin-bottom: -24px; object-fit: contain;">
+                <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="logo-dark" style="width: 270px; height: auto; margin-top: -24px; margin-bottom: -24px; object-fit: contain; display: none;">
+            </a>
+        </div>
+        <a href="index.html" class="back-btn" data-i18n="priv_back">← Voltar à Home</a>
+        <h1 data-i18n="priv_title">Políticas de Privacidade</h1>
+        <p data-i18n="priv_p1">A privacidade dos nossos clientes é fundamental na <strong>Renova Energy, Lda</strong>. Este documento descreve como recolhemos e utilizamos os seus dados pessoais:</p>
+        
+        <h2 data-i18n="priv_h1">1. Recolha de Dados</h2>
+        <p data-i18n="priv_p2">Recolhemos informações através do nosso formulário de agendamento (nome, telemóvel, localização, serviço, data e hora) apenas para processar pedidos de orçamento e reuniões técnicas.</p>
+        
+        <h2 data-i18n="priv_h2">2. Uso da Informação</h2>
+        <p data-i18n="priv_p3">Os seus dados são utilizados exclusivamente para o contacto comercial solicitado via WhatsApp ou E-mail. Não vendemos nem partilhamos os seus dados com terceiros para fins publicitários.</p>
+        
+        <h2 data-i18n="priv_h3">3. Localização</h2>
+        <p data-i18n="priv_p4">A recolha da sua localização serve apenas para o planeamento logístico da nossa equipa técnica antes de uma visita ou orçamento.</p>
+        
+        <h2 data-i18n="priv_h4">4. Cookies</h2>
+        <p data-i18n="priv_p5">Utilizamos cookies apenas para garantir a funcionalidade básica do website (como a preferência do Modo Escuro).</p>
+        
+        <h2 data-i18n="priv_h5">5. Direitos</h2>
+        <p data-i18n="priv_p6">O utilizador tem o direito de solicitar a eliminação dos seus dados a qualquer momento através do e-mail <strong>renovaenergylda@gmail.com</strong>.</p>
+    </div>
+    
+    <style>
+        body.dark-theme .logo-light { display: none !important; }
+        body.dark-theme .logo-dark { display: inline-block !important; }
+    </style>
+    <script src="js/main.js"></script>
+</body>
+</html>

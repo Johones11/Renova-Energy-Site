@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renova Energy, Lda — Soluções de Energia Solar em Moçambique</title>
+    <meta name="description" content="A Renova Energy fornece soluções tecnológicas em energias renováveis e sistemas fotovoltaicos em Nampula. Instalação em tempo recorde e energia verde para o seu futuro.">
+    <meta name="keywords" content="Painéis solares Nampula, instalação solar Moçambique, energia verde, sistemas fotovoltaicos, eletricidade sustentável, Renova Energy LDA, manutenção de painéis solares">
+    <meta name="author" content="Renova Energy, Lda">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="logotipo/Favicon.webp">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Translations -->
+    <script src="js/translations.js"></script>
+
+    <!-- SEO & Social Media (WhatsApp/Facebook) -->
+    <meta property="og:title" content="Renova Energy, Lda | Painéis Solares e Energia Verde em Nampula">
+    <meta property="og:description" content="Instalação de painéis solares em tempo recorde (máx 3 dias). Soluções de energia verde para Nampula e todo o Norte de Moçambique. Peça já o seu orçamento!">
+    <meta property="og:image" content="https://renovaenergy.co.mz/imagens/image-12.jpg">
+    <meta property="og:url" content="https://renovaenergy.co.mz">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Schema.org for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Renova Energy, Lda",
+      "image": "https://renovaenergy.co.mz/imagens/image-12.jpg",
+      "@id": "https://renovaenergy.co.mz",
+      "url": "https://renovaenergy.co.mz",
+      "telephone": "+258841151961",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bairro Central",
+        "addressLocality": "Nampula",
+        "addressCountry": "MZ"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -15.1119,
+        "longitude": 39.2487
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "17:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/RenovaEnergyLda"
+      ]
+    }
+    </script>
+</head>
+<body class="loading">
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="loader-wrapper">
+                <div class="loader-circle"></div>
+                <img src="logotipo/Light Mode.webp" alt="Renova Energy" class="loader-logo logo-light" style="width: 180px; height: auto; object-fit: contain;">
+                <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="loader-logo logo-dark" style="width: 180px; height: auto; object-fit: contain;">
+            </div>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header id="header">
+        <div class="header-inner">
+            <a href="#" class="logo-link" onclick="showSection('home', event)">
+                <img src="logotipo/Light Mode.webp" alt="Renova Energy" class="logo logo-light" style="height: 42px; width: auto; object-fit: contain;">
+                <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="logo logo-dark" style="height: 42px; width: auto; object-fit: contain;">
+            </a>
+            
+            <div class="header-right mobile-only">
+                <div class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+
+            <nav id="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active" onclick="showSection('home', event)" data-i18n="nav_home">Home</a></li>
+                    <li><a href="#sobre" class="nav-link" onclick="showSection('sobre', event)" data-i18n="nav_about">A Empresa</a></li>
+                    <li><a href="#servicos" class="nav-link" onclick="showSection('servicos', event)" data-i18n="nav_services">Serviços</a></li>
+                    <li><a href="#galeria" class="nav-link" onclick="showSection('galeria', event)" data-i18n="nav_gallery">Galeria</a></li>
+                    <li><a href="#numeros" class="nav-link" onclick="showSection('numeros', event)" data-i18n="nav_stats">Estatísticas</a></li>
+                    <li><a href="#blog" class="nav-link" onclick="showSection('blog', event)" data-i18n="nav_blog">Artigos</a></li>
+                    <li><a href="#areas" class="nav-link" onclick="showSection('areas', event)" data-i18n="nav_areas">Atuação</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="#agendamento" class="btn btn-primary btn-agendar-nav" onclick="showSection('agendamento', event)" data-i18n="nav_quote">Pedir Orçamento</a>
+                    <button id="theme-toggle" class="theme-toggle" title="Alternar Modo Escuro">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="lang-selector">
+                        <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+                        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content wrapper for SPA -->
+    <main id="main-content">
+        
+        <!-- SECTION: HOME -->
+        <section id="home" class="spa-section active">
+            <!-- Background Slider -->
+            <div class="hero-slider-container">
+                <div class="hero-slider" id="hero-slider">
+                    <div class="slider-item active" style="background-image: url('imagens/nova-imagem-1.jpg');"></div>
+                    <div class="slider-item" style="background-image: url('imagens/nova-imagem-2.jpg');"></div>
+                    <div class="slider-item" style="background-image: url('imagens/01-image.jpg');"></div>
+                    <div class="slider-item" style="background-image: url('imagens/image-17.jpg');"></div>
+                    <div class="slider-item" style="background-image: url('imagens/image-16.jpg');"></div>
+                </div>
+                <div class="hero-overlay"></div>
+                
+                <div class="container hero-content">
+                    <div class="hero-badge animate-up" data-i18n="hero_badge">Seja bem-vindo ao nosso site!</div>
+                    <h1 class="animate-up" data-i18n="hero_title">TRANSFORME O SOL EM <br><span class="typing-text text-gradient"></span><span class="cursor">|</span></h1>
+                    <p class="animate-up delay-1" data-i18n="hero_desc">Soluções de energia solar e infraestruturas elétricas de alta performance em Nampula e região. Montagem em tempo recorde: <strong>máximo 3 dias.</strong></p>
+                    <div class="hero-buttons animate-up delay-2">
+                        <a href="#agendamento" class="btn btn-primary btn-lg" onclick="showSection('agendamento', event)" data-i18n="hero_btn_quote"><i class="fas fa-bolt"></i> Pedir Orçamento Grátis</a>
+                        <a href="#servicos" class="btn btn-outline btn-lg" onclick="showSection('servicos', event)" data-i18n="hero_btn_services"><i class="fas fa-solar-panel"></i> Ver Soluções</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animated Stats Bar -->
+            <div class="home-stats-bar">
+                <div class="container stats-flex">
+                    <div class="stat-item">
+                        <div class="stat-number-row">
+                            <span class="stat-number" data-target="3">0</span>
+                            <span class="stat-suffix">dias</span>
+                        </div>
+                        <span class="stat-label" data-i18n="stat_days">Máx. de Montagem</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number-row">
+                            <span class="stat-number" data-target="45">0</span>
+                            <span class="stat-suffix">+</span>
+                        </div>
+                        <span class="stat-label" data-i18n="stat_installs">Instalações Concluídas</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number-row">
+                            <span class="stat-number" data-target="100">0</span>
+                            <span class="stat-suffix">%</span>
+                        </div>
+                        <span class="stat-label" data-i18n="stat_support">Acompanhamento Integral</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number-row">
+                            <span class="stat-number" data-target="24">0</span>
+                            <span class="stat-suffix">/7</span>
+                        </div>
+                        <span class="stat-label" data-i18n="stat_tech">Suporte Técnico</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Preview (Links to #servicos) -->
+            <div class="container home-segments section-padding">
+                <div class="text-center mb-5 reveal-up">
+                    <div class="section-badge" data-i18n="hm_srv_badge">O que Fazemos</div>
+                    <h2 data-i18n="hm_srv_title">Soluções Completas em Energia e Elétrica</h2>
+                    <p class="subtitle reveal-up delay-100ms" data-i18n="hm_srv_sub">Clique num serviço para explorar em detalhe.</p>
+                </div>
+
+                <div class="segment-grid">
+                    <a href="#servicos" class="segment-card reveal-up" onclick="goToService('srv-consultoria', event)">
+                        <div class="segment-icon"><i class="fas fa-handshake"></i></div>
+                        <h3 data-i18n="hm_srv_c_title">Consultoria em Energia</h3>
+                        <p data-i18n="hm_srv_c_desc">Direcionamento técnico especializado para o seu projeto.</p>
+                        <span class="card-link-indicator" data-i18n="learn_more">Saiba mais <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#servicos" class="segment-card reveal-up delay-100ms" onclick="goToService('srv-montagem', event)">
+                        <div class="segment-icon"><i class="fas fa-solar-panel"></i></div>
+                        <h3 data-i18n="hm_srv_m_title">Montagem Fotovoltaica</h3>
+                        <p data-i18n="hm_srv_m_desc">Instalação profissional de sistemas solares completos.</p>
+                        <span class="card-link-indicator" data-i18n="learn_more">Saiba mais <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#servicos" class="segment-card reveal-up delay-200ms" onclick="goToService('srv-material', event)">
+                        <div class="segment-icon"><i class="fas fa-plug"></i></div>
+                        <h3 data-i18n="hm_srv_mat_title">Material Elétrico</h3>
+                        <p data-i18n="hm_srv_mat_desc">Fornecimento de equipamentos com garantia de qualidade.</p>
+                        <span class="card-link-indicator" data-i18n="learn_more">Saiba mais <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#servicos" class="segment-card reveal-up delay-300ms" onclick="goToService('srv-edificios', event)">
+                        <div class="segment-icon"><i class="fas fa-building"></i></div>
+                        <h3 data-i18n="hm_srv_e_title">Instalação de Edifícios</h3>
+                        <p data-i18n="hm_srv_e_desc">Eletrificação completa para diferentes infraestruturas.</p>
+                        <span class="card-link-indicator" data-i18n="learn_more">Saiba mais <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Why Renova? (Interactive Accordion + Image) -->
+            <div class="why-renova-detailed section-padding bg-light">
+                <div class="container">
+                    <div class="row align-items-center mb-5">
+                        <div class="col-lg-6 reveal-up">
+                            <div class="section-badge" data-i18n="why_badge">O Nosso Diferencial</div>
+                            <h2 data-i18n="why_title">Por que escolher a Renova Energy?</h2>
+                            <p class="lead mb-4" data-i18n="why_desc">Mais do que instalar painéis — somos o parceiro estratégico que o acompanha do primeiro contacto até à energia a funcionar na sua casa ou empresa.</p>
+                            
+                            <div class="why-accordion">
+                                <div class="accordion-item">
+                                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span data-i18n="why_q1"><i class="fas fa-bolt"></i> Montagem em Tempo Recorde</span>
+                                        <i class="fas fa-plus toggle-icon"></i>
+                                    </button>
+                                    <div class="accordion-panel">
+                                        <p data-i18n="why_a1">Montamos qualquer sistema fotovoltaico em <strong>no máximo 3 dias</strong> — incluindo estrutura, cablagem e comissionamento. Enquanto a concorrência demora semanas, a Renova entrega resultados imediatos.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion-item">
+                                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span data-i18n="why_q2"><i class="fas fa-user-tie"></i> Acompanhamento do Início ao Fim</span>
+                                        <i class="fas fa-plus toggle-icon"></i>
+                                    </button>
+                                    <div class="accordion-panel">
+                                        <p data-i18n="why_a2">Desde a primeira consulta até ao pós-instalação, a nossa equipa técnica está sempre disponível. Não vendemos apenas equipamentos — comprometemo-nos com o sucesso do seu projeto energético.</p>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span data-i18n="why_q3"><i class="fas fa-medal"></i> Materiais de Última Geração</span>
+                                        <i class="fas fa-plus toggle-icon"></i>
+                                    </button>
+                                    <div class="accordion-panel">
+                                        <p data-i18n="why_a3">Utilizamos painéis com garantia de <strong>25 anos de performance</strong>, inversores de onda puramente sinusoidal e baterias LiFePO4. Só trabalhamos com equipamentos que garantimos com a nossa reputação.</p>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span data-i18n="why_q4"><i class="fas fa-map-marked-alt"></i> Cobertura em Todo o Norte de Moçambique</span>
+                                        <i class="fas fa-plus toggle-icon"></i>
+                                    </button>
+                                    <div class="accordion-panel">
+                                        <p data-i18n="why_a4">Com base em Nampula e cobertura que se estende a Zambézia, Beira e Maputo, temos logística para chegar onde o cliente precisa — sem custos de deslocação excessivos para projetos na região norte.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 reveal-right">
+                            <div class="why-img-wrapper">
+                                <img src="imagens/image-17.jpg" alt="Instalação Fotovoltaica Renova Energy" class="img-fluid rounded-xl shadow-lg">
+                                <div class="floating-badge">
+                                    <span class="fb-number">3</span>
+                                    <span class="fb-text">Dias Máx.<br>Montagem</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Home CTA -->
+            <div class="home-final-cta section-padding">
+                <div class="container text-center reveal-up">
+                    <div class="hero-badge" style="background: rgba(255,255,255,0.15); color: #fff; margin-bottom: 1.5rem; display:inline-block;" data-i18n="cta_badge">Pronto para começar?</div>
+                    <h3 data-i18n="cta_title">Energia Solar a Funcionar em 3 Dias.</h3>
+                    <p class="mb-4" data-i18n="cta_desc">Solicite uma proposta gratuita e sem compromisso. A nossa equipa analisa a sua situação e apresenta a melhor solução.</p>
+                    <div class="hero-buttons" style="justify-content: center;">
+                        <a href="#agendamento" class="btn btn-white btn-lg" onclick="showSection('agendamento', event)" data-i18n="cta_btn1"><i class="fas fa-bolt"></i> Pedir Proposta Grátis</a>
+                        <a href="https://wa.me/258841151961?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20os%20vossos%20servi%C3%A7os." target="_blank" class="btn btn-outline-white btn-lg" data-i18n="cta_btn2"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION: SOBRE A EMPRESA -->
+        <section id="sobre" class="spa-section">
+            <!-- Hero Heading for About Us -->
+            <div class="sobre-hero-header text-center section-padding pb-0 reveal-up">
+                <div class="section-badge" data-i18n="ab_badge">Renova Energy Lda</div>
+                <h2 class="display-title mb-3" data-i18n="ab_title">Construímos o Futuro da Energia</h2>
+                <p class="subtitle mx-auto" style="max-width: 700px;" data-i18n="ab_subtitle">Transformamos a paisagem energética de Moçambique com soluções renováveis, eficientes e desenhadas à medida do sucesso das suas infraestruturas.</p>
+            </div>
+
+            <div class="container section-padding pt-5">
+                <div class="row align-items-center mb-5 gx-5">
+                    <div class="col-lg-6 mb-5 mb-lg-0 reveal-left">
+                        <div class="sobre-image-container">
+                            <img src="imagens/image-13.jpg" alt="Instalação de painéis solares industrial pela Renova Energy" class="img-fluid rounded-lg shadow-lg">
+                            <div class="floating-badge--circle">
+                                <span class="fb-number">100%</span>
+                                <span class="fb-text">Sustentável</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 reveal-right">
+                        <blockquote class="founder-quote">
+                            <span data-i18n="ab_quote">"O nosso compromisso vai além do fornecimento técnico; é um compromisso rigoroso com a fiabilidade a longo prazo e a total autonomia do cliente."</span>
+                            <span data-i18n="ab_quote_author">— A Gerência, Renova Energy</span>
+                        </blockquote>
+                        <p class="mt-4 mb-3" style="font-size: 1.05rem; line-height: 1.7;" data-i18n="ab_p1">Fundada em 2024, a Renova Energy possui uma estrutura operacional perfeitamente talhada para abranger todos os setores do mercado: das habitações familiares aos complexos agrários e industriais mais exigentes do país.</p>
+                        <p class="mb-4" style="font-size: 1.05rem; line-height: 1.7;" data-i18n="ab_p2">O que nos destaca de imediato é a nossa audácia na execução: <strong>montagem fotovoltaica certificada em tempo recorde (máximo de 3 dias)</strong>. Do início ao fim, garantimos excelência.</p>
+                        
+                        <div class="sobre-pills-grid mt-4">
+                            <div class="s-pill"><i class="fas fa-microchip"></i> <span data-i18n="ab_pill1">Tecnologia Premium</span></div>
+                            <div class="s-pill"><i class="fas fa-hard-hat"></i> <span data-i18n="ab_pill2">Engenharia Focada</span></div>
+                            <div class="s-pill"><i class="fas fa-truck-moving"></i> <span data-i18n="ab_pill3">Logística Nacional</span></div>
+                            <div class="s-pill"><i class="fas fa-chart-line"></i> <span data-i18n="ab_pill4">ROI Garantido</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MVV Block (Glassmorphism) -->
+                <div class="mvv-glass-grid mt-5 pt-4">
+                    <div class="glass-mvv-card reveal-up delay-100ms">
+                        <div class="mvv-icon"><i class="fas fa-crosshairs"></i></div>
+                        <h3 data-i18n="ab_m_title">Missão</h3>
+                        <p data-i18n="ab_m_desc">Fornecer soluções de energia inovadoras e eficientes que garantam otimização financeira e crescimento contínuo para empresas e comunidades.</p>
+                    </div>
+                    <div class="glass-mvv-card reveal-up delay-200ms">
+                        <div class="mvv-icon"><i class="fas fa-eye"></i></div>
+                        <h3 data-i18n="ab_v_title">Visão</h3>
+                        <p data-i18n="ab_v_desc">Tornarmo-nos na maior força motriz e referência absoluta em energias limpas e infraestruturas técnicas inteligentes na zona norte de Moçambique.</p>
+                    </div>
+                    <div class="glass-mvv-card reveal-up delay-300ms">
+                        <div class="mvv-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3 data-i18n="ab_va_title">Valores</h3>
+                        <p data-i18n="ab_va_desc">Transparência cega, Rigor Técnico, Preservação Ambiental, Entregas Céleres sem comprometer qualidade e a obsessão pela experiência do cliente.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ SUB-SECTION -->
+                <div class="faq-container mt-5 pt-5" style="border-top: 1px solid rgba(0,0,0,0.1);">
+                    <div class="text-center mb-5 reveal-up">
+                        <div class="section-badge" data-i18n="faq_badge">Perguntas Frequentes</div>
+                        <h2 data-i18n="faq_title">Dúvidas Comuns</h2>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <span data-i18n="faq_q1">Quanto tempo demora a instalação?</span>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <div class="accordion-panel">
+                                <p data-i18n="faq_a1">Sistemas residenciais padrão levam entre 2 a 3 dias para montagem completa e comissionamento técnico.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <span data-i18n="faq_q2">A energia solar funciona em dias nublados?</span>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <div class="accordion-panel">
+                                <p data-i18n="faq_a2">Sim, os painéis continuam a captar radiação mesmo sem sol direto, embora a eficiência seja reduzida.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <span data-i18n="faq_q3">Preciso de baterias obrigatoriamente?</span>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <div class="accordion-panel">
+                                <p data-i18n="faq_a3">Não. Pode optar por sistemas On-Grid (sem baterias) se o seu objetivo principal for apenas a redução da fatura da EDM.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <span data-i18n="faq_q4">Quais as garantias oferecidas?</span>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <div class="accordion-panel">
+                                <p data-i18n="faq_a4">Garantia de 25 anos de performance nos painéis e 5 a 10 anos nos componentes eletrónicos centrais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SERVIÇOS (COM IMAGENS) -->
+        <section id="servicos" class="spa-section bg-light">
+            <div class="container section-padding text-center">
+                <div class="section-badge" data-i18n="srv_badge">Expertise</div>
+                <h2 class="mb-4" data-i18n="srv_title">Soluções Completas e Integradas</h2>
+                <p class="subtitle mb-5" data-i18n="srv_desc">Combinamos material da mais elevada qualidade europeia e asiática com a mão de obra mais especializada da região para lhe entregar um serviço irrepreensível.</p>
+                
+                <div class="expandable-services-grid">
+                    <!-- Consultoria -->
+                    <div id="srv-consultoria" class="expandable-service-card reveal-up delay-100ms">
+                        <div class="service-head" onclick="toggleServiceCard(this)">
+                            <div class="s-bg" style="background-image: url('imagens/image-19.jpg');"></div>
+                            <div class="s-overlay"></div>
+                            <div class="s-title-row">
+                                <div class="s-icon"><i class="fas fa-clipboard-list"></i></div>
+                                <h3 data-i18n="srv_c_title">Consultoria Estratégica</h3>
+                                <div class="s-toggle-btn"><i class="fas fa-chevron-down"></i></div>
+                            </div>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-body-content">
+                                <p data-i18n="srv_c_body">Damos a melhor informação imediata ao cliente para uma percepção técnica clara sobre energia renovável — antes mesmo de qualquer compromisso. Fazemos análise de infraestruturas locais, otimização de consumos e planeamento de autonomia energética para empresas e particulares.</p>
+                                <a href="#agendamento" class="btn btn-outline" onclick="showSection('agendamento', event)" data-i18n="srv_btn_quote">Pedir Orçamento Grátis</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Montagem -->
+                    <div id="srv-montagem" class="expandable-service-card reveal-up delay-200ms">
+                        <div class="service-head" onclick="toggleServiceCard(this)">
+                            <div class="s-bg" style="background-image: url('imagens/image-16.jpg');"></div>
+                            <div class="s-overlay"></div>
+                            <div class="s-title-row">
+                                <div class="s-icon"><i class="fas fa-solar-panel"></i></div>
+                                <h3 data-i18n="srv_m_title">Montagem Fotovoltaica</h3>
+                                <div class="s-toggle-btn"><i class="fas fa-chevron-down"></i></div>
+                            </div>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-body-content">
+                                <p data-i18n="srv_m_body">Montagem de todo tipo de sistema solar (On-Grid, Off-Grid, Híbrido) com entrega em tempo recorde: <strong>máximo 3 dias</strong>. Utilizamos inversores de alta durabilidade com inversão puramente sinusoidal e garantia de funcionamento imediato.</p>
+                                <a href="#agendamento" class="btn btn-outline" onclick="showSection('agendamento', event)" data-i18n="srv_btn_quote">Pedir Orçamento Grátis</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material -->
+                    <div id="srv-material" class="expandable-service-card reveal-up delay-300ms">
+                        <div class="service-head" onclick="toggleServiceCard(this)">
+                            <div class="s-bg" style="background-image: url('imagens/image-26.jpg');"></div>
+                            <div class="s-overlay"></div>
+                            <div class="s-title-row">
+                                <div class="s-icon"><i class="fas fa-plug"></i></div>
+                                <h3 data-i18n="srv_mat_title">Material Elétrico</h3>
+                                <div class="s-toggle-btn"><i class="fas fa-chevron-down"></i></div>
+                            </div>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-body-content">
+                                <p data-i18n="srv_mat_body">Fornecimento de material elétrico de última geração e alta qualidade, disponível para aquisição imediata: quadros elétricos, cablagens industriais, baterias de lítio e consumíveis elétricos rigorosamente certificados.</p>
+                                <a href="#agendamento" class="btn btn-outline" onclick="showSection('agendamento', event)" data-i18n="srv_btn_quote">Pedir Orçamento Grátis</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edificios -->
+                    <div id="srv-edificios" class="expandable-service-card reveal-up delay-400ms">
+                        <div class="service-head" onclick="toggleServiceCard(this)">
+                            <div class="s-bg" style="background-image: url('imagens/image-27.jpg');"></div>
+                            <div class="s-overlay"></div>
+                            <div class="s-title-row">
+                                <div class="s-icon"><i class="fas fa-city"></i></div>
+                                <h3 data-i18n="srv_e_title">Instalação de Edifícios</h3>
+                                <div class="s-toggle-btn"><i class="fas fa-chevron-down"></i></div>
+                            </div>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-body-content">
+                                <p data-i18n="srv_e_body">Instalação elétrica profissional para todo tipo de edifício — residencial, comercial ou industrial. Eletrificação completa, redes estruturadas e eficiência atestada com execução técnica impecável.</p>
+                                <a href="#agendamento" class="btn btn-outline" onclick="showSection('agendamento', event)" data-i18n="srv_btn_quote">Pedir Orçamento Grátis</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: GALERIA DE PROJETOS -->
+        <section id="galeria" class="spa-section bg-light">
+            <div class="container section-padding text-center">
+                <div class="section-badge reveal-up" data-i18n="gal_badge">O Nosso Trabalho</div>
+                <h2 class="mb-4 reveal-up delay-100ms" data-i18n="gal_title">Galeria de Operações</h2>
+                <p class="subtitle mb-5 mx-auto reveal-up delay-200ms" style="max-width: 700px;" data-i18n="gal_desc">Uma imagem vale mais que mil palavras. Veja de perto o impacto real da nossa dedicação e competência técnica em instalações recentes.</p>
+                
+                <div class="gallery-grid">
+                    <div class="g-item span-col-2 reveal-up delay-100ms">
+                        <img src="imagens/image-34.jpg" alt="Equipa técnica da Renova Energy em trabalho de campo" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item reveal-up delay-200ms">
+                        <img src="imagens/image-29.jpg" alt="Inversor e quadro elétrico de alta proteção" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item reveal-up delay-300ms">
+                        <img src="imagens/image-17.jpg" alt="Montagem de estrutura fotovoltaica em telhado" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item span-col-2 reveal-up delay-400ms">
+                        <img src="imagens/image-17-1.jpg" alt="Vista aérea de sistema solar completo" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item reveal-up delay-100ms">
+                        <img src="imagens/image-23-2.jpg" alt="Baterias de lítio de última geração para armazenamento" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item reveal-up delay-200ms">
+                        <img src="imagens/image-13-1.jpg" alt="Material de cablagem e disjuntores industriais" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item reveal-up delay-300ms">
+                        <img src="imagens/nova-imagem-3.jpg" alt="Novo Projeto de Energia Solar" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item span-col-2 reveal-up delay-400ms">
+                        <img src="imagens/nova-imagem-4.jpg" alt="Instalação Fotovoltaica Renova Energy" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item reveal-up delay-100ms">
+                        <img src="imagens/02-image.jpg" alt="Infraestrutura e Componentes Elétricos" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="g-item reveal-up delay-200ms">
+                        <img src="imagens/03-image.jpg" alt="Serviços Técnicos e Montagens" class="g-img" loading="lazy">
+                        <div class="g-overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: NÚMEROS ESTATÍSTICOS -->
+        <section id="numeros" class="spa-section parallax-section" style="background-image: url('imagens/image-38.jpg'); background-attachment: fixed; background-size: cover; background-position: center;">
+            <div class="parallax-overlay"></div>
+            <div class="container section-padding stats-grid" id="stats-container">
+                <!-- Stat 1 -->
+                <div class="stat-item reveal-up delay-100ms">
+                    <div class="stat-icon pulse-glow"><i class="fas fa-solar-panel"></i></div>
+                    <div class="stat-number glow-text" data-target="45">0</div>
+                    <div class="stat-label" data-i18n="stat2_1">Instalações Concluídas</div>
+                </div>
+                <!-- Stat 2 -->
+                <div class="stat-item reveal-up delay-200ms">
+                    <div class="stat-icon pulse-glow"><i class="fas fa-users"></i></div>
+                    <div class="stat-number glow-text" data-target="60">0</div>
+                    <div class="stat-label" data-i18n="stat2_2">Clientes Satisfeitos</div>
+                </div>
+                <!-- Stat 3 -->
+                <div class="stat-item reveal-up delay-300ms">
+                    <div class="stat-icon pulse-glow"><i class="fas fa-map-marked-alt"></i></div>
+                    <div class="stat-number glow-text" data-target="3">0</div>
+                    <div class="stat-label" data-i18n="stat2_3">Zonas de Cobertura</div>
+                </div>
+                <!-- Stat 4 -->
+                <div class="stat-item reveal-up delay-400ms">
+                    <div class="stat-icon pulse-glow"><i class="fas fa-bolt"></i></div>
+                    <div class="stat-number glow-text" data-target="48">0</div>
+                    <div class="stat-label" data-i18n="stat2_4">Horas Recorde de Montagem</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: MINI BLOG (ARTIGOS) -->
+        <section id="blog" class="spa-section bg-light">
+            <div class="container section-padding">
+                <div class="text-center mb-5 reveal-up">
+                    <div class="section-badge" data-i18n="blog_badge">Educação e Notícias</div>
+                    <h2 class="mb-4" data-i18n="blog_title">Artigos de Autoridade Renova</h2>
+                    <p class="subtitle mx-auto" style="max-width: 600px;" data-i18n="blog_desc">Explore a nossa base de conhecimento técnico e mantenha-se atualizado com as inovações que desenham o futuro energético.</p>
+                </div>
+                
+                <div class="blog-grid">
+                    <!-- Blog Card 1 -->
+                    <div class="blog-card premium-glass reveal-up delay-100ms" onclick="abrirModalBlog(1)">
+                        <div class="blog-img-wrapper">
+                            <div class="blog-img" style="background-image: url('imagens/image-16.jpg');"></div>
+                            <div class="b-overlay"></div>
+                        </div>
+                        <div class="blog-body">
+                            <span class="blog-category">Dicas Solares</span>
+                            <h3>3 Mitos Frequentes sobre Painéis Solares Nampula</h3>
+                            <p>A transição para energia solar gera muitas dúvidas. Separamos o que é verdade do que é ficção...</p>
+                            <span class="blog-more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <!-- Blog Card 2 -->
+                    <div class="blog-card premium-glass reveal-up delay-200ms" onclick="abrirModalBlog(2)">
+                        <div class="blog-img-wrapper">
+                            <div class="blog-img" style="background-image: url('imagens/image-19.jpg');"></div>
+                            <div class="b-overlay"></div>
+                        </div>
+                        <div class="blog-body">
+                            <span class="blog-category">Mercado Financeiro</span>
+                            <h3>Impacto Econômico: Retorno de Investimento Rápido</h3>
+                            <p>Descubra como o sol pode ser o seu melhor ativo financeiro sustentável em 2026...</p>
+                            <span class="blog-more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <!-- Blog Card 3 -->
+                    <div class="blog-card premium-glass reveal-up delay-300ms" onclick="abrirModalBlog(3)">
+                        <div class="blog-img-wrapper">
+                            <div class="blog-img" style="background-image: url('imagens/image-26.jpg');"></div>
+                            <div class="b-overlay"></div>
+                        </div>
+                        <div class="blog-body">
+                            <span class="blog-category">Tecnologia Off-Grid</span>
+                            <h3>A Revolução Sustentável na Indústria Off-Grid</h3>
+                            <p>Sistemas independentes com baterias de lítio de última geração para fazendas agrárias...</p>
+                            <span class="blog-more">Ler Artigo Completo <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ÁREAS DE ATUAÇÃO -->
+        <section id="areas" class="spa-section bg-light">
+            <div class="container section-padding text-center">
+                <div class="section-badge reveal-up" data-i18n="areas_badge">Cobertura Estratégica</div>
+                <h2 class="mb-5 reveal-up delay-100ms" data-i18n="areas_title">Onde A Renova Opera</h2>
+                
+                <div class="areas-grid">
+                    <!-- Nampula -->
+                    <div class="area-card hub-glass reveal-up delay-100ms">
+                        <div class="area-icon-wrapper">
+                            <div class="radar-ping"></div>
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Nampula (Sede)</h3>
+                        <p>Matriz operacional, logística centralizada e suporte regional imediato para todo o norte.</p>
+                    </div>
+                    <!-- Maputo -->
+                    <div class="area-card hub-glass reveal-up delay-200ms">
+                        <div class="area-icon-wrapper">
+                            <div class="radar-ping"></div>
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Maputo</h3>
+                        <p>Hub comercial e fornecimento direto para grandes infraestruturas na capital do sul.</p>
+                    </div>
+                    <!-- Beira -->
+                    <div class="area-card hub-glass reveal-up delay-300ms">
+                        <div class="area-icon-wrapper">
+                            <div class="radar-ping"></div>
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Beira</h3>
+                        <p>Centro de assistência técnica e execução de projetos de eletrificação industrial.</p>
+                    </div>
+                    <!-- Zambézia -->
+                    <div class="area-card hub-glass reveal-up delay-400ms">
+                        <div class="area-icon-wrapper">
+                            <div class="radar-ping"></div>
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Zambézia</h3>
+                        <p>Expansão fotovoltaica estratégica com foco em agricultura e off-grid sustentável.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: AGENDAMENTO E CONTACTOS -->
+        <section id="agendamento" class="spa-section section-padding main-contact-bg">
+            <div class="container overflow-visible">
+                
+                <div class="contact-header-top text-center mb-5 reveal-up">
+                    <div class="section-badge mb-3" data-i18n="ag_badge">Consultoria Gratuita</div>
+                    <h2 class="display-4 font-weight-bold" data-i18n="ag_title">O Sol Está ao Teu Alcance.</h2>
+                    <p class="max-600 mx-auto opacity-70" data-i18n="ag_desc">Preencha os dados e a nossa equipa de elite responderá com uma simulação técnica completa em menos de 12 horas.</p>
+                </div>
+
+                <div class="contact-ultra-grid">
+                    
+                    <!-- Left: Contact Info (Discreet) -->
+                    <div class="contact-info-minimal reveal-up delay-100ms">
+                        <div class="modern-contact-grid-v2">
+                            <div class="m-contact-item-v2">
+                                <i class="fas fa-location-arrow pin-glow-v2"></i>
+                                <div class="m-text-v2">
+                                    <span class="label">Moçambique</span>
+                                    <p>Bairro Copacabana, Nampula</p>
+                                </div>
+                            </div>
+                            <div class="m-contact-item-v2">
+                                <i class="fab fa-whatsapp whatsapp-glow-v2"></i>
+                                <div class="m-text-v2">
+                                    <span class="label">Linha Direta</span>
+                                    <p>+258 84 115 1961</p>
+                                </div>
+                            </div>
+                            <div class="m-contact-item-v2">
+                                <i class="fas fa-envelope email-glow-v2"></i>
+                                <div class="m-text-v2">
+                                    <span class="label">Digital</span>
+                                    <p>renovaenergylda@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="m-contact-item-v2">
+                                <i class="far fa-clock time-glow-v2"></i>
+                                <div class="m-text-v2">
+                                    <span class="label">Horário</span>
+                                    <p>Seg - Sáb: 08:00 - 18:00</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trusted Badge -->
+                        <div class="trusted-footer mt-5 reveal-opacity delay-300ms">
+                             <div class="trust-pill"><i class="fas fa-shield-alt"></i> Dados 100% Seguros</div>
+                             <p class="small mt-2 text-muted">A sua transição energética começa aqui com o suporte técnico mais rigoroso de Moçambique.</p>
+                        </div>
+                    </div>
+
+                    <!-- Right: The Magnetic Form (Star of the show) -->
+                    <div class="magnetic-card-wrapper reveal-up delay-200ms">
+                        <div class="magnetic-card premium-glass">
+                            <div class="form-magia-glow"></div>
+                            
+                            <form id="agendamento-form" onsubmit="handleFormSubmit(event)" class="p-4 p-md-5">
+                                <div class="form-group-magia">
+                                    <label for="nome" data-i18n="ag_f_name"><i class="fas fa-user-tag mr-2"></i> Nome Completo</label>
+                                    <input type="text" id="nome" class="form-control-magia" placeholder="Ex: João Silva" data-i18n="ag_f_name_ph" required>
+                                </div>
+                                
+                                <div class="form-magia-row">
+                                    <div class="form-magia-col">
+                                        <label for="telefone" data-i18n="ag_f_phone"><i class="fab fa-whatsapp mr-2"></i> Telemóvel</label>
+                                        <input type="tel" id="telefone" class="form-control-magia" placeholder="+258..." required>
+                                    </div>
+                                    <div class="form-magia-col">
+                                        <label for="localizacao" data-i18n="ag_f_prov"><i class="fas fa-map-marker-alt mr-2"></i> Província</label>
+                                        <select id="localizacao" class="form-control-magia selection-magia" required>
+                                            <option value="" disabled selected data-i18n="ag_f_prov_ph">Província...</option>
+                                            <option value="Nampula">Nampula</option>
+                                            <option value="Maputo">Maputo</option>
+                                            <option value="Beira">Beira</option>
+                                            <option value="Zambézia">Zambézia</option>
+                                            <option value="Outra" data-i18n="ag_f_prov_other">Outra Província</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-magia">
+                                    <label for="cidade" data-i18n="ag_f_city"><i class="fas fa-home mr-2"></i> Cidade / Bairro Específico</label>
+                                    <input type="text" id="cidade" class="form-control-magia" placeholder="Local de instalação" data-i18n="ag_f_city_ph" required>
+                                </div>
+
+                                <div class="form-group-magia">
+                                    <label for="servico" data-i18n="ag_f_serv"><i class="fas fa-tools mr-2"></i> Serviço Pretendido</label>
+                                    <select id="servico" class="form-control-magia selection-magia" required>
+                                        <option value="" disabled selected data-i18n="ag_f_serv_ph">O que necessita?</option>
+                                        <option value="Sistemas Fotovoltaicos" data-i18n="ag_f_serv_opt1">Sistemas Fotovoltaicos (Luz Grátis)</option>
+                                        <option value="Eletrificação" data-i18n="ag_f_serv_opt2">Eletrificação e Alta Tensão</option>
+                                        <option value="Material" data-i18n="ag_f_serv_opt3">Aquisição de Material Elétrico</option>
+                                        <option value="Eficiência" data-i18n="ag_f_serv_opt4">Estudo de Eficiência</option>
+                                        <option value="Manutenção" data-i18n="ag_f_serv_opt5">Manutenção Técnica</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-magia-row">
+                                    <div class="form-magia-col">
+                                        <label for="data" data-i18n="ag_f_date"><i class="far fa-calendar-alt mr-2"></i> Data Sugerida</label>
+                                        <input type="text" id="data" class="form-control-magia" placeholder="DD / MM / AAAA" maxlength="10" required>
+                                    </div>
+                                    <div class="form-magia-col">
+                                        <label for="hora" data-i18n="ag_f_time"><i class="far fa-clock mr-2"></i> Hora Estimada</label>
+                                        <input type="time" id="hora" class="form-control-magia" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions-magia mt-5">
+                                    <button type="submit" class="btn-magia-primary" onclick="setSubmitMethod('whatsapp')">
+                                        <span class="btn-shine"></span>
+                                        <i class="fab fa-whatsapp"></i> <span data-i18n="ag_f_btn_w">Confirmar por WhatsApp</span>
+                                    </button>
+                                    <button type="submit" class="btn-magia-outline mt-3" onclick="setSubmitMethod('email')">
+                                        <i class="fas fa-envelope"></i> <span data-i18n="ag_f_btn_e">Enviar por E-mail</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps -->
+                <div class="map-container-wrapper mt-5 reveal-up delay-400ms">
+                    <div class="map-overlay-title">Central Operacional Nampula</div>
+                    <iframe id="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31063.812239327508!2d39.248692518434695!3d-15.11186716942127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18c0df9bc9adfaad%3A0xe5a3acff0fdffbd6!2sNampula%2C%20Mo%C3%A7ambique!5e0!3m2!1spt-PT!2sbr!4v1700000000000!5m2!1spt-PT!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <a href="#" class="logo-sticker footer-logo-sticker" onclick="showSection('home', event)">
+                    <img src="logotipo/Light Mode.webp" alt="Renova Energy" class="footer-logo footer-logo-light" style="width: 270px; height: auto; object-fit: contain;">
+                    <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="footer-logo footer-logo-dark" style="width: 270px; height: auto; object-fit: contain;">
+                </a>
+                <p data-i18n="ft_desc">Nascemos do desejo de revolucionar a energia em Moçambique...</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/18b2FxRGwB/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/renovaenergylda" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/258841151961?text=Ol%C3%A1%21%20Encontrei%20a%20Renova%20Energy%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20obter%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <!-- Minimalist Contact Info -->
+                <div class="footer-contact-minimal">
+                    <p><i class="fas fa-map-marker-alt"></i> Bairro Copacabana, Nampula, MZ</p>
+                    <p><i class="fas fa-envelope"></i> renovaenergylda@gmail.com</p>
+                    <p><i class="fas fa-phone-alt"></i> (+258) 84 115 1961</p>
+                </div>
+            </div>
+            <div class="footer-col links-col">
+                <h3 data-i18n="ft_links_title">Acesso Rápido</h3>
+                <ul>
+                    <li><a href="#home" onclick="showSection('home', event)" data-i18n="ft_l1">Voltar à Inicial</a></li>
+                    <li><a href="#sobre" onclick="showSection('sobre', event)" data-i18n="ft_l2">O Grupo Renova</a></li>
+                    <li><a href="#servicos" onclick="showSection('servicos', event)" data-i18n="ft_l3">Portfolio de Serviços</a></li>
+                    <li><a href="#galeria" onclick="showSection('galeria', event)" data-i18n="ft_l4">Conheça a Qualidade</a></li>
+                    <li><a href="#agendamento" onclick="showSection('agendamento', event)" data-i18n="ft_l5">Formulário de Pedido</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col hours-col">
+                <h3 data-i18n="ft_hours_title">Horário de Operação</h3>
+                <ul class="hours-list">
+                    <li><span data-i18n="ft_h1_day">Segunda a Sexta</span> <span>08:00 - 18:00</span></li>
+                    <li><span data-i18n="ft_h2_day">Sábado</span> <span>08:00 - 14:00</span></li>
+                    <li><span data-i18n="ft_h3_day">Domingo e Feriados</span> <span style="color: #ef4444; font-weight: 500;" data-i18n="ft_h3_time">Encerrado</span></li>
+                </ul>
+                <div class="mt-4">
+                    <p style="color: #9ca3af; font-size: 0.875rem;"><i class="fas fa-headset" style="margin-right: 5px;"></i> <span data-i18n="ft_emergency">Linha Técnica de Emergência disponível 24h para Parceiros Contratados.</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <p>&copy; 2026 Renova Energy, Lda. Contribuindo para um mundo 100% sustentável. Todos os direitos reservados.</p>
+                <p style="font-size: 0.75rem;"><a href="termos.html" target="_blank" rel="noopener noreferrer">Termos e Condições</a> | <a href="privacidade.html" target="_blank" rel="noopener noreferrer">Políticas de Privacidade</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/258841151961?text=Ol%C3%A1%21%20Visitei%20o%20site%20da%20Renova%20Energy%20Lda%20e%20gostaria%20de%20receber%20um%20atendimento%20pessoal." target="_blank" rel="noopener noreferrer" class="float-whatsapp" title="Fale connosco pelo WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Blog Modal -->
+    <div id="blog-modal" class="blog-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="fecharModalBlog()">&times;</span>
+            <div id="modal-img" class="modal-img"></div>
+            <div class="modal-body">
+                <span id="modal-category" class="section-badge">Categoria</span>
+                <h2 id="modal-title" class="mb-4">Título do Artigo</h2>
+                <div id="modal-text" class="modal-text">
+                    <!-- Conteúdo dinâmico -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Zoom Imagem Galeria" class="lightbox-content">
+    </div>
+
+    <!-- Success Toast Container -->
+    <div class="toast-container">
+        <div class="toast">
+            <i class="fas fa-check-circle"></i>
+            <span>Mensagem enviada com sucesso!</span>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Banner (Elite Design) -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <i class="fas fa-cookie-bite cookie-icon"></i>
+            <p data-i18n="cookie_text">Utilizamos cookies para garantir a melhor experiência no nosso site. Ao clicar em "Aceitar", concorda com a nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
+            <div class="cookie-actions">
+                <button onclick="acceptCookies()" class="btn-msg-cookie" data-i18n="cookie_btn">Aceitar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="mobile-sticky-cta" style="display: none;">
+        <a href="#agendamento" class="btn btn-primary" onclick="showSection('agendamento', event)">
+            <i class="fas fa-bolt"></i> Pedir Orçamento Grátis
+        </a>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>
