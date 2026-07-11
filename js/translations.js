@@ -14,7 +14,8 @@ const translations = {
         "hero_desc": "Soluções de energia solar e infraestruturas elétricas de alta performance em Nampula e região. Montagem em tempo recorde: <strong>máximo 3 dias.</strong>",
         "hero_btn_quote": "<i class='fas fa-bolt'></i> Pedir Orçamento Grátis",
         "hero_btn_services": "<i class='fas fa-solar-panel'></i> Ver Soluções",
-        
+        "hero_scroll": "Explorar",
+
         "stat_days": "Máx. de Montagem",
         "stat_installs": "Instalações Concluídas",
         "stat_support": "Acompanhamento Integral",
@@ -108,6 +109,9 @@ const translations = {
         
         "areas_badge": "Cobertura Estratégica",
         "areas_title": "Onde A Renova Opera",
+        "areas_desc_1": "A <strong>Renova Energy Lda</strong> opera ativamente na província de <strong>Nampula</strong> (nossa sede oficial) e expande os seus projetos de engenharia fotovoltaica e elétrica para várias regiões estratégicas do norte, centro e sul de Moçambique.",
+        "areas_desc_2": "Ao passar o cursor ou clicar nas regiões demarcadas do mapa interativo, poderá consultar informações de instalações executadas, como sistemas de bombagem solar e eletrificação de edifícios.",
+        "areas_btn_quote": "Solicitar Atuação Regional",
         
         "ag_badge": "Consultoria Gratuita",
         "ag_title": "O Sol Está ao Teu Alcance.",
@@ -223,7 +227,10 @@ const translations = {
         "tooltip_wa": "Fale connosco pelo WhatsApp",
         "tooltip_lang": "Alterar idioma (Mudar para Inglês)",
         "ag_f_date_ph": "DD / MM / AAAA",
-        "typewriter_words": "ECONOMIA,EFICIÊNCIA,AUTONOMIA,SUSTENTABILIDADE"
+        "typewriter_words": "ECONOMIA,EFICIÊNCIA,AUTONOMIA,SUSTENTABILIDADE",
+        "partners_badge": "Parcerias Globais",
+        "partners_title": "Marcas e Parceiros de Confiança",
+        "partners_desc": "Trabalhamos com os principais líderes mundiais de tecnologia fotovoltaica e elétrica para garantir a máxima durabilidade e performance."
     },
     en: {
         "nav_home": "Home",
@@ -240,6 +247,7 @@ const translations = {
         "hero_desc": "High-performance solar energy solutions and electrical infrastructure in Nampula and region. Assembly in record time: <strong>maximum 3 days.</strong>",
         "hero_btn_quote": "<i class='fas fa-bolt'></i> Get Free Quote",
         "hero_btn_services": "<i class='fas fa-solar-panel'></i> View Solutions",
+        "hero_scroll": "Explore",
         
         "stat_days": "Max. Assembly Days",
         "stat_installs": "Completed Installs",
@@ -334,6 +342,9 @@ const translations = {
         
         "areas_badge": "Strategic Coverage",
         "areas_title": "Where Renova Operates",
+        "areas_desc_1": "<strong>Renova Energy Lda</strong> actively operates in <strong>Nampula</strong> province (our official headquarters) and expands its photovoltaic and electrical engineering projects to several strategic regions of northern, central, and southern Mozambique.",
+        "areas_desc_2": "By hovering or clicking on the demarcated regions of the interactive map, you can consult information about executed installations, such as solar pumping systems and building electrification.",
+        "areas_btn_quote": "Request Regional Operation",
         
         "ag_badge": "Free Consulting",
         "ag_title": "The Sun Is Within Your Reach.",
@@ -449,6 +460,9 @@ const translations = {
         "tooltip_wa": "Chat with us on WhatsApp",
         "tooltip_lang": "Change language (Switch to Portuguese)",
         "ag_f_date_ph": "DD / MM / YYYY",
-        "typewriter_words": "ECONOMY,EFFICIENCY,AUTONOMY,SUSTAINABILITY"
+        "typewriter_words": "ECONOMY,EFFICIENCY,AUTONOMY,SUSTAINABILITY",
+        "partners_badge": "Global Partnerships",
+        "partners_title": "Trusted Brands & Partners",
+        "partners_desc": "We work with leading global photovoltaic and electrical technology brands to guarantee maximum durability and performance."
     }
 };

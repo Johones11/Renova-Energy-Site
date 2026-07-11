@@ -153,6 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4.3 Initialize Stats Counter
     initStatsCounter();
 
+    // 4.4 Initialize Interactive Map
+    initInteractiveMap();
+
     // 5. Manual trigger for reveal animations on first load
     setTimeout(() => {
         const activeSection = document.querySelector('.spa-section.active');
@@ -205,10 +208,10 @@ function removeLoader() {
     }, 1200); // 1.2s delay for corporate institutional loader
 }
 
-if (document.readyState === 'complete') {
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
     removeLoader();
 } else {
-    window.addEventListener('load', removeLoader);
+    document.addEventListener('DOMContentLoaded', removeLoader);
 }
 
 /* ==========================================================================
@@ -222,6 +225,9 @@ function showSection(sectionId, event, noScrollToTop = false) {
 
     const targetSection = document.getElementById(sectionId);
     if (targetSection) targetSection.classList.add('active');
+
+    // Marca a home como ativa: só aí o cabeçalho transparente mostra texto claro sobre a hero
+    document.body.classList.toggle('home-active', sectionId === 'home');
 
     const links = document.querySelectorAll(`.nav-link[href="#${sectionId}"]`);
     links.forEach(link => link.classList.add('active'));
@@ -686,6 +692,10 @@ function setLanguage(lang) {
             }
         }
     });
+
+    if (window.updateMapInfo) {
+        window.updateMapInfo(lang);
+    }
 }
 
 function resetDefaultDate() {
@@ -708,5 +718,102 @@ function resetDefaultDate() {
             dataInput.value = `${dd}/${mm}/${yyyy}`;
         }
     }
+}
+
+/* ==========================================================================
+   Interactive SVG Mozambique Map
+   ========================================================================== */
+const mapDetailsPT = {
+    'Cabo Delgado': { projects: '8 Projetos Concluídos', details: 'Sistemas solares residenciais isolados (Off-Grid) e manutenção de redes elétricas secundárias.' },
+    'Niassa': { projects: '12 Projetos Concluídos', details: 'Projetos de regadio solar agrícola com bombas fotovoltaicas de alto rendimento para horticultura.' },
+    'Nampula': { projects: '45 Projetos Concluídos', details: 'Sede central da Renova Energy. Matriz operacional com suporte técnico 24/7 e montagem em tempo recorde de no máximo 3 dias.' },
+    'Zambézia': { projects: '15 Projetos Concluídos', details: 'Instalação de painéis solares comerciais e eletrificação estruturada de edifícios comerciais.' },
+    'Tete': { projects: '7 Projetos Concluídos', details: 'Dimensionamento e fornecimento de bancos de baterias de lítio industriais e inversores híbridos.' },
+    'Manica': { projects: '6 Projetos Concluídos', details: 'Consultoria em eficiência energética e auditorias técnicas para sistemas de bombagem solar.' },
+    'Sofala': { projects: '11 Projetos Concluídos', details: 'Eletrificação predial e montagem de centrais solares de backup para empresas no corredor da Beira.' },
+    'Inhambane': { projects: '9 Projetos Concluídos', details: 'Instalação de sistemas solares híbridos com monitorização remota Wi-Fi/4G para o setor de turismo.' },
+    'Gaza': { projects: '5 Projetos Concluídos', details: 'Micro-redes solares comunitárias para fornecimento de energia limpa e iluminação pública sustentável.' },
+    'Maputo': { projects: '22 Projetos Concluídos', details: 'Escritório comercial. Elaboração de estudos de viabilidade financeira e ROI de grandes centrais solares.' }
+};
+
+const mapDetailsEN = {
+    'Cabo Delgado': { projects: '8 Projects Completed', details: 'Isolated residential solar systems (Off-Grid) and maintenance of secondary electrical grids.' },
+    'Niassa': { projects: '12 Projects Completed', details: 'Solar agricultural irrigation projects with high-performance PV pumps for horticulture.' },
+    'Nampula': { projects: '45 Projects Completed', details: 'Headquarters of Renova Energy. Operational hub with 24/7 technical support and record installation time (max 3 days).' },
+    'Zambézia': { projects: '15 Projects Completed', details: 'Commercial solar panel installation and structured electrification of commercial buildings.' },
+    'Tete': { projects: '7 Projects Completed', details: 'Dimensioning and supply of industrial lithium battery banks and hybrid inverters.' },
+    'Manica': { projects: '6 Projects Completed', details: 'Energy efficiency consulting and technical audits for solar pumping systems.' },
+    'Sofala': { projects: '11 Projects Completed', details: 'Building electrification and assembly of backup solar power stations for companies in the Beira corridor.' },
+    'Inhambane': { projects: '9 Projects Completed', details: 'Installation of hybrid solar systems with Wi-Fi/4G remote monitoring for the tourism sector.' },
+    'Gaza': { projects: '5 Projects Completed', details: 'Community solar microgrids for supplying clean energy and sustainable public street lighting.' },
+    'Maputo': { projects: '22 Projects Completed', details: 'Commercial office. Preparation of financial viability and ROI studies for large solar power stations.' }
+};
+
+window.updateMapInfo = function(lang) {
+    const activeProv = document.querySelector('.map-province.active-province');
+    if (!activeProv) return;
+    
+    const name = activeProv.getAttribute('data-name');
+    const detailsSource = lang === 'en' ? mapDetailsEN : mapDetailsPT;
+    const info = detailsSource[name];
+    
+    const infoTitle = document.getElementById('map-info-title');
+    const infoDesc = document.getElementById('map-info-desc');
+    
+    if (info && infoTitle && infoDesc) {
+        infoTitle.innerHTML = `${name} &mdash; ${info.projects}`;
+        infoDesc.innerHTML = info.details;
+    }
+};
+
+function initInteractiveMap() {
+    const provinces = document.querySelectorAll('.map-province');
+    const tooltip = document.getElementById('map-tooltip');
+    const infoBox = document.getElementById('map-info-box');
+
+    if (provinces.length === 0) return;
+
+    provinces.forEach(prov => {
+        prov.addEventListener('mouseenter', (e) => {
+            const name = prov.getAttribute('data-name');
+            if (tooltip) {
+                tooltip.textContent = name;
+                tooltip.style.opacity = '1';
+            }
+        });
+
+        prov.addEventListener('mousemove', (e) => {
+            if (tooltip) {
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY + 15) + 'px';
+                tooltip.style.position = 'fixed';
+            }
+        });
+
+        prov.addEventListener('mouseleave', () => {
+            if (tooltip) tooltip.style.opacity = '0';
+        });
+
+        prov.addEventListener('click', () => {
+            provinces.forEach(p => p.classList.remove('active-province'));
+            prov.classList.add('active-province');
+
+            const lang = localStorage.getItem('lang') || 'pt';
+            window.updateMapInfo(lang);
+            
+            if (infoBox) {
+                infoBox.style.opacity = '0';
+                infoBox.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    infoBox.style.transition = 'all 0.3s ease';
+                    infoBox.style.opacity = '1';
+                    infoBox.style.transform = 'translateY(0)';
+                }, 50);
+            }
+        });
+    });
+
+    const lang = localStorage.getItem('lang') || 'pt';
+    window.updateMapInfo(lang);
 }
 

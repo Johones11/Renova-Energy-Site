@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Recursos de desenvolvimento / configuração local não devem ser indexados
+Disallow: /.claude/
+Disallow: /.vscode/
+
+Sitemap: https://renovaenergy.co.mz/sitemap.xml

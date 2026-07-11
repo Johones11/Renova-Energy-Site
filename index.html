@@ -7,11 +7,14 @@
     <meta name="description" content="A Renova Energy fornece soluções tecnológicas em energias renováveis e sistemas fotovoltaicos em Nampula. Instalação em tempo recorde e energia verde para o seu futuro.">
     <meta name="keywords" content="Painéis solares Nampula, instalação solar Moçambique, energia verde, sistemas fotovoltaicos, eletricidade sustentável, Renova Energy LDA, manutenção de painéis solares">
     <meta name="author" content="Renova Energy, Lda">
-    
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://renovaenergy.co.mz/">
+    <meta name="theme-color" content="#0284c7">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" type="image/webp" href="logotipo/Favicon.webp">
@@ -82,15 +85,15 @@
     }
     </script>
 </head>
-<body class="loading">
+<body class="loading home-active">
 
     <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="loader-content">
             <div class="loader-wrapper">
                 <div class="loader-circle"></div>
-                <img src="logotipo/Light Mode.webp" alt="Renova Energy" class="loader-logo logo-light" style="width: 180px; height: auto; object-fit: contain;">
-                <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="loader-logo logo-dark" style="width: 180px; height: auto; object-fit: contain;">
+                <img src="logotipo/logo.svg" alt="Renova Energy" class="loader-logo logo-light" style="width: 170px; height: auto; object-fit: contain;">
+                <img src="logotipo/logo-footer.svg" alt="Renova Energy" class="loader-logo logo-dark" style="width: 170px; height: auto; object-fit: contain;">
             </div>
             <div class="loader-bar"></div>
         </div>
@@ -100,8 +103,8 @@
     <header id="header">
         <div class="header-inner">
             <a href="#" class="logo-link" onclick="showSection('home', event)">
-                <img src="logotipo/Light Mode.webp" alt="Renova Energy" class="logo logo-light" style="height: 42px; width: auto; object-fit: contain;">
-                <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="logo logo-dark" style="height: 42px; width: auto; object-fit: contain;">
+                <img src="logotipo/logo.svg" alt="Renova Energy" class="logo logo-light" style="height: 38px; width: auto; object-fit: contain;">
+                <img src="logotipo/logo-footer.svg" alt="Renova Energy" class="logo logo-dark" style="height: 38px; width: auto; object-fit: contain;">
             </a>
             
             <div class="header-right mobile-only">
@@ -140,6 +143,9 @@
         
         <!-- SECTION: HOME -->
         <section id="home" class="spa-section active">
+            <!-- Ambient Energy Orbs -->
+            <div class="energy-blob bg-blob-primary" style="top: 10%; left: -5%;"></div>
+            <div class="energy-blob bg-blob-secondary" style="bottom: 15%; right: -5%;"></div>
             <!-- Background Slider -->
             <div class="hero-slider-container">
                 <div class="hero-slider" id="hero-slider">
@@ -159,6 +165,12 @@
                         <a href="#agendamento" class="btn btn-primary btn-lg" onclick="showSection('agendamento', event)" data-i18n="hero_btn_quote"><i class="fas fa-bolt"></i> Pedir Orçamento Grátis</a>
                         <a href="#servicos" class="btn btn-outline btn-lg" onclick="showSection('servicos', event)" data-i18n="hero_btn_services"><i class="fas fa-solar-panel"></i> Ver Soluções</a>
                     </div>
+                </div>
+
+                <!-- Scroll Cue (Corporate Premium) -->
+                <div class="hero-scroll-cue">
+                    <div class="cue-mouse"></div>
+                    <span class="cue-text" data-i18n="hero_scroll">Explorar</span>
                 </div>
             </div>
 
@@ -296,6 +308,118 @@
                 </div>
             </div>
 
+            
+        <!-- SECTION: PARCEIROS & ALIANÇAS -->
+        <div id="parceiros" class="partners-section bg-light-gradient">
+            <!-- Ambient Energy Orbs -->
+            <div class="energy-blob bg-blob-primary" style="top: 10%; left: -5%;"></div>
+            <div class="energy-blob bg-blob-secondary" style="bottom: 10%; right: -5%;"></div>
+            
+            <div class="container section-padding text-center">
+                <div class="section-badge" data-i18n="partners_badge">Parcerias Globais</div>
+                <h2 class="mb-4" data-i18n="partners_title">Marcas e Parceiros de Confiança</h2>
+                <p class="subtitle mb-5 mx-auto" style="max-width: 750px;" data-i18n="partners_desc">Trabalhamos com os principais líderes mundiais de tecnologia fotovoltaica e elétrica para garantir a máxima durabilidade e performance.</p>
+                
+                <div class="partners-slider-wrapper reveal-up">
+                    <div class="partners-track">
+                        <!-- Partner Logos (Imagens dos parceiros autodetectadas) -->
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0000.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0001.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0002.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0003.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0004.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0005.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0006.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0007.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0008.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0009.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0010.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0011.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0012.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0013.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0014.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0015.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0016.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0017.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0018.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0019.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0020.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0021.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0022.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0023.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0024.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0025.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0026.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0027.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0028.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0029.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0030.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0031.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0032.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0033.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0034.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0035.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0036.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0037.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0038.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0039.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0040.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0041.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0042.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0043.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0044.jpg" alt="Parceiro" class="partner-logo-img"></div>
+
+                        <!-- Duplicação para loop infinito -->
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0000.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0001.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0002.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0003.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0004.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0005.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0006.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0007.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0008.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0009.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0010.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0011.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0012.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0013.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0014.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0015.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0016.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0017.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0018.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0019.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0020.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0021.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0022.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0023.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0024.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0025.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0026.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0027.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0028.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0029.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0030.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0031.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0032.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0033.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0034.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0035.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0036.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0037.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0038.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0039.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0040.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0041.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0042.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0043.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                        <div class="partner-logo-card"><img src="imagens/parceiros/IMG-20260701-WA0044.jpg" alt="Parceiro" class="partner-logo-img"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
             <!-- Final Home CTA -->
             <div class="home-final-cta section-padding">
                 <div class="container text-center reveal-up">
@@ -310,9 +434,27 @@
             </div>
         </section>
 
+        <!-- Section Diagonal Divider (Top of About Section) -->
+        <div class="diagonal-divider-container divider-section-top">
+            <svg class="diagonal-svg" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="diag-line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="var(--clr-primary)" />
+                        <stop offset="50%" stop-color="var(--clr-secondary)" />
+                        <stop offset="100%" stop-color="var(--clr-primary)" />
+                    </linearGradient>
+                </defs>
+                <polygon points="0,0 1200,80 1200,80 0,80" fill="var(--clr-bg-light)" />
+                <line x1="0" y1="0" x2="1200" y2="80" class="diagonal-line" />
+                <line x1="0" y1="0" x2="1200" y2="80" class="diagonal-pulse-line" style="animation-delay: 1s;" />
+            </svg>
+        </div>
 
         <!-- SECTION: SOBRE A EMPRESA -->
         <section id="sobre" class="spa-section">
+            <!-- Ambient Energy Orbs -->
+            <div class="energy-blob bg-blob-secondary" style="top: -5%; left: 10%;"></div>
+            <div class="energy-blob bg-blob-primary" style="bottom: 20%; right: 5%;"></div>
             <!-- Hero Heading for About Us -->
             <div class="sobre-hero-header text-center section-padding pb-0 reveal-up">
                 <div class="section-badge" data-i18n="ab_badge">Renova Energy Lda</div>
@@ -418,6 +560,9 @@
 
         <!-- SECTION: SERVIÇOS (COM IMAGENS) -->
         <section id="servicos" class="spa-section bg-light">
+            <!-- Ambient Energy Orbs -->
+            <div class="energy-blob bg-blob-primary" style="top: 5%; right: -10%;"></div>
+            <div class="energy-blob bg-blob-secondary" style="bottom: 5%; left: -10%;"></div>
             <div class="container section-padding text-center">
                 <div class="section-badge" data-i18n="srv_badge">Expertise</div>
                 <h2 class="mb-4" data-i18n="srv_title">Soluções Completas e Integradas</h2>
@@ -641,46 +786,59 @@
 
         <!-- SECTION: ÁREAS DE ATUAÇÃO -->
         <section id="areas" class="spa-section bg-light">
-            <div class="container section-padding text-center">
-                <div class="section-badge reveal-up" data-i18n="areas_badge">Cobertura Estratégica</div>
-                <h2 class="mb-5 reveal-up delay-100ms" data-i18n="areas_title">Onde A Renova Opera</h2>
+            <div class="container section-padding">
+                <div class="text-center mb-5">
+                    <div class="section-badge reveal-up" data-i18n="areas_badge">Cobertura Estratégica</div>
+                    <h2 class="reveal-up delay-100ms" data-i18n="areas_title">Onde A Renova Opera</h2>
+                </div>
                 
-                <div class="areas-grid">
-                    <!-- Nampula -->
-                    <div class="area-card hub-glass reveal-up delay-100ms">
-                        <div class="area-icon-wrapper">
-                            <div class="radar-ping"></div>
-                            <i class="fas fa-map-marker-alt"></i>
+                <div class="map-grid">
+                    <div class="map-text-side reveal-up delay-200ms">
+                        <p class="mb-4" data-i18n="areas_desc_1">A <strong>Renova Energy Lda</strong> opera ativamente na província de <strong>Nampula</strong> (nossa sede oficial) e expande os seus projetos de engenharia fotovoltaica e elétrica para várias regiões estratégicas do norte, centro e sul de Moçambique.</p>
+                        <p class="mb-4" data-i18n="areas_desc_2">Ao passar o cursor ou clicar nas regiões demarcadas do mapa interativo, poderá consultar informações de instalações executadas, como sistemas de bombagem solar e eletrificação de edifícios.</p>
+                        
+                        <div class="map-info-content animate-up" id="map-info-box" style="margin-bottom: 30px;">
+                            <div class="map-info-item">
+                                <div class="map-info-number">1</div>
+                                <div class="map-info-text">
+                                    <h3 class="map-info-title" id="map-info-title">Nampula &mdash; 45 Projetos Concluídos</h3>
+                                    <p class="map-info-desc" id="map-info-desc">Sede central da Renova Energy. Matriz operacional com suporte técnico 24/7 e montagem em tempo recorde de no máximo 3 dias.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 data-i18n="area_nampula_title">Nampula (Sede)</h3>
-                        <p data-i18n="area_nampula_desc">Matriz operacional, logística centralizada e suporte regional imediato para todo o norte.</p>
+
+                        <a href="#agendamento" onclick="showSection('agendamento', event)" class="btn btn-primary" data-i18n="areas_btn_quote">Solicitar Atuação Regional</a>
                     </div>
-                    <!-- Maputo -->
-                    <div class="area-card hub-glass reveal-up delay-200ms">
-                        <div class="area-icon-wrapper">
-                            <div class="radar-ping"></div>
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h3 data-i18n="area_maputo_title">Maputo</h3>
-                        <p data-i18n="area_maputo_desc">Hub comercial e fornecimento direto para grandes infraestruturas na capital do sul.</p>
-                    </div>
-                    <!-- Beira -->
-                    <div class="area-card hub-glass reveal-up delay-300ms">
-                        <div class="area-icon-wrapper">
-                            <div class="radar-ping"></div>
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h3 data-i18n="area_beira_title">Beira</h3>
-                        <p data-i18n="area_beira_desc">Centro de assistência técnica e execução de projetos de eletrificação industrial.</p>
-                    </div>
-                    <!-- Zambézia -->
-                    <div class="area-card hub-glass reveal-up delay-400ms">
-                        <div class="area-icon-wrapper">
-                            <div class="radar-ping"></div>
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h3 data-i18n="area_zambezia_title">Zambézia</h3>
-                        <p data-i18n="area_zambezia_desc">Expansão fotovoltaica estratégica com foco em agricultura e off-grid sustentável.</p>
+                    
+                    <div class="map-container reveal-up delay-300ms">
+                        <!-- Interactive Mozambique SVG Map (Polygonal Representation) -->
+                        <svg viewBox="0 0 450 650" class="moz-map-svg">
+                            <!-- Province: Cabo Delgado -->
+                            <path d="M350,100 L410,130 L380,220 L330,200 L320,150 Z" class="map-province" data-name="Cabo Delgado"></path>
+                            <!-- Province: Niassa -->
+                            <path d="M250,120 L320,150 L330,200 L300,280 L230,260 L210,180 Z" class="map-province" data-name="Niassa"></path>
+                            <!-- Province: Nampula (sede) -->
+                            <path d="M300,280 L330,200 L380,220 L400,270 L340,350 L290,320 Z" class="map-province active-province" data-name="Nampula"></path>
+                            <!-- Province: Zambézia -->
+                            <path d="M230,260 L300,280 L290,320 L270,400 L200,380 L180,310 Z" class="map-province" data-name="Zambézia"></path>
+                            <!-- Province: Tete -->
+                            <path d="M140,240 L230,260 L210,180 L160,160 L100,210 Z" class="map-province" data-name="Tete"></path>
+                            <!-- Province: Manica -->
+                            <path d="M140,240 L180,310 L160,400 L120,400 L110,310 Z" class="map-province" data-name="Manica"></path>
+                            <!-- Province: Sofala -->
+                            <path d="M180,310 L200,380 L230,420 L160,470 L150,400 Q160,350 180,310 Z" class="map-province" data-name="Sofala"></path>
+                            <!-- Province: Inhambane -->
+                            <path d="M160,470 Q210,500 180,550 L110,530 L120,470 Z" class="map-province" data-name="Inhambane"></path>
+                            <!-- Province: Gaza -->
+                            <path d="M110,530 L110,410 L150,400 L120,470 L90,560 Z" class="map-province" data-name="Gaza"></path>
+                            <!-- Province: Maputo (Cidade e Província) -->
+                            <path d="M90,560 L110,530 L80,630 L60,620 Z" class="map-province" data-name="Maputo"></path>
+                            
+                            <!-- Pulse Point Nampula -->
+                            <circle cx="340" cy="270" r="6" class="map-pin"></circle>
+                        </svg>
+                        <!-- Map Tooltip -->
+                        <div class="map-tooltip" id="map-tooltip">Nampula</div>
                     </div>
                 </div>
             </div>
@@ -824,8 +982,8 @@
         <div class="container footer-grid">
             <div class="footer-col brand-col">
                 <a href="#" class="logo-sticker footer-logo-sticker" onclick="showSection('home', event)">
-                    <img src="logotipo/Light Mode.webp" alt="Renova Energy" class="footer-logo footer-logo-light" style="width: 270px; height: auto; object-fit: contain;">
-                    <img src="logotipo/Dark Mode.webp" alt="Renova Energy" class="footer-logo footer-logo-dark" style="width: 270px; height: auto; object-fit: contain;">
+                    <img src="logotipo/logo.svg" alt="Renova Energy" class="footer-logo footer-logo-light" style="width: 230px; height: auto; object-fit: contain;">
+                    <img src="logotipo/logo-footer.svg" alt="Renova Energy" class="footer-logo footer-logo-dark" style="width: 230px; height: auto; object-fit: contain;">
                 </a>
                 <p data-i18n="ft_desc">Nascemos do desejo de revolucionar a energia em Moçambique...</p>
                 <div class="social-links">

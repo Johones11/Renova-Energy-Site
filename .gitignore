@@ -1,6 +1,9 @@
 # IDE and Editor Folders
 .vscode/
 .idea/
+
+# Claude Code — configuração local de desenvolvimento
+.claude/
 *.suo
 *.ntvs*
 *.njsproj
