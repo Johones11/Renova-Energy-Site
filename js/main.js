@@ -1,435 +1,453 @@
 /* ==========================================================================
-   Renova Energy LDA - Main Scripts (Premium Version - PT)
+   Renova Energy, Lda — Main
    ========================================================================== */
 
-/* --- Blog Content (Multilingue) --- */
+'use strict';
+
+const PARTNER_COUNT = 45;
+const SLIDE_INTERVAL = 6000;
+
+/* Analytics. Ambos os campos vazios = nenhum pedido a terceiros sai do site.
+   - cloudflareToken: Cloudflare > Analytics > Web Analytics. Nao usa cookies,
+     nao precisa de consentimento e ja esta no mesmo painel do alojamento.
+   - ga4Id: alternativa Google Analytics 4 ("G-XXXXXXXXXX"). Usa cookies, por
+     isso so arranca depois de o visitante aceitar o aviso. */
+const ANALYTICS = {
+    cloudflareToken: '',
+    ga4Id: ''
+};
+
+/* Secções antigas continuam a funcionar: houve links partilhados, o sitemap e
+   a 404 apontavam para #galeria, #sobre, #numeros. Redirecionamos em vez de
+   deixar cair num ecrã em branco. */
+const SECTION_ALIASES = {
+    sobre: 'empresa',
+    blog: 'empresa',
+    galeria: 'projetos',
+    numeros: 'projetos',
+    areas: 'projetos',
+    parceiros: 'home',
+    contacto: 'agendamento',
+    inicio: 'home'
+};
+
+const VALID_SECTIONS = ['home', 'servicos', 'projetos', 'empresa', 'agendamento'];
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* --------------------------------------------------------------------------
+   Conteúdo das notas técnicas
+   -------------------------------------------------------------------------- */
 const blogContent = {
     pt: {
         '1': {
-            category: 'Dicas Solares',
-            title: '3 Mitos Frequentes sobre Painéis Solares Nampula',
-            image: 'url(\'imagens/image-16.jpg\')',
+            category: 'Solar',
+            title: 'Três coisas que lhe disseram sobre painéis e não são verdade',
+            image: "url('imagens/image-16.jpg')",
             text: `
-                <p><strong>Mito 1: Painéis solares não funcionam no inverno.</strong> Na verdade, eles dependem da luz, não do calor. Moçambique tem radiação solar excelente o ano todo.</p>
-                <p><strong>Mito 2: A manutenção é caríssima.</strong> Falso. A manutenção básica consiste em limpeza e inspeção visual, com custo muito reduzido comparado à economia gerada.</p>
-                <p><strong>Mito 3: Preciso de baterias para tudo.</strong> Em sistemas On-Grid, você pode usar a rede da EDM como "bateria virtual", reduzindo drasticamente o investimento inicial.</p>
+                <p><strong>"Não funcionam no inverno."</strong> Os painéis vivem de luz, não de calor. Em Moçambique a radiação é boa o ano inteiro; o que muda entre julho e dezembro é a duração do dia, e isso já está no dimensionamento.</p>
+                <p><strong>"A manutenção é cara."</strong> A manutenção corrente é lavar o vidro e inspecionar as ligações. Custa uma fração do que o sistema poupa. O que fica caro é não fazer nada durante cinco anos.</p>
+                <p><strong>"Preciso de baterias para tudo."</strong> Num sistema On-Grid, a rede da EDM funciona como reserva. Se o objetivo for baixar a fatura e não houver cortes frequentes, as baterias são dinheiro parado.</p>
             `
         },
         '2': {
-            category: 'Mercado Financeiro',
-            title: 'Impacto Econômico: Retorno de Investimento Rápido',
-            image: 'url(\'imagens/image-19.jpg\')',
+            category: 'Contas',
+            title: 'Ao fim de quanto tempo é que o sistema se paga',
+            image: "url('imagens/image-19.jpg')",
             text: `
-                <p>Investir em energia renovável na Renova Energy garante um ROI entre 2 a 5 anos. Com a subida das tarifas elétricas, produzir a sua própria energia é o melhor ativo financeiro sustentável.</p>
-                <p>Nossos projetos Turnkey incluem tudo: do licenciamento à instalação, maximizando cada metical investido.</p>
+                <p>Para uma instalação residencial ou comercial dimensionada com base no consumo real, o retorno costuma cair entre os dois e os cinco anos. A diferença dentro desse intervalo depende quase toda de uma coisa: quanto do consumo acontece de dia.</p>
+                <p>Quem trabalha das 08:00 às 18:00 — lojas, oficinas, escritórios, bombas de rega — aproveita quase toda a produção no momento em que ela existe e chega ao fim do intervalo mais cedo. Uma casa onde o consumo é sobretudo à noite precisa de armazenamento, e o armazenamento empurra o retorno para a frente.</p>
+                <p>Por isso pedimos as faturas antes de dar um número. Um retorno prometido sem olhar para o consumo é um número inventado.</p>
             `
         },
         '3': {
-            category: 'Tecnologia',
-            title: 'A Revolução Sustentável na Indústria Off-Grid',
-            image: 'url(\'imagens/image-26.jpg\')',
+            category: 'Off-Grid',
+            title: 'Energia onde a rede não chega',
+            image: "url('imagens/image-26.jpg')",
             text: `
-                <p>A indústria mineira e agrícola em Moçambique está a mudar para o Off-Grid. Usamos inversores de alta frequência e baterias de lítio LiFePO4 para garantir energia 24/7 em locais remotos.</p>
-                <p>A Renova Energy lidera a implementação destas soluções robustas com monitorização remota via Wi-Fi/4G.</p>
+                <p>Sem EDM não há rede de segurança: se o dimensionamento falhar, a luz apaga-se. É essa a diferença toda entre um sistema off-grid e um sistema ligado à rede.</p>
+                <p>Na prática significa contar com os dias de céu fechado, com o arranque dos motores e com o consumo que ninguém declarou na primeira conversa. Trabalhamos com inversores de alta frequência e baterias LiFePO4, que aguentam ciclos diários durante anos, e deixamos margem no banco de baterias em vez de a cortar para baixar o orçamento.</p>
+                <p>Nas machambas e nas unidades mais afastadas instalamos monitorização por Wi-Fi ou 4G — para vermos o problema antes de o cliente ficar sem água.</p>
             `
         }
     },
     en: {
         '1': {
-            category: 'Solar Tips',
-            title: '3 Common Myths about Solar Panels in Nampula',
-            image: 'url(\'imagens/image-16.jpg\')',
+            category: 'Solar',
+            title: 'Three things you were told about panels that are not true',
+            image: "url('imagens/image-16.jpg')",
             text: `
-                <p><strong>Myth 1: Solar panels do not work in winter.</strong> In fact, they rely on light, not heat. Mozambique has excellent solar radiation all year round.</p>
-                <p><strong>Myth 2: Maintenance is extremely expensive.</strong> False. Basic maintenance consists of cleaning and visual inspection, with a very low cost compared to the savings generated.</p>
-                <p><strong>Myth 3: I need batteries for everything.</strong> In On-Grid systems, you can use the EDM network as a "virtual battery", drastically reducing the initial investment.</p>
+                <p><strong>"They do not work in winter."</strong> Panels run on light, not heat. Mozambique has good radiation all year; what changes between July and December is day length, and that is already in the sizing.</p>
+                <p><strong>"Maintenance is expensive."</strong> Routine maintenance is washing the glass and inspecting the connections. It costs a fraction of what the system saves. What gets expensive is doing nothing for five years.</p>
+                <p><strong>"I need batteries for everything."</strong> On an on-grid system the EDM network acts as the reserve. If the goal is a lower bill and cuts are not frequent, batteries are money standing still.</p>
             `
         },
         '2': {
-            category: 'Financial Market',
-            title: 'Economic Impact: Quick Return on Investment',
-            image: 'url(\'imagens/image-19.jpg\')',
+            category: 'Numbers',
+            title: 'How long before the system pays for itself',
+            image: "url('imagens/image-19.jpg')",
             text: `
-                <p>Investing in renewable energy with Renova Energy guarantees an ROI of 2 to 5 years. With rising electricity tariffs, producing your own energy is the best sustainable financial asset.</p>
-                <p>Our Turnkey projects include everything: from licensing to installation, maximizing every metical invested.</p>
+                <p>For a residential or commercial installation sized on real consumption, payback usually lands between two and five years. Where you fall inside that range depends almost entirely on one thing: how much of your consumption happens during daylight.</p>
+                <p>Anyone working 08:00 to 18:00 — shops, workshops, offices, irrigation pumps — uses nearly all the output at the moment it exists, and reaches payback sooner. A house that consumes mostly at night needs storage, and storage pushes payback further out.</p>
+                <p>That is why we ask for the bills before quoting a figure. A payback promised without looking at consumption is an invented number.</p>
             `
         },
         '3': {
-            category: 'Technology',
-            title: 'The Sustainable Revolution in the Off-Grid Industry',
-            image: 'url(\'imagens/image-26.jpg\')',
+            category: 'Off-grid',
+            title: 'Power where the grid does not reach',
+            image: "url('imagens/image-26.jpg')",
             text: `
-                <p>The mining and agricultural industry in Mozambique is moving to Off-Grid. We use high-frequency inverters and LiFePO4 lithium batteries to guarantee 24/7 energy in remote locations.</p>
-                <p>Renova Energy leads the implementation of these robust solutions with remote monitoring via Wi-Fi/4G.</p>
+                <p>With no EDM there is no safety net: if the sizing is wrong, the lights go out. That is the whole difference between an off-grid system and a grid-tied one.</p>
+                <p>In practice that means allowing for overcast days, for motor starting currents, and for the load nobody mentioned in the first conversation. We use high-frequency inverters and LiFePO4 batteries, which take daily cycling for years, and we leave headroom in the battery bank instead of trimming it to lower the quote.</p>
+                <p>On farms and remote sites we install Wi-Fi or 4G monitoring — so we see the problem before the client runs out of water.</p>
             `
         }
     }
 };
 
+/* ==========================================================================
+   Arranque
+   ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-
-    // 1. Initialize Theme from localStorage
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-    const header = document.getElementById('header');
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme === 'dark') {
-        body.classList.add('dark-theme');
-        if (header) header.classList.add('dark-theme');
-        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
-            if (header) header.classList.toggle('dark-theme');
-            
-            let theme = 'light';
-            if (body.classList.contains('dark-theme')) {
-                theme = 'dark';
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            } else {
-                theme = 'light';
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            }
-            localStorage.setItem('theme', theme);
-        });
-    }
-
-    // --- Language Initialization ---
+    initTheme();
     initLanguage();
-
-    // --- Date Initialization (Tomorrow's Date as Default) ---
+    initMobileMenu();
+    initHeaderScroll();
+    initPartners();
+    initHeroSlider();
+    initReveals();
+    initStatsObserver();
+    initLightbox();
+    initInteractiveMap();
+    initDateMask();
+    initModalDismissal();
+    initCookieBanner();
+    initDelegation();
+    initAnalytics();
     resetDefaultDate();
 
-    // --- Cookie Consent Logic ---
-    const cookieConsent = localStorage.getItem('cookieConsent');
-    const cookieBanner = document.getElementById('cookie-banner');
-    if (!cookieConsent && cookieBanner) {
-        // Delay before showing banner
-        setTimeout(() => {
-            cookieBanner.classList.add('show');
-        }, 3000);
-    }
+    // O browser tenta repor o scroll da visita anterior, o que numa SPA de
+    // secções deixa o visitante a meio de um bloco que nem estava aberto.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-    /* --- Header Scroll Effect --- */
-    window.addEventListener('scroll', () => {
-        if (!header) return;
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-
-    /* --- Mobile Menu Toggle --- */
-    const mobileBtn = document.getElementById('mobile-menu-btn');
-    const mainNav = document.getElementById('main-nav');
-    
-    if (mobileBtn && mainNav) {
-        mobileBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            const icon = mobileBtn.querySelector('i');
-            if (mainNav.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-times');
-                body.style.overflow = 'hidden';
-            } else {
-                icon.classList.replace('fa-times', 'fa-bars');
-                body.style.overflow = '';
-            }
-        });
-    }
-
-    // 4. Initialize Hero Slider
-    initHeroSlider();
-
-    // 4.1 Initialize Typewriter Effect
-    initTypewriter();
-
-    // 4.2 Initialize Gallery Lightbox (Bug fix: was never called)
-    initLightbox();
-
-    // 4.3 Initialize Stats Counter
-    initStatsCounter();
-
-    // 4.4 Initialize Interactive Map
-    initInteractiveMap();
-
-    // 5. Manual trigger for reveal animations on first load
-    setTimeout(() => {
-        const activeSection = document.querySelector('.spa-section.active');
-        if (activeSection) {
-            const animatedElements = activeSection.querySelectorAll('.reveal-up, .reveal-opacity, .reveal-right');
-            animatedElements.forEach(el => {
-                el.style.animation = 'none';
-                el.offsetHeight; 
-                el.style.animation = '';
-            });
-        }
-    }, 1500);
-
+    // A rota só pode ser aplicada depois de as secções existirem no DOM.
+    applyRoute(location.hash, { scroll: true });
+    window.addEventListener('hashchange', () => applyRoute(location.hash, { scroll: false }));
 });
 
-// Prevent initStatsCounter from being called twice via second DOMContentLoaded
-let statsInitialized = false;
+window.addEventListener('load', removeLoader);
+// Rede de segurança: se um recurso ficar pendurado, o ecrã de arranque sai à mesma.
+setTimeout(removeLoader, 4000);
 
-/* --- Hero Slider Logic --- */
-function initHeroSlider() {
-    const slides = document.querySelectorAll('.slider-item');
-    if (slides.length === 0) return;
-
-    let currentSlide = 0;
-    const slideInterval = 6000; // 6 seconds
-
-    function nextSlide() {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
-    }
-
-    setInterval(nextSlide, slideInterval);
-}
-
-
-
-
-// 5. Loading Screen Fade Out (Robust implementation)
+let loaderRemoved = false;
 function removeLoader() {
+    if (loaderRemoved) return;
+    loaderRemoved = true;
     const loader = document.getElementById('loading-screen');
-    setTimeout(() => {
-        if (loader) {
-            loader.classList.add('fade-out');
-            document.body.classList.remove('loading');
-            
-            // Trigger das animações globais e números na página inicial
-            showSection('home', null, true);
-        }
-    }, 1200); // 1.2s delay for corporate institutional loader
-}
+    if (loader) loader.classList.add('fade-out');
+    document.body.classList.remove('loading');
 
-if (document.readyState === 'interactive' || document.readyState === 'complete') {
-    removeLoader();
-} else {
-    document.addEventListener('DOMContentLoaded', removeLoader);
+    // O Chrome repõe o scroll depois do 'load', ignorando o scrollRestoration
+    // pedido em DOMContentLoaded. Só aqui é que o pedido pega de facto.
+    window.scrollTo(0, 0);
+    revealVisible();
 }
 
 /* ==========================================================================
-   SPA Navigation & Interactive Functions
+   Tema
    ========================================================================== */
+function initTheme() {
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) document.body.classList.add('dark-theme');
+
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', () => {
+        const dark = document.body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dark ? '#00101f' : '#001b48');
+    });
+}
+
+/* ==========================================================================
+   Cabeçalho e menu
+   ========================================================================== */
+function initHeaderScroll() {
+    const header = document.getElementById('header');
+    if (!header) return;
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+}
+
+function initMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('main-nav');
+    if (!btn || !nav) return;
+
+    btn.addEventListener('click', () => setMenu(!nav.classList.contains('active')));
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('active')) setMenu(false);
+    });
+}
+
+function setMenu(open) {
+    const btn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('main-nav');
+    if (!btn || !nav) return;
+    nav.classList.toggle('active', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+}
+
+/* ==========================================================================
+   Navegação entre secções
+   ========================================================================== */
+function applyRoute(hash, opts = {}) {
+    const id = (hash || '').replace('#', '');
+    const target = SECTION_ALIASES[id] || id;
+    showSection(VALID_SECTIONS.includes(target) ? target : 'home', null, !opts.scroll);
+}
+
 function showSection(sectionId, event, noScrollToTop = false) {
     if (event) event.preventDefault();
-    
-    document.querySelectorAll('.spa-section').forEach(sec => sec.classList.remove('active'));
-    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
 
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) targetSection.classList.add('active');
+    const resolved = SECTION_ALIASES[sectionId] || sectionId;
+    const target = document.getElementById(resolved);
+    if (!target) return;
 
-    // Marca a home como ativa: só aí o cabeçalho transparente mostra texto claro sobre a hero
-    document.body.classList.toggle('home-active', sectionId === 'home');
+    document.querySelectorAll('.spa-section').forEach(s => s.classList.remove('active'));
+    target.classList.add('active');
 
-    const links = document.querySelectorAll(`.nav-link[href="#${sectionId}"]`);
-    links.forEach(link => link.classList.add('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll(`.nav-link[href="#${resolved}"]`).forEach(l => l.classList.add('active'));
 
-    if (!noScrollToTop) {
-        window.scrollTo({ top: 0, behavior: 'auto' });
-    }
+    document.body.classList.toggle('home-active', resolved === 'home');
 
-    // 5. Close mobile menu if it is open
-    const mainNav = document.getElementById('main-nav');
-    if (mainNav && mainNav.classList.contains('active')) {
-        mainNav.classList.remove('active');
-        document.body.style.overflow = ''; // Unlock scroll
-        const icon = document.querySelector('#mobile-menu-btn i');
-        if (icon) icon.classList.replace('fa-times', 'fa-bars');
-    }
+    if (history.replaceState) history.replaceState(null, '', '#' + resolved);
 
-    // 6. Toggle Mobile Sticky CTA visibility (MOBILE ONLY)
-    const stickyCta = document.querySelector('.mobile-sticky-cta');
-    if (stickyCta) {
-        if (window.innerWidth <= 768 && sectionId !== 'agendamento' && sectionId !== 'home') {
-            stickyCta.style.display = 'block';
-        } else {
-            stickyCta.style.display = 'none';
+    setMenu(false);
+    if (!noScrollToTop) window.scrollTo({ top: 0, behavior: 'auto' });
+
+    // Contadores e revelações da secção que acabou de entrar em cena.
+    resetCounters(target);
+    revealVisible();
+    updateStickyCta(resolved);
+    if (resolved === 'agendamento') loadMap();
+}
+
+/* O mapa do Google só é pedido quando alguém abre o Contacto: poupa o pedido a
+   terceiros na primeira visita e tira ~1 s do carregamento inicial. */
+function loadMap() {
+    const frame = document.getElementById('google-map');
+    if (!frame || frame.src) return;
+    frame.src = frame.getAttribute('data-src');
+}
+
+function updateStickyCta(sectionId) {
+    const cta = document.querySelector('.mobile-sticky-cta');
+    if (!cta) return;
+    const show = window.innerWidth <= 768 && sectionId !== 'agendamento' && sectionId !== 'home';
+    cta.style.display = show ? 'block' : 'none';
+}
+
+function goToService(serviceId, event) {
+    if (event) event.preventDefault();
+    showSection('servicos', null, true);
+
+    // Espera um frame para a secção existir no layout antes de medir a posição.
+    requestAnimationFrame(() => {
+        const card = document.getElementById(serviceId);
+        if (!card) return;
+        card.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'center' });
+        if (!card.classList.contains('expanded')) {
+            toggleServiceCard(card.querySelector('.service-head'));
         }
-    }
-
-    // 7. Re-trigger counters and animations globally when any section opens
-    if (targetSection) {
-        const items = targetSection.querySelectorAll('.stat-item');
-        if (items.length > 0) {
-            items.forEach((item, idx) => {
-                item.style.animation = 'none';
-                item.offsetHeight; /* trigger reflow */
-                item.style.animation = '';
-                
-                const num = item.querySelector('.stat-number');
-                if (num) {
-                    num.innerText = '0';
-                    const target = +num.getAttribute('data-target');
-                    const duration = 2000;
-                    const startTime = performance.now();
-                    
-                    function update(currentTime) {
-                        const elapsed = currentTime - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        const currentCount = Math.floor(progress * target);
-                        
-                        // O sufixo é controlado pelo HTML (<span class="stat-suffix">), logo gerimos apenas o número
-                        num.innerText = currentCount;
-                        
-                        if (progress < 1) {
-                            requestAnimationFrame(update);
-                        } else {
-                            num.innerText = target;
-                        }
-                    }
-                    requestAnimationFrame(update);
-                }
-            });
-        }
-    }
-
-    // 8. Reinforce Reveal Animations
-    if (targetSection) {
-        const animatedElements = targetSection.querySelectorAll('.reveal-up, .reveal-opacity');
-        animatedElements.forEach(el => {
-            el.style.animation = 'none';
-            el.offsetHeight; /* trigger reflow */
-            el.style.animation = '';
-        });
-    }
-}
-
-let submitMethod = 'whatsapp';
-function setSubmitMethod(method) { submitMethod = method; }
-
-function handleFormSubmit(event) {
-    event.preventDefault(); // Process data locally for both methods
-    const form = event.target;
-    
-    const nome = document.getElementById('nome').value;
-    const telefone = document.getElementById('telefone').value;
-    const provincia = document.getElementById('localizacao').value;
-    const cidade = document.getElementById('cidade').value;
-    const servico = document.getElementById('servico').value;
-    const dataInput = document.getElementById('data');
-    const data = dataInput.value.trim();
-    const hora = document.getElementById('hora').value;
-
-    let displayDate = data;
-    let diaVal, mesVal, anoVal;
-    let isValid = false;
-
-    // Check if YYYY-MM-DD format (mobile native picker)
-    if (/^\d{4}-\d{2}-\d{2}$/.test(data)) {
-        const partes = data.split('-');
-        anoVal = parseInt(partes[0], 10);
-        mesVal = parseInt(partes[1], 10);
-        diaVal = parseInt(partes[2], 10);
-        isValid = true;
-        displayDate = `${String(diaVal).padStart(2, '0')}/${String(mesVal).padStart(2, '0')}/${anoVal}`;
-    } 
-    // Check if DD/MM/YYYY format (desktop text mask)
-    else if (/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
-        const partes = data.split('/');
-        diaVal = parseInt(partes[0], 10);
-        mesVal = parseInt(partes[1], 10);
-        anoVal = parseInt(partes[2], 10);
-        isValid = true;
-    }
-
-    const lang = localStorage.getItem('lang') || 'pt';
-
-    // --- DATA VALIDATION ---
-    if (!isValid) {
-        const msg = (translations[lang] && translations[lang]['toast_invalid_format']) || "Por favor, introduza uma data válida no formato DD/MM/AAAA.";
-        showToast(msg);
-        dataInput.focus();
-        return;
-    }
-
-    if (diaVal < 1 || diaVal > 31 || mesVal < 1 || mesVal > 12 || anoVal < 2026) {
-        const msg = (translations[lang] && translations[lang]['toast_bad_date']) || "Data inválida. Verifique o dia, mês e ano.";
-        showToast(msg);
-        dataInput.focus();
-        return;
-    }
-    // -----------------------
-
-    if (submitMethod === 'whatsapp') {
-        const message = `*NOVO AGENDAMENTO SITE*%0A%0A*Nome:* ${nome}%0A*Telefone:* ${telefone}%0A*Localização:* ${provincia} (${cidade})%0A*Serviço:* ${servico}%0A*Data:* ${displayDate}%0A*Hora:* ${hora}`;
-        window.open(`https://wa.me/258841151961?text=${message}`, '_blank').focus();
-        const msg = (translations[lang] && translations[lang]['toast_redirect_wa']) || "Redirecionando para o WhatsApp...";
-        showToast(msg);
-        form.reset();
-        resetDefaultDate();
-    } else {
-        // --- TRADITIONAL MAILTO METHOD ---
-        const subject = encodeURIComponent("Solicitação de Orçamento - Renova Energy");
-        const body = encodeURIComponent(`Olá Renova Energy,\n\nGostaria de solicitar um agendamento:\n\nNome: ${nome}\nTelefone: ${telefone}\nLocalização: ${provincia} (${cidade})\nServiço: ${servico}\nData: ${displayDate}\nHora: ${hora}\n\nEnvio feito via Website.`);
-        
-        window.location.href = `mailto:renovaenergylda@gmail.com?subject=${subject}&body=${body}`;
-        
-        const msg = (translations[lang] && translations[lang]['toast_redirect_mail']) || "Abrindo o seu gestor de e-mail...";
-        showToast(msg);
-        // Delay reset slightly to let the browser start the protocol handler
-        setTimeout(() => {
-            form.reset();
-            resetDefaultDate();
-        }, 1000);
-    }
-}
-
-function showToast(text) {
-    const toast = document.querySelector('.toast');
-    if (toast) {
-        toast.querySelector('span').innerText = text;
-        toast.classList.add('active');
-        setTimeout(() => toast.classList.remove('active'), 5000);
-    }
-}
-
-function abrirModalBlog(id) {
-    const modal = document.getElementById('blog-modal');
-    const lang = localStorage.getItem('lang') || 'pt';
-    const item = blogContent[lang] ? blogContent[lang][id] : null;
-    if (modal && item) {
-        document.getElementById('modal-img').style.backgroundImage = item.image;
-        document.getElementById('modal-category').innerText = item.category;
-        document.getElementById('modal-title').innerText = item.title;
-        document.getElementById('modal-text').innerHTML = item.text;
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function fecharModalBlog() {
-    const modal = document.getElementById('blog-modal');
-    if (modal) {
-        modal.classList.remove('show');
-        document.body.style.overflow = '';
-    }
+        card.classList.add('service-highlight');
+        setTimeout(() => card.classList.remove('service-highlight'), 2000);
+    });
 }
 
 /* ==========================================================================
-   Advanced Features (FAQ & Accordion)
+   Hero
    ========================================================================== */
+function initHeroSlider() {
+    const slides = Array.from(document.querySelectorAll('.slider-item'));
+    const ticks = document.getElementById('hero-ticks');
+    const capN = document.getElementById('hero-shot-n');
+    const capT = document.getElementById('hero-shot-cap');
+    if (slides.length === 0) return;
+
+    if (ticks) {
+        ticks.innerHTML = slides
+            .map((_, i) => `<span class="hero-tick${i === 0 ? ' on' : ''}"></span>`)
+            .join('');
+    }
+
+    let current = 0;
+    const paint = () => {
+        slides.forEach((s, i) => s.classList.toggle('active', i === current));
+        if (ticks) {
+            Array.from(ticks.children).forEach((t, i) => t.classList.toggle('on', i === current));
+        }
+        if (capN) capN.textContent = `${String(current + 1).padStart(2, '0')}/${String(slides.length).padStart(2, '0')}`;
+        if (capT) {
+            const key = 'shot_' + (current + 1);
+            capT.setAttribute('data-i18n', key);
+            capT.innerHTML = t(key, capT.innerHTML);
+        }
+    };
+
+    paint();
+    setInterval(() => { current = (current + 1) % slides.length; paint(); }, SLIDE_INTERVAL);
+}
 
 /* ==========================================================================
-   Gallery Lightbox Logic
+   Marcas — a pasta tem 45 ficheiros numerados; gerar evita 90 linhas de HTML
+   ========================================================================== */
+function initPartners() {
+    const track = document.getElementById('partners-track');
+    if (!track) return;
+
+    const cards = [];
+    for (let i = 0; i < PARTNER_COUNT; i++) {
+        const base = `imagens/parceiros/IMG-20260701-WA${String(i).padStart(4, '0')}`;
+        cards.push(
+            `<div class="partner-logo-card"><picture>` +
+            `<source srcset="${base}.webp" type="image/webp">` +
+            `<img src="${base}.jpg" alt="" class="partner-logo-img" loading="lazy" decoding="async" width="420" height="420">` +
+            `</picture></div>`
+        );
+    }
+    // Duplicado: a animação desloca -50%, logo a segunda metade entra sem salto.
+    track.innerHTML = cards.join('') + cards.join('');
+}
+
+/* ==========================================================================
+   Revelações
+   ========================================================================== */
+let revealObserver = null;
+
+function initReveals() {
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-in'));
+        return;
+    }
+    revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            revealObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+    document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+}
+
+// Ao trocar de secção há elementos já dentro do ecrã que o observer não volta a
+// visitar — este empurrão resolve isso sem duplicar observers.
+function revealVisible() {
+    if (!revealObserver) return;
+    document.querySelectorAll('.spa-section.active [data-reveal]:not(.is-in)').forEach(el => {
+        revealObserver.unobserve(el);
+        revealObserver.observe(el);
+    });
+}
+
+/* ==========================================================================
+   Contadores
+   ========================================================================== */
+function countUp(el) {
+    const target = Number(el.getAttribute('data-target')) || 0;
+    if (prefersReducedMotion) { el.textContent = String(target); return; }
+
+    const duration = 1600;
+    const start = performance.now();
+    const step = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = String(Math.floor(eased * target));
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = String(target);
+    };
+    requestAnimationFrame(step);
+}
+
+function resetCounters(scope) {
+    scope.querySelectorAll('.stat-number').forEach(n => { n.textContent = '0'; n.dataset.counted = ''; });
+}
+
+function initStatsObserver() {
+    const groups = document.querySelectorAll('.spec');
+    if (!groups.length) return;
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        document.querySelectorAll('.stat-number').forEach(countUp);
+        return;
+    }
+
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.querySelectorAll('.stat-number').forEach(n => {
+                if (n.dataset.counted === 'yes') return;
+                n.dataset.counted = 'yes';
+                countUp(n);
+            });
+        });
+    }, { threshold: 0.35 });
+
+    groups.forEach(g => obs.observe(g));
+}
+
+/* ==========================================================================
+   Acordeão e cartões de serviço
+   ========================================================================== */
+function toggleAccordion(header) {
+    const item = header.parentElement;
+    const open = item.classList.toggle('active');
+    header.setAttribute('aria-expanded', String(open));
+}
+
+function toggleServiceCard(headEl) {
+    if (!headEl) return;
+    const card = headEl.parentElement;
+    const body = card.querySelector('.service-body');
+    const isExpanded = card.classList.contains('expanded');
+
+    document.querySelectorAll('.expandable-service-card.expanded').forEach(other => {
+        if (other === card) return;
+        other.classList.remove('expanded');
+        const b = other.querySelector('.service-body');
+        if (b) b.style.maxHeight = null;
+    });
+
+    if (isExpanded) {
+        card.classList.remove('expanded');
+        body.style.maxHeight = null;
+    } else {
+        card.classList.add('expanded');
+        body.style.maxHeight = body.scrollHeight + 'px';
+    }
+}
+
+/* ==========================================================================
+   Galeria e modais
    ========================================================================== */
 function initLightbox() {
-    const galleryItems = document.querySelectorAll('.g-item');
     const modal = document.getElementById('lightbox-modal');
     const modalImg = document.getElementById('lightbox-img');
+    if (!modal || !modalImg) return;
 
-    galleryItems.forEach(item => {
-        const img = item.querySelector('.g-img');
-        item.style.cursor = 'zoom-in';
+    document.querySelectorAll('.g-item').forEach(item => {
         item.addEventListener('click', () => {
+            const img = item.querySelector('.g-img');
+            if (!img) return;
             modalImg.src = img.src;
+            modalImg.alt = img.alt;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
@@ -438,382 +456,384 @@ function initLightbox() {
 
 function closeLightbox() {
     const modal = document.getElementById('lightbox-modal');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
 }
 
-/* --- Typewriter Effect (Digitalização) --- */
-function initTypewriter() {
-    const textElement = document.querySelector('.typing-text');
-    if (!textElement) return;
+function abrirModalBlog(id) {
+    const modal = document.getElementById('blog-modal');
+    const lang = localStorage.getItem('lang') || 'pt';
+    const item = (blogContent[lang] || blogContent.pt)[String(id)];
+    if (!modal || !item) return;
 
-    let typewriterLang = localStorage.getItem('lang') || 'pt';
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typeSpeed = 150;
-
-    function type() {
-        const lang = localStorage.getItem('lang') || 'pt';
-        if (lang !== typewriterLang) {
-            typewriterLang = lang;
-            wordIndex = 0;
-            charIndex = 0;
-            isDeleting = false;
-        }
-
-        const wordsStr = (typeof translations !== 'undefined' && translations[lang] && translations[lang]['typewriter_words']) || "ECONOMIA,EFICIÊNCIA,AUTONOMIA,SUSTENTABILIDADE";
-        const words = wordsStr.split(',');
-        
-        if (wordIndex >= words.length) {
-            wordIndex = 0;
-        }
-        const currentWord = words[wordIndex];
-        
-        if (isDeleting) {
-            textElement.textContent = currentWord.substring(0, charIndex - 1);
-            charIndex--;
-            typeSpeed = 75;
-        } else {
-            textElement.textContent = currentWord.substring(0, charIndex + 1);
-            charIndex++;
-            typeSpeed = 150;
-        }
-
-        if (!isDeleting && charIndex === currentWord.length) {
-            isDeleting = true;
-            typeSpeed = 2000; // Pause at end
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            typeSpeed = 500;
-        }
-
-        setTimeout(type, typeSpeed);
-    }
-
-    type();
+    document.getElementById('modal-img').style.backgroundImage = item.image;
+    document.getElementById('modal-category').textContent = item.category;
+    document.getElementById('modal-title').textContent = item.title;
+    document.getElementById('modal-text').innerHTML = item.text;
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
 }
 
-/* --- Accordion Toggle (Interatividade) --- */
-function toggleAccordion(header) {
-    const item = header.parentElement;
-    const isActive = item.classList.contains('active');
-
-    if (isActive) {
-        item.classList.remove('active');
-    } else {
-        item.classList.add('active');
-    }
+function fecharModalBlog() {
+    const modal = document.getElementById('blog-modal');
+    if (modal) modal.classList.remove('show');
+    document.body.style.overflow = '';
 }
 
-/* --- Animated Stats Counter --- */
-function initStatsCounter() {
-    const counters = document.querySelectorAll('.stat-number');
-    if (!counters.length) return;
+function initModalDismissal() {
+    // Clicar fora fecha; Esc fecha. Os dois modais partilham o mesmo gesto.
+    const blog = document.getElementById('blog-modal');
+    const light = document.getElementById('lightbox-modal');
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                counters.forEach(counter => {
-                    const target = +counter.getAttribute('data-target');
-                    const duration = 2000;
-                    const start = 0;
-                    const startTime = performance.now();
+    if (blog) blog.addEventListener('click', (e) => { if (e.target === blog) fecharModalBlog(); });
+    if (light) light.addEventListener('click', (e) => { if (e.target === light) closeLightbox(); });
 
-                    function animate(currentTime) {
-                        const elapsed = currentTime - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        const eased = 1 - Math.pow(1 - progress, 3);
-                        counter.textContent = Math.floor(eased * target);
-                        if (progress < 1) {
-                            requestAnimationFrame(animate);
-                        } else {
-                            counter.textContent = target;
-                        }
-                    }
-                    requestAnimationFrame(animate);
-                });
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    const statsBar = document.querySelector('.home-stats-bar');
-    if (statsBar) observer.observe(statsBar);
-}
-
-// initStatsCounter is called from the main DOMContentLoaded block above.
-
-/* --- Expandable Service Cards --- */
-function toggleServiceCard(headEl) {
-    const card = headEl.parentElement;
-    const body = card.querySelector('.service-body');
-    const isExpanded = card.classList.contains('expanded');
-    
-    // Close all other expanded cards (Accordion style UX)
-    document.querySelectorAll('.expandable-service-card.expanded').forEach(otherCard => {
-        if (otherCard !== card) {
-            otherCard.classList.remove('expanded');
-            const otherBody = otherCard.querySelector('.service-body');
-            if (otherBody) otherBody.style.maxHeight = null;
-        }
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        fecharModalBlog();
+        closeLightbox();
     });
-
-    // Toggle current card
-    if (isExpanded) {
-        card.classList.remove('expanded');
-        body.style.maxHeight = null;
-    } else {
-        card.classList.add('expanded');
-        body.style.maxHeight = body.scrollHeight + "px";
-    }
-}
-
-/* --- Navigate to Specific Service --- */
-function goToService(serviceId, event) {
-    if (event) event.preventDefault();
-    
-    // Show the services section, but prevent the default scroll-to-top
-    showSection('servicos', null, true);
-    
-    // Short wait for section transition, then scroll directly to the service card
-    setTimeout(() => {
-        const target = document.getElementById(serviceId);
-        if (target) {
-            // Scroll to the card
-            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Add highlight animation
-            target.classList.add('service-highlight');
-            
-            // Auto open the card so the user can read it perfectly
-            const headEl = target.querySelector('.service-head');
-            if (headEl && !target.classList.contains('expanded')) {
-                toggleServiceCard(headEl);
-            }
-            
-            // Remove highlight after animation
-            setTimeout(() => {
-                target.classList.remove('service-highlight');
-            }, 2500);
-        }
-    }, 100);
-}
-
-// --- MÁSCARA DE DATA (Dia/Mês/Ano) ---
-document.addEventListener('DOMContentLoaded', () => {
-    const dataInput = document.getElementById('data');
-    if (dataInput) {
-        dataInput.addEventListener('input', (e) => {
-            if (e.target.type === 'date') return;
-            let value = e.target.value.replace(/\D/g, ""); // Remove não-dígitos
-            if (value.length > 8) value = value.slice(0, 8);
-            
-            // Insere as barras
-            if (value.length > 4) {
-                value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, "$1/$2/$3");
-            } else if (value.length > 2) {
-                value = value.replace(/^(\d{2})(\d{0,2})/, "$1/$2");
-            }
-            
-            e.target.value = value;
-        });
-    }
-});
-
-/* --- Cookie Consent Function --- */
-function acceptCookies() {
-    localStorage.setItem('cookieConsent', 'true');
-    const cookieBanner = document.getElementById('cookie-banner');
-    if (cookieBanner) {
-        cookieBanner.classList.remove('show');
-    }
-}
-
-/* --- Multilingual System --- */
-function initLanguage() {
-    let lang = localStorage.getItem('lang');
-    if (!lang) lang = 'pt'; // Default is PT
-    setLanguage(lang);
-}
-
-function toggleLanguage() {
-    const currentLang = localStorage.getItem('lang') || 'pt';
-    const nextLang = currentLang === 'pt' ? 'en' : 'pt';
-    setLanguage(nextLang);
-}
-
-function setLanguage(lang) {
-    if (typeof translations === 'undefined') return;
-    
-    const dic = translations[lang];
-    if (!dic) return;
-    
-    // Atualiza a linguagem no HTML para SEO e acessibilidade
-    document.documentElement.lang = lang === 'pt' ? 'pt-PT' : 'en';
-    
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dic[key]) {
-            // Se for placeholder
-            if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
-                el.setAttribute('placeholder', dic[key]);
-            } else {
-                el.innerHTML = dic[key];
-            }
-        }
-    });
-
-    document.querySelectorAll('[data-i18n-title]').forEach(el => {
-        const key = el.getAttribute('data-i18n-title');
-        if (dic[key]) {
-            el.setAttribute('title', dic[key]);
-        }
-    });
-
-    localStorage.setItem('lang', lang);
-
-    // Atualiza o texto do botão único de idioma
-    document.querySelectorAll('.lang-btn-label').forEach(el => {
-        el.innerText = lang.toUpperCase();
-    });
-
-    // Mantém compatibilidade com botões normais se existirem
-    const langBtns = document.querySelectorAll('.lang-btn');
-    langBtns.forEach(btn => {
-        if (btn.dataset.lang) {
-            if (btn.dataset.lang === lang) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        }
-    });
-
-    if (window.updateMapInfo) {
-        window.updateMapInfo(lang);
-    }
-}
-
-function resetDefaultDate() {
-    const dataInput = document.getElementById('data');
-    if (dataInput) {
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
-        const today = new Date();
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        
-        const yyyy = tomorrow.getFullYear();
-        const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
-        const dd = String(tomorrow.getDate()).padStart(2, '0');
-        
-        if (isMobile) {
-            dataInput.type = 'date';
-            dataInput.value = `${yyyy}-${mm}-${dd}`;
-        } else {
-            dataInput.type = 'text';
-            dataInput.value = `${dd}/${mm}/${yyyy}`;
-        }
-    }
 }
 
 /* ==========================================================================
-   Interactive SVG Mozambique Map
+   Formulário
    ========================================================================== */
-const mapDetailsPT = {
-    'Cabo Delgado': { projects: '8 Projetos Concluídos', details: 'Sistemas solares residenciais isolados (Off-Grid) e manutenção de redes elétricas secundárias.' },
-    'Niassa': { projects: '12 Projetos Concluídos', details: 'Projetos de regadio solar agrícola com bombas fotovoltaicas de alto rendimento para horticultura.' },
-    'Nampula': { projects: '45 Projetos Concluídos', details: 'Sede central da Renova Energy. Matriz operacional com suporte técnico 24/7 e montagem em tempo recorde de no máximo 3 dias.' },
-    'Zambézia': { projects: '15 Projetos Concluídos', details: 'Instalação de painéis solares comerciais e eletrificação estruturada de edifícios comerciais.' },
-    'Tete': { projects: '7 Projetos Concluídos', details: 'Dimensionamento e fornecimento de bancos de baterias de lítio industriais e inversores híbridos.' },
-    'Manica': { projects: '6 Projetos Concluídos', details: 'Consultoria em eficiência energética e auditorias técnicas para sistemas de bombagem solar.' },
-    'Sofala': { projects: '11 Projetos Concluídos', details: 'Eletrificação predial e montagem de centrais solares de backup para empresas no corredor da Beira.' },
-    'Inhambane': { projects: '9 Projetos Concluídos', details: 'Instalação de sistemas solares híbridos com monitorização remota Wi-Fi/4G para o setor de turismo.' },
-    'Gaza': { projects: '5 Projetos Concluídos', details: 'Micro-redes solares comunitárias para fornecimento de energia limpa e iluminação pública sustentável.' },
-    'Maputo': { projects: '22 Projetos Concluídos', details: 'Escritório comercial. Elaboração de estudos de viabilidade financeira e ROI de grandes centrais solares.' }
-};
+let submitMethod = 'whatsapp';
+function setSubmitMethod(method) { submitMethod = method; }
 
-const mapDetailsEN = {
-    'Cabo Delgado': { projects: '8 Projects Completed', details: 'Isolated residential solar systems (Off-Grid) and maintenance of secondary electrical grids.' },
-    'Niassa': { projects: '12 Projects Completed', details: 'Solar agricultural irrigation projects with high-performance PV pumps for horticulture.' },
-    'Nampula': { projects: '45 Projects Completed', details: 'Headquarters of Renova Energy. Operational hub with 24/7 technical support and record installation time (max 3 days).' },
-    'Zambézia': { projects: '15 Projects Completed', details: 'Commercial solar panel installation and structured electrification of commercial buildings.' },
-    'Tete': { projects: '7 Projects Completed', details: 'Dimensioning and supply of industrial lithium battery banks and hybrid inverters.' },
-    'Manica': { projects: '6 Projects Completed', details: 'Energy efficiency consulting and technical audits for solar pumping systems.' },
-    'Sofala': { projects: '11 Projects Completed', details: 'Building electrification and assembly of backup solar power stations for companies in the Beira corridor.' },
-    'Inhambane': { projects: '9 Projects Completed', details: 'Installation of hybrid solar systems with Wi-Fi/4G remote monitoring for the tourism sector.' },
-    'Gaza': { projects: '5 Projects Completed', details: 'Community solar microgrids for supplying clean energy and sustainable public street lighting.' },
-    'Maputo': { projects: '22 Projects Completed', details: 'Commercial office. Preparation of financial viability and ROI studies for large solar power stations.' }
-};
+function handleFormSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
 
-window.updateMapInfo = function(lang) {
-    const activeProv = document.querySelector('.map-province.active-province');
-    if (!activeProv) return;
-    
-    const name = activeProv.getAttribute('data-name');
-    const detailsSource = lang === 'en' ? mapDetailsEN : mapDetailsPT;
-    const info = detailsSource[name];
-    
-    const infoTitle = document.getElementById('map-info-title');
-    const infoDesc = document.getElementById('map-info-desc');
-    
-    if (info && infoTitle && infoDesc) {
-        infoTitle.innerHTML = `${name} &mdash; ${info.projects}`;
-        infoDesc.innerHTML = info.details;
+    const nome = document.getElementById('nome').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const provincia = document.getElementById('localizacao').value;
+    const cidade = document.getElementById('cidade').value.trim();
+    const servico = document.getElementById('servico').value;
+    const dataInput = document.getElementById('data');
+    const data = dataInput.value.trim();
+    const hora = document.getElementById('hora').value;
+
+    if (!nome || !telefone || !provincia || !cidade || !servico || !hora) {
+        showToast(t('toast_required', 'Faltam campos por preencher.'));
+        return;
     }
+
+    const parsed = parseDate(data);
+    if (!parsed) {
+        showToast(t('toast_invalid_format', 'Escreva a data no formato DD/MM/AAAA.'));
+        dataInput.focus();
+        return;
+    }
+    if (!parsed.valid) {
+        showToast(t('toast_bad_date', 'Data inválida. Verifique o dia, o mês e o ano.'));
+        dataInput.focus();
+        return;
+    }
+
+    const linhas = [
+        `Nome: ${nome}`,
+        `Telefone: ${telefone}`,
+        `Localização: ${provincia} (${cidade})`,
+        `Serviço: ${servico}`,
+        `Data: ${parsed.display}`,
+        `Hora: ${hora}`
+    ];
+
+    if (submitMethod === 'whatsapp') {
+        const msg = encodeURIComponent('*PEDIDO DE ORÇAMENTO — SITE*\n\n' + linhas.join('\n'));
+        window.open(`https://wa.me/258841151961?text=${msg}`, '_blank', 'noopener');
+        trackEvent('gerar_lead', { method: 'whatsapp', servico });
+        showToast(t('toast_redirect_wa', 'A abrir o WhatsApp…'));
+        form.reset();
+        resetDefaultDate();
+    } else {
+        const subject = encodeURIComponent('Pedido de orçamento — Renova Energy');
+        const body = encodeURIComponent('Olá Renova Energy,\n\nGostaria de pedir um orçamento:\n\n' + linhas.join('\n') + '\n\nEnviado pelo site.');
+        window.location.href = `mailto:renovaenergylda@gmail.com?subject=${subject}&body=${body}`;
+        trackEvent('gerar_lead', { method: 'email', servico });
+        showToast(t('toast_redirect_mail', 'A abrir o seu gestor de e-mail…'));
+        setTimeout(() => { form.reset(); resetDefaultDate(); }, 1000);
+    }
+}
+
+/* Aceita o formato nativo do telemóvel (AAAA-MM-DD) e o da máscara (DD/MM/AAAA). */
+function parseDate(value) {
+    let d, m, y;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        [y, m, d] = value.split('-').map(Number);
+    } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+        [d, m, y] = value.split('/').map(Number);
+    } else {
+        return null;
+    }
+
+    // Round-trip pelo Date apanha 31/02 e afins, que a validação por intervalos deixava passar.
+    const dt = new Date(y, m - 1, d);
+    const valid = dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d && y >= new Date().getFullYear();
+
+    return { valid, display: `${String(d).padStart(2, '0')}/${String(m).padStart(2, '0')}/${y}` };
+}
+
+function initDateMask() {
+    const input = document.getElementById('data');
+    if (!input) return;
+    input.addEventListener('input', (e) => {
+        if (e.target.type === 'date') return;
+        let v = e.target.value.replace(/\D/g, '').slice(0, 8);
+        if (v.length > 4) v = v.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
+        else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,2})/, '$1/$2');
+        e.target.value = v;
+    });
+}
+
+function resetDefaultDate() {
+    const input = document.getElementById('data');
+    if (!input) return;
+
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const dd = String(tomorrow.getDate()).padStart(2, '0');
+
+    if (isTouch) {
+        input.type = 'date';
+        input.value = `${yyyy}-${mm}-${dd}`;
+    } else {
+        input.type = 'text';
+        input.value = `${dd}/${mm}/${yyyy}`;
+    }
+}
+
+function showToast(text) {
+    const toast = document.querySelector('.toast');
+    if (!toast) return;
+    toast.querySelector('span').textContent = text;
+    toast.classList.add('active');
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => toast.classList.remove('active'), 4500);
+}
+
+/* ==========================================================================
+   Cookies
+   ========================================================================== */
+function initCookieBanner() {
+    if (localStorage.getItem('cookieConsent')) return;
+    const banner = document.getElementById('cookie-banner');
+    if (banner) setTimeout(() => banner.classList.add('show'), 2500);
+}
+
+function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'true');
+    const banner = document.getElementById('cookie-banner');
+    if (banner) banner.classList.remove('show');
+    startGa4();
+}
+
+/* ==========================================================================
+   Idiomas
+   ========================================================================== */
+function t(key, fallback) {
+    const lang = localStorage.getItem('lang') || 'pt';
+    const dic = (typeof translations !== 'undefined' && translations[lang]) || {};
+    return dic[key] || fallback || key;
+}
+
+function initLanguage() {
+    setLanguage(localStorage.getItem('lang') || 'pt');
+}
+
+function toggleLanguage() {
+    setLanguage((localStorage.getItem('lang') || 'pt') === 'pt' ? 'en' : 'pt');
+}
+
+function setLanguage(lang) {
+    if (typeof translations === 'undefined' || !translations[lang]) return;
+    const dic = translations[lang];
+
+    document.documentElement.lang = lang === 'pt' ? 'pt-PT' : 'en';
+    localStorage.setItem('lang', lang);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = dic[el.getAttribute('data-i18n')];
+        if (v !== undefined) el.innerHTML = v;
+    });
+    // Placeholders têm chave própria: reutilizar data-i18n punha o texto dentro
+    // do input em vez do atributo.
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const v = dic[el.getAttribute('data-i18n-ph')];
+        if (v !== undefined) el.setAttribute('placeholder', v);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const v = dic[el.getAttribute('data-i18n-title')];
+        if (v !== undefined) { el.setAttribute('title', v); el.setAttribute('aria-label', v); }
+    });
+
+    document.querySelectorAll('.lang-btn-label').forEach(el => { el.textContent = lang.toUpperCase(); });
+
+    if (window.updateMapInfo) window.updateMapInfo(lang);
+}
+
+/* ==========================================================================
+   Mapa de Moçambique
+   ========================================================================== */
+const mapDetails = {
+    pt: {
+        'Cabo Delgado': { projects: '8 projetos concluídos', details: 'Sistemas solares isolados para habitação e manutenção de redes elétricas secundárias.' },
+        'Niassa': { projects: '12 projetos concluídos', details: 'Rega agrícola com bombas fotovoltaicas para horticultura.' },
+        'Nampula': { projects: '45 projetos concluídos', details: 'Sede e armazém. Equipa permanente, stock de material e linha técnica para contratos de manutenção.' },
+        'Zambézia': { projects: '15 projetos concluídos', details: 'Sistemas solares comerciais e instalação elétrica de edifícios de comércio.' },
+        'Tete': { projects: '7 projetos concluídos', details: 'Dimensionamento e fornecimento de bancos de baterias de lítio e inversores híbridos.' },
+        'Manica': { projects: '6 projetos concluídos', details: 'Estudos de eficiência energética e auditorias a sistemas de bombagem solar.' },
+        'Sofala': { projects: '11 projetos concluídos', details: 'Instalação elétrica predial e sistemas solares de reserva no corredor da Beira.' },
+        'Inhambane': { projects: '9 projetos concluídos', details: 'Sistemas híbridos com monitorização remota para unidades de turismo.' },
+        'Gaza': { projects: '5 projetos concluídos', details: 'Micro-redes solares comunitárias e iluminação pública.' },
+        'Maputo': { projects: '22 projetos concluídos', details: 'Escritório comercial. Estudos de viabilidade e retorno para centrais de maior potência.' }
+    },
+    en: {
+        'Cabo Delgado': { projects: '8 projects completed', details: 'Stand-alone residential solar systems and maintenance of secondary electrical networks.' },
+        'Niassa': { projects: '12 projects completed', details: 'Agricultural irrigation with photovoltaic pumps for horticulture.' },
+        'Nampula': { projects: '45 projects completed', details: 'Head office and warehouse. Permanent team, material in stock and a technical line for maintenance contracts.' },
+        'Zambézia': { projects: '15 projects completed', details: 'Commercial solar systems and electrical installation of retail buildings.' },
+        'Tete': { projects: '7 projects completed', details: 'Sizing and supply of lithium battery banks and hybrid inverters.' },
+        'Manica': { projects: '6 projects completed', details: 'Energy efficiency studies and audits of solar pumping systems.' },
+        'Sofala': { projects: '11 projects completed', details: 'Building electrical installation and backup solar systems along the Beira corridor.' },
+        'Inhambane': { projects: '9 projects completed', details: 'Hybrid systems with remote monitoring for tourism operations.' },
+        'Gaza': { projects: '5 projects completed', details: 'Community solar microgrids and public lighting.' },
+        'Maputo': { projects: '22 projects completed', details: 'Commercial office. Feasibility and payback studies for higher-capacity plants.' }
+    }
+};
+
+window.updateMapInfo = function (lang) {
+    const active = document.querySelector('.map-province.active-province');
+    if (!active) return;
+    const name = active.getAttribute('data-name');
+    const info = (mapDetails[lang] || mapDetails.pt)[name];
+    const title = document.getElementById('map-info-title');
+    const desc = document.getElementById('map-info-desc');
+    if (!info || !title || !desc) return;
+    title.innerHTML = `${name} &mdash; ${info.projects}`;
+    desc.textContent = info.details;
 };
 
 function initInteractiveMap() {
     const provinces = document.querySelectorAll('.map-province');
     const tooltip = document.getElementById('map-tooltip');
-    const infoBox = document.getElementById('map-info-box');
+    const box = document.getElementById('map-info-box');
+    if (!provinces.length) return;
 
-    if (provinces.length === 0) return;
+    const select = (prov) => {
+        provinces.forEach(p => p.classList.remove('active-province'));
+        prov.classList.add('active-province');
+        window.updateMapInfo(localStorage.getItem('lang') || 'pt');
+        if (!box) return;
+        box.style.opacity = '0';
+        box.style.transform = 'translateY(8px)';
+        requestAnimationFrame(() => {
+            box.style.opacity = '1';
+            box.style.transform = 'none';
+        });
+    };
 
     provinces.forEach(prov => {
-        prov.addEventListener('mouseenter', (e) => {
-            const name = prov.getAttribute('data-name');
-            if (tooltip) {
-                tooltip.textContent = name;
-                tooltip.style.opacity = '1';
-            }
+        prov.addEventListener('mouseenter', () => {
+            if (!tooltip) return;
+            tooltip.textContent = prov.getAttribute('data-name');
+            tooltip.style.opacity = '1';
         });
-
         prov.addEventListener('mousemove', (e) => {
-            if (tooltip) {
-                tooltip.style.left = (e.clientX + 15) + 'px';
-                tooltip.style.top = (e.clientY + 15) + 'px';
-                tooltip.style.position = 'fixed';
-            }
+            if (!tooltip) return;
+            tooltip.style.left = (e.clientX + 14) + 'px';
+            tooltip.style.top = (e.clientY + 14) + 'px';
         });
-
-        prov.addEventListener('mouseleave', () => {
-            if (tooltip) tooltip.style.opacity = '0';
-        });
-
-        prov.addEventListener('click', () => {
-            provinces.forEach(p => p.classList.remove('active-province'));
-            prov.classList.add('active-province');
-
-            const lang = localStorage.getItem('lang') || 'pt';
-            window.updateMapInfo(lang);
-            
-            if (infoBox) {
-                infoBox.style.opacity = '0';
-                infoBox.style.transform = 'translateY(10px)';
-                setTimeout(() => {
-                    infoBox.style.transition = 'all 0.3s ease';
-                    infoBox.style.opacity = '1';
-                    infoBox.style.transform = 'translateY(0)';
-                }, 50);
-            }
+        prov.addEventListener('mouseleave', () => { if (tooltip) tooltip.style.opacity = '0'; });
+        prov.addEventListener('click', () => select(prov));
+        // O mapa é navegável por teclado: os paths têm tabindex no HTML.
+        prov.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(prov); }
         });
     });
 
-    const lang = localStorage.getItem('lang') || 'pt';
-    window.updateMapInfo(lang);
+    window.updateMapInfo(localStorage.getItem('lang') || 'pt');
 }
 
+/* ==========================================================================
+   Delegação de eventos
+   Nada de handlers inline no HTML: é o que permite a política de segurança
+   (_headers) proibir script inline sem partir metade do site.
+   ========================================================================== */
+function initDelegation() {
+    document.addEventListener('click', (e) => {
+        const el = e.target.closest('[data-nav], [data-service], [data-note], [data-close], [data-cookie-accept], [data-lang-toggle], [data-method], .accordion-header, .service-head');
+        if (!el) return;
+
+        if (el.hasAttribute('data-nav'))          return showSection(el.getAttribute('data-nav'), e);
+        if (el.hasAttribute('data-service'))      return goToService(el.getAttribute('data-service'), e);
+        if (el.hasAttribute('data-note'))         return abrirModalBlog(el.getAttribute('data-note'));
+        if (el.hasAttribute('data-lang-toggle'))  return toggleLanguage();
+        if (el.hasAttribute('data-cookie-accept'))return acceptCookies();
+        if (el.hasAttribute('data-close'))        return el.getAttribute('data-close') === 'blog' ? fecharModalBlog() : closeLightbox();
+        // Guardado antes do submit: o clique no botão chega sempre primeiro.
+        if (el.hasAttribute('data-method'))       return setSubmitMethod(el.getAttribute('data-method'));
+        if (el.classList.contains('accordion-header')) return toggleAccordion(el);
+        if (el.classList.contains('service-head'))     return toggleServiceCard(el);
+    });
+
+    // Elementos que não são <button> mas têm papel de botão precisam do teclado.
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const head = e.target.closest && e.target.closest('.service-head');
+        if (!head) return;
+        e.preventDefault();
+        toggleServiceCard(head);
+    });
+
+    const form = document.getElementById('agendamento-form');
+    if (form) form.addEventListener('submit', handleFormSubmit);
+}
+
+/* ==========================================================================
+   Analytics
+   ========================================================================== */
+function initAnalytics() {
+    if (ANALYTICS.cloudflareToken) {
+        // Sem cookies: pode arrancar de imediato.
+        const b = document.createElement('script');
+        b.defer = true;
+        b.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        b.setAttribute('data-cf-beacon', JSON.stringify({ token: ANALYTICS.cloudflareToken }));
+        document.head.appendChild(b);
+    }
+    if (ANALYTICS.ga4Id && localStorage.getItem('cookieConsent') === 'true') startGa4();
+}
+
+function startGa4() {
+    if (!ANALYTICS.ga4Id || window.__ga4Started) return;
+    window.__ga4Started = true;
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ANALYTICS.ga4Id;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', ANALYTICS.ga4Id, { anonymize_ip: true });
+}
+
+/* Um pedido de orçamento é a única conversão que interessa medir aqui. */
+function trackEvent(name, params) {
+    if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+}
+
+window.addEventListener('resize', () => {
+    // O acordeão de serviços guarda a altura em pixels; se a largura mudar, remede.
+    const open = document.querySelector('.expandable-service-card.expanded .service-body');
+    if (open) open.style.maxHeight = open.scrollHeight + 'px';
+    const active = document.querySelector('.spa-section.active');
+    if (active) updateStickyCta(active.id);
+});

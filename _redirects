@@ -1,0 +1,20 @@
+# Redirecionamentos do Cloudflare Pages.
+# Um só endereço canónico: tudo o resto responde 301 para https://renovaenergylda.co.mz
+
+https://www.renovaenergylda.co.mz/*   https://renovaenergylda.co.mz/:splat   301!
+http://www.renovaenergylda.co.mz/*    https://renovaenergylda.co.mz/:splat   301!
+
+# Endereços antigos que possam ter sido partilhados como páginas separadas.
+# As secções vivem em hashes; o main.js trata dos aliases (#sobre, #galeria...).
+/index                             /                                    301
+/home                              /                                    301
+/inicio                            /                                    301
+/servicos                          /#servicos                           301
+/galeria                           /#projetos                           301
+/projetos                          /#projetos                           301
+/sobre                             /#empresa                            301
+/empresa                           /#empresa                            301
+/contacto                          /#agendamento                        301
+/agendamento                       /#agendamento                        301
+/privacidade                       /privacidade.html                    301
+/termos                            /termos.html                         301

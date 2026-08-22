@@ -1,0 +1,38 @@
+# Cabeçalhos servidos pelo Cloudflare Pages.
+# Referência: https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  # --- Segurança ---
+  # O site não tem script inline (os handlers estão todos em js/main.js por
+  # delegação), por isso script-src pode ficar sem 'unsafe-inline'.
+  # style-src precisa de 'unsafe-inline' por causa dos style="background-image"
+  # que a equipa edita à mão no HTML da galeria.
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google.com https://maps.gstatic.com https://*.googleapis.com; frame-src https://www.google.com; connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+
+# --- Cache ---
+# HTML revalida sempre: uma alteração de texto tem de aparecer no mesmo dia.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# CSS e JS trazem ?v=N no HTML. Uma hora chega e evita ficar preso a uma
+# versão antiga se alguém publicar sem incrementar o número.
+/css/*
+  Cache-Control: public, max-age=3600
+
+/js/*
+  Cache-Control: public, max-age=3600
+
+# Fotografias e logótipos: o nome do ficheiro é estável, o conteúdo também.
+/imagens/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/logotipo/*
+  Cache-Control: public, max-age=31536000, immutable
