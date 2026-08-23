@@ -224,13 +224,14 @@ const translations = {
 
         /* Rodapé */
         "ft_desc": "Engenharia e serviços elétricos em Nampula. Energia solar, instalação de edifícios e material certificado.",
+        "ft_contact_title": "Contactos",
         "ft_links_title": "Secções",
         "ft_hours_title": "Horário",
         "ft_h1_day": "Segunda a sexta",
         "ft_h2_day": "Sábado",
         "ft_h3_day": "Domingo e feriados",
         "ft_h3_time": "Encerrado",
-        "ft_emergency": "Linha técnica 24 h disponível para clientes com contrato de manutenção.",
+        "ft_emergency": "Linha técnica 24 h para clientes com contrato de manutenção.",
         "footer_copyright": "&copy; 2026 Renova Energy, Lda &middot; Nampula, Moçambique",
         "footer_terms": "Termos",
         "footer_privacy": "Privacidade",
@@ -490,6 +491,7 @@ const translations = {
         "ag_note": "The data comes only to us. No newsletter, no sharing with third parties.",
 
         "ft_desc": "Engineering and electrical services in Nampula. Solar power, building installations and certified material.",
+        "ft_contact_title": "Contact",
         "ft_links_title": "Sections",
         "ft_hours_title": "Hours",
         "ft_h1_day": "Monday to Friday",

@@ -16,5 +16,6 @@ http://www.renovaenergylda.co.mz/*    https://renovaenergylda.co.mz/:splat   301
 /empresa                           /#empresa                            301
 /contacto                          /#agendamento                        301
 /agendamento                       /#agendamento                        301
-/privacidade                       /privacidade.html                    301
-/termos                            /termos.html                         301
+# NAO acrescentar /termos -> /termos.html nem /privacidade -> /privacidade.html:
+# o Cloudflare Pages ja faz 308 de /termos.html para /termos, e a regra inversa
+# fecha um ciclo infinito. Testado em producao a 23/08/2026.

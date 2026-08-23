@@ -1326,7 +1326,7 @@ footer {
 }
 .footer-grid {
     display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr) minmax(0, 4fr);
     gap: clamp(2rem, 5vw, 4rem);
     padding-bottom: clamp(3rem, 6vw, 5rem);
 }
@@ -1390,7 +1390,6 @@ footer ul a:hover { color: var(--sun); }
 }
 .footer-bottom a:hover { color: var(--sun); }
 
-@media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr; } }
 
 /* ==========================================================================
    Navegação móvel
@@ -1777,4 +1776,76 @@ picture { display: contents; }
     footer ul { gap: 0; }
     .footer-contact { gap: 0; }
     .footer-bottom .wrap { gap: 0.25rem; }
+}
+
+/* ==========================================================================
+   Correções de 23/08/2026
+   ========================================================================== */
+
+/* O menu do telemóvel abria como uma faixa de 144 px presa ao cabeçalho em vez
+   de cobrir o ecrã, mas só depois de rolar a página. Causa: `backdrop-filter`
+   em #header.scrolled transforma o cabeçalho em bloco contentor dos
+   descendentes `position: fixed` — e #main-nav é um deles. Sem o filtro no
+   telemóvel, o nav volta a referir-se ao viewport. Sai também um efeito caro
+   em telemóveis modestos, que é onde este site mais é aberto. */
+@media (max-width: 1080px) {
+    #header.scrolled {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        background: var(--paper);
+    }
+    /* Com o cabeçalho opaco, o menu aberto tem de o cobrir. */
+    #main-nav.active { z-index: 901; }
+}
+
+
+
+
+/* Alvos de toque: os ícones sociais tinham 38 px e os links legais 36 px. */
+@media (max-width: 768px) {
+    .social-links a { width: 44px; height: 44px; }
+    .footer-bottom a { padding-block: 0.75rem; }
+}
+
+/* ==========================================================================
+   Rodapé no telemóvel
+   ==========================================================================
+   Quatro blocos, cada um com título. Antes o da marca juntava descrição, redes
+   e contactos sem cabeçalho nenhum, ao lado de duas colunas arrumadas — lia-se
+   como um despejo, e era esse o problema de organização, mais do que a altura.
+
+   Arrumação: marca e contactos ocupam a linha toda (o e-mail é longo e numa
+   meia-coluna partia-se a meio da palavra); secções e horário partilham a
+   última linha, que é onde duas colunas ainda funcionam. */
+@media (max-width: 860px) {
+    .footer-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.75rem 1.25rem;
+    }
+    .footer-grid > :nth-child(1),
+    .footer-grid > :nth-child(2) { grid-column: 1 / -1; }
+
+    /* Uma régua a fechar a marca separa-a dos blocos com título. */
+    .footer-grid > :nth-child(1) {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--rule-ink-soft);
+    }
+
+    .footer-logo { width: 170px; margin-bottom: 1.15rem; }
+    .social-links { margin-block: 1.15rem 0; }
+    footer h3 { margin-bottom: 0.9rem; }
+
+    /* Cinco links em duas colunas: metade da altura, mesma área de toque. */
+    .footer-grid > :nth-child(3) ul { grid-template-columns: 1fr 1fr; column-gap: 0.75rem; }
+
+    /* Em ~150 px o dia e a hora não cabem lado a lado. */
+    .hours-list li { flex-direction: column; gap: 0.1rem; padding-bottom: 0.55rem; }
+
+    .footer-bottom .wrap { padding-block: 0.9rem; }
+}
+
+/* Alvos de toque: os ícones sociais tinham 38 px e os links legais 36 px. */
+@media (max-width: 768px) {
+    .social-links a { width: 44px; height: 44px; }
+    .footer-bottom a { padding-block: 0.8rem; }
 }
