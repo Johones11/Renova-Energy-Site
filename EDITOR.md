@@ -54,17 +54,38 @@ o número da linha do problema.
 
 ## 2. Mudar os números das estatísticas
 
-Estes ficam no `index.html`, na secção `<div class="spec">`:
+### Instalações concluídas
 
-```html
-<span class="stat-number" data-target="45">0</span>
+Este aparece em dois sítios da página (início e *Projetos*), mas **muda-se
+num só**. No `js/main.js`, perto do início:
+
+```js
+const TOTAL_INSTALACOES = 45;
 ```
 
-Mudar o `45`. A animação de contagem trata-se sozinha. O rótulo por baixo tem
-`data-i18n`, portanto muda-se no `translations.js`.
+Mudar o `45` e mais nada. Os dois contadores actualizam-se sozinhos.
 
-Os números aparecem em dois sítios (página inicial e secção *Projetos*).
-Manter os dois coerentes.
+> Porquê assim: antes o número estava escrito à mão em cada sítio, e o mapa
+> ainda somava outro valor por província. O site chegou a dizer 45 no topo
+> enquanto o mapa somava 140. Com um valor só, deixa de poder acontecer.
+
+### Os outros números
+
+Ficam no `index.html`, dentro de `<div class="spec">`:
+
+```html
+<span class="stat-number" data-target="60">0</span>
+```
+
+Mudar o `data-target`. A animação de contagem trata-se sozinha. O rótulo por
+baixo tem `data-i18n`, portanto muda-se no `translations.js`.
+
+### O mapa das províncias
+
+No `js/main.js`, em `mapDetails`, cada província tem um rótulo curto (`area`) e
+uma descrição (`details`). **Não pôr contagens de projetos aqui** — se um dia
+houver números reais por província, é preciso que somem ao `TOTAL_INSTALACOES`,
+senão a página volta a contradizer-se.
 
 ---
 

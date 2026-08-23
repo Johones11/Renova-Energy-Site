@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLanguage();
     initMobileMenu();
     initHeaderScroll();
+    aplicarTotalInstalacoes();
     initPartners();
     initHeroSlider();
     initReveals();
@@ -680,30 +681,44 @@ function setLanguage(lang) {
 /* ==========================================================================
    Mapa de Moçambique
    ========================================================================== */
+/* Total de instalações concluídas.
+   Vive aqui e em mais lado nenhum. O site mostrava 45 no cabeçalho enquanto o
+   mapa somava 140 por província, porque eram dois conjuntos de números escritos
+   à mão sem ligação nenhuma entre si. Ao escrever este valor, ele aplica-se a
+   todos os contadores marcados com data-stat="instalacoes"; o data-target no
+   HTML fica só como recurso para quem tenha o JavaScript desligado. */
+const TOTAL_INSTALACOES = 45;
+
+function aplicarTotalInstalacoes() {
+    document.querySelectorAll('[data-stat="instalacoes"]').forEach((el) => {
+        el.setAttribute('data-target', String(TOTAL_INSTALACOES));
+    });
+}
+
 const mapDetails = {
     pt: {
-        'Cabo Delgado': { projects: '8 projetos concluídos', details: 'Sistemas solares isolados para habitação e manutenção de redes elétricas secundárias.' },
-        'Niassa': { projects: '12 projetos concluídos', details: 'Rega agrícola com bombas fotovoltaicas para horticultura.' },
-        'Nampula': { projects: '45 projetos concluídos', details: 'Sede e armazém. Equipa permanente, stock de material e linha técnica para contratos de manutenção.' },
-        'Zambézia': { projects: '15 projetos concluídos', details: 'Sistemas solares comerciais e instalação elétrica de edifícios de comércio.' },
-        'Tete': { projects: '7 projetos concluídos', details: 'Dimensionamento e fornecimento de bancos de baterias de lítio e inversores híbridos.' },
-        'Manica': { projects: '6 projetos concluídos', details: 'Estudos de eficiência energética e auditorias a sistemas de bombagem solar.' },
-        'Sofala': { projects: '11 projetos concluídos', details: 'Instalação elétrica predial e sistemas solares de reserva no corredor da Beira.' },
-        'Inhambane': { projects: '9 projetos concluídos', details: 'Sistemas híbridos com monitorização remota para unidades de turismo.' },
-        'Gaza': { projects: '5 projetos concluídos', details: 'Micro-redes solares comunitárias e iluminação pública.' },
-        'Maputo': { projects: '22 projetos concluídos', details: 'Escritório comercial. Estudos de viabilidade e retorno para centrais de maior potência.' }
+        'Cabo Delgado': { area: 'Habitação isolada', details: 'Sistemas solares isolados para habitação e manutenção de redes elétricas secundárias.' },
+        'Niassa': { area: 'Rega agrícola', details: 'Rega agrícola com bombas fotovoltaicas para horticultura.' },
+        'Nampula': { area: 'Sede e armazém', details: 'Sede e armazém. Equipa permanente, stock de material e linha técnica para contratos de manutenção.' },
+        'Zambézia': { area: 'Comércio e serviços', details: 'Sistemas solares comerciais e instalação elétrica de edifícios de comércio.' },
+        'Tete': { area: 'Armazenamento', details: 'Dimensionamento e fornecimento de bancos de baterias de lítio e inversores híbridos.' },
+        'Manica': { area: 'Auditorias', details: 'Estudos de eficiência energética e auditorias a sistemas de bombagem solar.' },
+        'Sofala': { area: 'Corredor da Beira', details: 'Instalação elétrica predial e sistemas solares de reserva no corredor da Beira.' },
+        'Inhambane': { area: 'Turismo', details: 'Sistemas híbridos com monitorização remota para unidades de turismo.' },
+        'Gaza': { area: 'Micro-redes', details: 'Micro-redes solares comunitárias e iluminação pública.' },
+        'Maputo': { area: 'Escritório comercial', details: 'Escritório comercial. Estudos de viabilidade e retorno para centrais de maior potência.' }
     },
     en: {
-        'Cabo Delgado': { projects: '8 projects completed', details: 'Stand-alone residential solar systems and maintenance of secondary electrical networks.' },
-        'Niassa': { projects: '12 projects completed', details: 'Agricultural irrigation with photovoltaic pumps for horticulture.' },
-        'Nampula': { projects: '45 projects completed', details: 'Head office and warehouse. Permanent team, material in stock and a technical line for maintenance contracts.' },
-        'Zambézia': { projects: '15 projects completed', details: 'Commercial solar systems and electrical installation of retail buildings.' },
-        'Tete': { projects: '7 projects completed', details: 'Sizing and supply of lithium battery banks and hybrid inverters.' },
-        'Manica': { projects: '6 projects completed', details: 'Energy efficiency studies and audits of solar pumping systems.' },
-        'Sofala': { projects: '11 projects completed', details: 'Building electrical installation and backup solar systems along the Beira corridor.' },
-        'Inhambane': { projects: '9 projects completed', details: 'Hybrid systems with remote monitoring for tourism operations.' },
-        'Gaza': { projects: '5 projects completed', details: 'Community solar microgrids and public lighting.' },
-        'Maputo': { projects: '22 projects completed', details: 'Commercial office. Feasibility and payback studies for higher-capacity plants.' }
+        'Cabo Delgado': { area: 'Off-grid housing', details: 'Stand-alone residential solar systems and maintenance of secondary electrical networks.' },
+        'Niassa': { area: 'Agricultural irrigation', details: 'Agricultural irrigation with photovoltaic pumps for horticulture.' },
+        'Nampula': { area: 'Head office and warehouse', details: 'Head office and warehouse. Permanent team, material in stock and a technical line for maintenance contracts.' },
+        'Zambézia': { area: 'Retail and services', details: 'Commercial solar systems and electrical installation of retail buildings.' },
+        'Tete': { area: 'Energy storage', details: 'Sizing and supply of lithium battery banks and hybrid inverters.' },
+        'Manica': { area: 'Audits', details: 'Energy efficiency studies and audits of solar pumping systems.' },
+        'Sofala': { area: 'Beira corridor', details: 'Building electrical installation and backup solar systems along the Beira corridor.' },
+        'Inhambane': { area: 'Tourism', details: 'Hybrid systems with remote monitoring for tourism operations.' },
+        'Gaza': { area: 'Microgrids', details: 'Community solar microgrids and public lighting.' },
+        'Maputo': { area: 'Commercial office', details: 'Commercial office. Feasibility and payback studies for higher-capacity plants.' }
     }
 };
 
@@ -715,7 +730,7 @@ window.updateMapInfo = function (lang) {
     const title = document.getElementById('map-info-title');
     const desc = document.getElementById('map-info-desc');
     if (!info || !title || !desc) return;
-    title.innerHTML = `${name} &mdash; ${info.projects}`;
+    title.innerHTML = `${name} &mdash; ${info.area}`;
     desc.textContent = info.details;
 };
 
