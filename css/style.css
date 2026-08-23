@@ -12,9 +12,19 @@
     --ink-soft:   #14315f;
     --sun:        #faa80b;
     --sun-hot:    #ff8000;
+    /* Âmbar para TEXTO sobre fundos claros. O marigold da marca dá 1.8:1 em
+       texto pequeno sobre papel — ilegível. Fica reservado a preenchimentos,
+       réguas e estados; quando é letra, usa-se este. */
+    --sun-ink:    #8a5600;
     /* Texto sobre o âmbar. Não inverte no tema escuro: se invertesse, todos os
        botões amarelos ficavam com texto claro sobre fundo claro. */
     --on-sun:     #001b48;
+    /* Superfície escura sólida das peças flutuantes (toast, cookies, tooltip,
+       botões de fechar, WhatsApp). NÃO pode ser --ink: esse inverte no tema
+       escuro para servir de cor de texto, e punha letra clara sobre fundo
+       claro no banner de cookies (1.9:1, ilegível). */
+    --chip-bg:    #001b48;
+    --chip-fg:    #f2efe6;
 
     /* --- Papel: off-white quente. O branco clínico é metade do ar genérico --- */
     --paper:      #f5f2ea;
@@ -25,7 +35,11 @@
     /* --- Texto --- */
     --tx:         #001b48;
     --tx-2:       #46567a;
-    --tx-3:       #7b88a3;
+    /* Escurecido de #7b88a3, que dava 2.9:1 no rodapé e 3.2:1 no papel — abaixo
+       do mínimo AA de 4.5. É o token dos rótulos mono pequenos, usado em 14
+       sítios, por isso o problema era do site inteiro e não só do rodapé.
+       Agora: 5.4 no papel, 4.9 no rodapé, 6.0 no cartão. */
+    --tx-3:       #57637a;
     --on-ink:     #f2efe6;
     --on-ink-2:   #9aa8c4;
 
@@ -35,7 +49,8 @@
     --rule-ink:   rgba(242, 239, 230, 0.18);
     --rule-ink-soft: rgba(242, 239, 230, 0.09);
 
-    --alert:      #c2410c;
+    /* Escurecido de #c2410c, que dava 4.2:1 no rodapé — abaixo de AA. */
+    --alert:      #a63407;
 
     /* --- Tipografia --- */
     --f-display: 'Archivo', 'Arial Narrow', sans-serif;
@@ -65,6 +80,9 @@
     --tx-2:      #a8b4cc;
     --tx-3:      #7987a4;
     --ink:       #eae6db;
+    --sun-ink:   var(--sun);
+    --chip-bg:   #14315f;
+    --alert:     #ef7040;   /* sobre navy tem de clarear, nao escurecer */
     --rule:      rgba(234, 230, 219, 0.18);
     --rule-soft: rgba(234, 230, 219, 0.09);
 }
@@ -181,7 +199,7 @@ strong { font-weight: 600; color: var(--tx); }
 .sec-head__body > p { color: var(--tx-2); }
 
 .idx {
-    color: var(--sun);
+    color: var(--sun-ink);
     display: inline-block;
     margin-bottom: 0.5rem;
 }
@@ -234,8 +252,8 @@ strong { font-weight: 600; color: var(--tx); }
 .btn:hover, .btn:focus-visible { color: var(--on-sun); border-color: var(--sun); }
 
 .btn--sun { --btn-bg: var(--sun); --btn-fg: var(--on-sun); --btn-bd: var(--sun); }
-.btn--sun::before { background: var(--ink); }
-.btn--sun:hover, .btn--sun:focus-visible { color: var(--paper); border-color: var(--ink); }
+.btn--sun::before { background: var(--chip-bg); }
+.btn--sun:hover, .btn--sun:focus-visible { color: var(--chip-fg); border-color: var(--chip-bg); }
 
 .btn--ghost { --btn-bg: transparent; --btn-fg: var(--tx); --btn-bd: var(--rule); }
 .btn--ghost:hover, .btn--ghost:focus-visible { color: var(--on-sun); }
@@ -353,7 +371,7 @@ body.home-active #header:not(.scrolled) .logo-dark { display: block; }
     font-size: 0.8rem;
     transition: color var(--t), border-color var(--t);
 }
-.icon-btn:hover { color: var(--sun); border-color: var(--sun); }
+.icon-btn:hover { color: var(--sun-ink); border-color: var(--sun); }
 
 .lang-btn {
     display: inline-flex; align-items: center; gap: 0.4rem;
@@ -365,7 +383,7 @@ body.home-active #header:not(.scrolled) .logo-dark { display: block; }
     color: var(--tx-2);
     transition: color var(--t), border-color var(--t);
 }
-.lang-btn:hover { color: var(--sun); border-color: var(--sun); }
+.lang-btn:hover { color: var(--sun-ink); border-color: var(--sun); }
 
 .btn-nav-quote { padding: 0.72rem 1.15rem; font-size: 0.7rem; }
 
@@ -609,7 +627,7 @@ body.loading { overflow: hidden; }
     font-family: var(--f-mono);
     font-size: clamp(0.8rem, 0.7rem + 0.4vw, 1rem);
     font-weight: 500;
-    color: var(--sun);
+    color: var(--sun-ink);
 }
 .stat-label {
     display: block;
@@ -661,7 +679,7 @@ body.loading { overflow: hidden; }
     color: var(--tx-3);
     transition: color var(--t);
 }
-.index-row:hover .index-row__n { color: var(--sun); }
+.index-row:hover .index-row__n { color: var(--sun-ink); }
 
 .index-row h3 { margin-bottom: 0.4rem; }
 .index-row p {
@@ -681,7 +699,7 @@ body.loading { overflow: hidden; }
     gap: 0.5rem;
     transition: color var(--t), transform 0.4s var(--ease-out);
 }
-.index-row:hover .index-row__go { color: var(--sun); transform: translateX(5px); }
+.index-row:hover .index-row__go { color: var(--sun-ink); transform: translateX(5px); }
 
 /* Miniatura que segue o cursor. Só no ponteiro fino — no telemóvel seria ruído. */
 .index-row__peek {
@@ -733,7 +751,7 @@ body.loading { overflow: hidden; }
     color: var(--tx);
     transition: color var(--t);
 }
-.accordion-header:hover { color: var(--sun); }
+.accordion-header:hover { color: var(--sun-ink); }
 .accordion-header .toggle-icon,
 .accordion-header > i {
     position: relative;
@@ -752,8 +770,8 @@ body.loading { overflow: hidden; }
     background: currentColor;
 }
 .accordion-header .toggle-icon::after { transform: rotate(90deg); transition: transform 0.45s var(--ease-out); }
-.accordion-item.active .accordion-header { color: var(--sun); }
-.accordion-item.active .toggle-icon { color: var(--sun); }
+.accordion-item.active .accordion-header { color: var(--sun-ink); }
+.accordion-item.active .toggle-icon { color: var(--sun-ink); }
 .accordion-item.active .toggle-icon::after { transform: rotate(0deg); }
 
 .accordion-panel {
@@ -873,7 +891,7 @@ body.loading { overflow: hidden; }
     letter-spacing: 0.1em;
     color: var(--tx-3);
 }
-.expandable-service-card.expanded .svc-n { color: var(--sun); }
+.expandable-service-card.expanded .svc-n { color: var(--sun-ink); }
 
 .svc-thumb {
     width: 88px;
@@ -916,7 +934,7 @@ body.loading { overflow: hidden; }
     transform: translate(-50%, -50%);
 }
 .s-toggle-btn::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform 0.45s var(--ease-out); }
-.expandable-service-card.expanded .s-toggle-btn { color: var(--sun); border-color: var(--sun); }
+.expandable-service-card.expanded .s-toggle-btn { color: var(--sun-ink); border-color: var(--sun); }
 .expandable-service-card.expanded .s-toggle-btn::after { transform: translate(-50%, -50%) rotate(0deg); }
 
 .service-body { max-height: 0; overflow: hidden; transition: max-height 0.55s var(--ease-out); }
@@ -1068,8 +1086,8 @@ body.loading { overflow: hidden; }
     position: fixed;
     z-index: 800;
     padding: 0.4rem 0.7rem;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--chip-bg);
+    color: var(--chip-fg);
     border-radius: var(--r);
     font-family: var(--f-mono);
     font-size: 0.65rem;
@@ -1213,7 +1231,7 @@ body.loading { overflow: hidden; }
     font-size: 0.65rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--sun);
+    color: var(--sun-ink);
 }
 @media (max-width: 860px) { .notes { grid-template-columns: 1fr; } }
 
@@ -1237,7 +1255,7 @@ body.loading { overflow: hidden; }
     border-bottom: 1px solid var(--rule);
     transition: color var(--t);
 }
-.contact-list > a:hover { color: var(--sun); }
+.contact-list > a:hover { color: var(--sun-ink); }
 .contact-list .label {
     font-family: var(--f-mono);
     font-size: 0.65rem;
@@ -1315,10 +1333,17 @@ select.form-control option { background: var(--card); color: var(--tx); }
 /* ==========================================================================
    Rodapé
    ========================================================================== */
+/* O rodapé acompanha o tema. Usa --paper-2 e --tx*, que já viram sozinhos, em
+   vez dos tokens fixos --ink-deep/--on-ink: assim fica papel quente com texto
+   navy no claro, e um navy um tom acima do fundo da página no escuro. Antes era
+   #00122f nos dois temas, o que no escuro o tornava indistinguível do #00101f
+   da página — o rodapé desaparecia. */
 footer {
-    background: var(--ink-deep);
-    color: var(--on-ink);
+    background: var(--paper-2);
+    color: var(--tx);
+    border-top: 1px solid var(--rule);
     padding-top: clamp(3.5rem, 7vw, 6rem);
+    transition: background-color 0.5s var(--ease), color 0.5s var(--ease);
 }
 .footer-grid {
     display: grid;
@@ -1327,7 +1352,7 @@ footer {
     padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 .footer-logo { width: 210px; margin-bottom: 1.5rem; }
-footer p { color: var(--on-ink-2); font-size: 0.9rem; }
+footer p { color: var(--tx-2); font-size: 0.9rem; }
 
 footer h3 {
     font-family: var(--f-mono);
@@ -1336,41 +1361,41 @@ footer h3 {
     font-size: 0.65rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(242, 239, 230, 0.5);
+    color: var(--tx-3);
     margin-bottom: 1.35rem;
 }
 footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
-footer ul a { font-size: 0.92rem; color: var(--on-ink); transition: color var(--t); }
-footer ul a:hover { color: var(--sun); }
+footer ul a { font-size: 0.92rem; color: var(--tx); transition: color var(--t); }
+footer ul a:hover { color: var(--sun-ink); }
 
 .hours-list li {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
     padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--rule-ink-soft);
+    border-bottom: 1px solid var(--rule-soft);
     font-size: 0.88rem;
-    color: var(--on-ink-2);
+    color: var(--tx-2);
     font-variant-numeric: tabular-nums;
 }
-.hours-list li span:first-child { color: var(--on-ink); }
-.hours-closed { color: var(--sun); }
+.hours-list li span:first-child { color: var(--tx); }
+.hours-closed { color: var(--alert); font-weight: 500; }
 
 .social-links { display: flex; gap: 0.5rem; margin-block: 1.5rem; }
 .social-links a {
     width: 38px; height: 38px;
     display: grid; place-items: center;
-    border: 1px solid var(--rule-ink);
+    border: 1px solid var(--rule);
     border-radius: var(--r);
-    color: var(--on-ink);
+    color: var(--tx);
     transition: color var(--t), border-color var(--t);
 }
-.social-links a:hover { color: var(--sun); border-color: var(--sun); }
+.social-links a:hover { color: var(--sun-ink); border-color: var(--sun); }
 
-.footer-contact { display: grid; gap: 0.35rem; font-size: 0.88rem; color: var(--on-ink-2); }
-.footer-contact a:hover { color: var(--sun); }
+.footer-contact { display: grid; gap: 0.35rem; font-size: 0.88rem; color: var(--tx-2); }
+.footer-contact a:hover { color: var(--sun-ink); }
 
-.footer-bottom { border-top: 1px solid var(--rule-ink-soft); }
+.footer-bottom { border-top: 1px solid var(--rule-soft); }
 .footer-bottom .wrap {
     display: flex;
     flex-wrap: wrap;
@@ -1381,9 +1406,9 @@ footer ul a:hover { color: var(--sun); }
     font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(242, 239, 230, 0.45);
+    color: var(--tx-3);
 }
-.footer-bottom a:hover { color: var(--sun); }
+.footer-bottom a:hover { color: var(--sun-ink); }
 
 
 /* ==========================================================================
@@ -1511,8 +1536,8 @@ footer ul a:hover { color: var(--sun); }
     z-index: 2;
     width: 40px; height: 40px;
     display: grid; place-items: center;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--chip-bg);
+    color: var(--chip-fg);
     border-radius: var(--r);
     font-size: 1.35rem;
     line-height: 1;
@@ -1542,8 +1567,8 @@ footer ul a:hover { color: var(--sun); }
     align-items: center;
     gap: 0.75rem;
     padding: 0.95rem 1.15rem;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--chip-bg);
+    color: var(--chip-fg);
     border-left: 2px solid var(--sun);
     border-radius: var(--r);
     font-size: 0.9rem;
@@ -1564,8 +1589,8 @@ footer ul a:hover { color: var(--sun); }
     bottom: var(--gutter);
     z-index: 1050;
     width: min(400px, calc(100vw - 2 * var(--gutter)));
-    background: var(--ink);
-    color: var(--on-ink);
+    background: var(--chip-bg);
+    color: var(--chip-fg);
     border-radius: var(--r);
     padding: 1.35rem;
     opacity: 0;
@@ -1600,8 +1625,8 @@ footer ul a:hover { color: var(--sun); }
     z-index: 800;
     width: 52px; height: 52px;
     display: grid; place-items: center;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--chip-bg);
+    color: var(--chip-fg);
     border-radius: var(--r);
     font-size: 1.4rem;
     transition: background-color var(--t), color var(--t);
@@ -1835,4 +1860,30 @@ picture { display: contents; }
 @media (max-width: 768px) {
     .social-links a { width: 44px; height: 44px; }
     .footer-bottom a { padding-block: 0.8rem; }
+}
+
+/* Com o rodapé claro, o logótipo claro deixa de se ler. Reaproveita-se o par
+   .logo-light/.logo-dark do cabeçalho. */
+.footer-logo.logo-dark { display: none; }
+.dark-theme .footer-logo.logo-light { display: none; }
+.dark-theme .footer-logo.logo-dark { display: block; }
+
+/* Nos blocos escuros o fundo é navy, portanto o marigold da marca lê-se bem. */
+.ink-block .idx,
+.hero .idx { color: var(--sun); }
+
+/* Em superfícies escuras o marigold da marca lê-se bem, portanto --sun-ink
+   volta a ser ele próprio. Assim o resto da folha usa sempre --sun-ink para
+   letra e não é preciso decidir caso a caso. */
+.hero,
+.ink-block,
+.spec--ink,
+.toast,
+.cookie-banner,
+.err-page,
+#loading-screen,
+body.home-active #header:not(.scrolled) { --sun-ink: var(--sun); }
+
+@media (max-width: 1080px) {
+    #main-nav { --sun-ink: var(--sun); }
 }

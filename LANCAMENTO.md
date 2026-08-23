@@ -87,12 +87,45 @@ não há MX, SPF nem DMARC. Mesmo sem enviar e-mail a partir do domínio, ele de
 ser **fechado**, para ninguém o poder usar em mensagens fraudulentas em nome da
 empresa:
 
-| Tipo | Nome | Valor | TTL |
+Painel do Cloudflare → o domínio → **DNS** → *Add record*. São quatro, e a
+ordem não importa. Deixar o TTL em *Auto* e o *Proxy status* em **DNS only**
+(a nuvem cinzenta — estes registos não são tráfego web):
+
+| Tipo | Nome | Conteúdo | Prioridade |
 |---|---|---|---|
-| TXT | `@` | `v=spf1 -all` | 3600 |
-| TXT | `*._domainkey` | `v=DKIM1; p=` | 3600 |
-| TXT | `_dmarc` | `v=DMARC1; p=reject; rua=mailto:renovaenergylda@gmail.com` | 3600 |
-| MX | `@` | `.` com prioridade `0` (null MX, RFC 7505) | 3600 |
+| TXT | `@` | `v=spf1 -all` | — |
+| TXT | `*._domainkey` | `v=DKIM1; p=` | — |
+| TXT | `_dmarc` | `v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s` | — |
+| MX | `@` | `.` | `0` |
+
+O que cada um faz:
+
+- **SPF `v=spf1 -all`** — nenhum servidor no mundo está autorizado a enviar
+  e-mail com este domínio no remetente. É a declaração mais forte possível, e é
+  verdadeira: a empresa usa Gmail, não o domínio.
+- **DKIM `*._domainkey` com `p=` vazio** — o curinga responde por qualquer
+  selector que um burlão invente, e a chave vazia significa "esta chave foi
+  revogada". Sem isto, um selector inexistente devolve *nada*, que é mais fraco
+  do que devolver *revogada*.
+- **DMARC `p=reject`** — diz ao servidor que recebe para **rejeitar**, não só
+  marcar como spam. O `sp=reject` estende a regra a subdomínios (é por aí que
+  as burlas costumam entrar: `facturas.renovaenergylda.co.mz`). O `adkim=s` e o
+  `aspf=s` exigem correspondência exacta do domínio, não bastando um subdomínio.
+- **MX `.` com prioridade 0** — o "null MX" da RFC 7505. Declara que o domínio
+  não recebe e-mail, e faz com que quem tente enviar receba um erro imediato em
+  vez de ficar dias a tentar.
+
+> **Sem `rua=`, e é de propósito.** A versão anterior deste documento mandava pôr
+> `rua=mailto:renovaenergylda@gmail.com` para receber os relatórios. Estava
+> errado: pela RFC 7489 §7.1, mandar relatórios para um domínio diferente exige
+> que *esse* domínio autorize, publicando
+> `renovaenergylda.co.mz._report._dmarc.gmail.com`. O Google não publica isso
+> para domínios de terceiros — confirmado, não existe nem há curinga. O `rua`
+> seria ignorado e nunca chegaria relatório nenhum.
+>
+> Como o domínio não envia e-mail, os relatórios só mostrariam tentativas de
+> burla. Se um dia isso interessar, usa-se um serviço gratuito (dmarcian,
+> Postmark, URIports) que fornece um endereço já autorizado.
 
 #### Cenário B — passa a haver `geral@renovaenergylda.co.mz` no Google Workspace
 
@@ -116,6 +149,10 @@ Ordem de trabalhos no cenário B:
 
 > Nunca saltar directamente para `p=reject` no cenário B: se o SPF ou o DKIM
 > ainda não estiverem certos, o e-mail legítimo da empresa deixa de ser entregue.
+
+> No cenário B o `rua` já pode ser `dmarc@renovaenergylda.co.mz`, porque o
+> endereço é do próprio domínio e dispensa autorização externa. Basta que essa
+> caixa exista.
 
 **Como verificar** (só funciona depois de o domínio resolver):
 
