@@ -205,6 +205,10 @@ GA4, marcar `gerar_lead` como conversão em *Admin → Events*.
 
 ## 5. Ser encontrado
 
+> Esta secção é o **arranque**, para fazer uma vez. O acompanhamento contínuo
+> — erros do Search Console, palavras-chave reais, PageSpeed — está na
+> secção 8.
+
 | Passo | Onde | Notas |
 |---|---|---|
 | Google Search Console | <https://search.google.com/search-console> | Verificar por registo TXT no DNS. Submeter `https://renovaenergylda.co.mz/sitemap.xml`. |
@@ -278,3 +282,224 @@ telefone. O Google cruza isto para ranking local.
 3. Testar o formulário nos dois botões (WhatsApp e e-mail).
 4. Confirmar que o WhatsApp abre com o número certo.
 5. Correr o PageSpeed Insights em modo telemóvel.
+
+---
+
+## 8. Depois de publicar
+
+### 8.1 Saber que o site caiu antes do cliente saber
+
+O Cloudflare não avisa se a página começar a dar erro — só garante que serve o
+que lá está. É preciso um vigia de fora.
+
+**UptimeRobot** (gratuito, chega bem):
+
+1. Conta em <https://uptimerobot.com> → *Add New Monitor*.
+2. Tipo **HTTP(s)**, URL `https://renovaenergylda.co.mz`, intervalo **5 min**.
+3. Em *Alert Contacts*, pôr **dois**: o e-mail e o telemóvel por app. Se o aviso
+   for só para o e-mail e o e-mail estiver no telemóvel que está sem dados, não
+   serve de nada.
+4. Criar um segundo monitor com **Keyword** para `Renova Energy` na página.
+   Só o HTTP 200 não chega: o Cloudflare pode devolver 200 com a página em
+   branco se o *build* falhar a meio, e um monitor de estado não dá por isso.
+
+Vale a pena vigiar também o **certificado SSL** — o UptimeRobot avisa 30 dias
+antes de expirar. Não devia acontecer (o Cloudflare renova sozinho), mas se o
+domínio deixar de apontar para os nameservers dele, a renovação pára em
+silêncio e só se descobre quando o browser mostra o aviso vermelho.
+
+### 8.2 Erros de JavaScript em telemóveis que não temos
+
+O site é JavaScript simples, sem framework, mas basta um telemóvel antigo com
+um browser que não conhece uma função para a navegação deixar de funcionar — e
+o visitante sai sem dizer nada.
+
+**Sentry** tem um plano gratuito com 5 000 erros por mês, que é muito mais do
+que este site alguma vez vai gerar:
+
+1. Conta em <https://sentry.io> → projeto **Browser JavaScript**.
+2. Copiar o `DSN` e juntar ao `<head>` do `index.html`, **antes** do `main.js`.
+3. O `_headers` tem uma CSP restritiva: é preciso acrescentar o domínio do
+   Sentry a `script-src` e a `connect-src`, senão o browser bloqueia-o e nunca
+   se recebe erro nenhum. **É o engano mais comum.**
+
+Configurar `tracesSampleRate: 0` — só interessam os erros, não o desempenho, e
+assim não se gasta a quota.
+
+Se parecer excessivo para este site, a alternativa mínima é ver a coluna de
+erros do Cloudflare Web Analytics de vez em quando. Não dá o detalhe, mas
+mostra se há um pico.
+
+### 8.3 Search Console
+
+É onde se vê o que o Google percebeu do site. Sem isto anda-se às cegas.
+
+Se ainda não estiver criado, ver a secção 5. Depois de criado:
+
+1. Confirmar que a propriedade é **Prefixo do URL**
+   `https://renovaenergylda.co.mz` (não a versão `www`).
+2. Verificação: escolher **registo DNS TXT** e criá-lo no Cloudflare. É o método
+   que sobrevive a mudanças no site — a verificação por ficheiro HTML perde-se
+   se alguém apagar o ficheiro.
+3. *Sitemaps* → submeter `sitemap.xml`.
+4. *Inspeção de URL* na página inicial → **Pedir indexação**. Sem isto pode
+   demorar semanas até à primeira visita do robô.
+
+### 8.4 Os erros que vão aparecer no Search Console
+
+Nas primeiras semanas aparecem quase sempre estes, e a maior parte **não é
+problema**:
+
+| O que diz | Significa | Fazer |
+|---|---|---|
+| *Descoberta — não indexada* | O Google viu mas ainda não visitou | Esperar. É normal num site novo |
+| *Rastreada — não indexada* | Visitou e decidiu não indexar | Se for a página inicial, é sinal de conteúdo fraco. Nas legais, é normal |
+| *Página alternativa com tag canónica adequada* | Está a fazer o que deve | Nada |
+| *Erro de redirecionamento* | **Isto é a sério** | Ver 8.5 |
+| *Bloqueada pelo robots.txt* | Só se for uma página que devia ser indexada | Verificar o `robots.txt` |
+
+O site é uma página só com secções por `#hash`. O Google **não indexa hashes
+como páginas separadas** — vai indexar `/` e mais nada, além das legais. Isso é
+esperado e não é erro. Se um dia interessar ter `/servicos` como página própria
+a aparecer na pesquisa, é preciso separar em ficheiros HTML verdadeiros.
+
+### 8.5 Erros de redirecionamento — o que já nos mordeu
+
+Já aconteceu neste site: uma regra no `_redirects` a mandar `/termos` para
+`/termos.html` enquanto o Cloudflare mandava `/termos.html` para `/termos`.
+Ciclo infinito, páginas inacessíveis, e o Search Console teria reportado
+*Erro de redirecionamento*.
+
+Depois de qualquer alteração ao `_redirects`, confirmar:
+
+```bash
+curl -s -o /dev/null -w '%{num_redirects} saltos -> %{http_code}\n' -L https://renovaenergylda.co.mz/termos
+```
+
+Zero ou um salto e `200`. Se aparecerem 5 ou mais saltos, há um ciclo.
+
+### 8.6 Palavras-chave
+
+O site está escrito para quem procura em português de Moçambique. As
+expressões que interessam não são as bonitas, são as que as pessoas escrevem:
+
+| O que se escreve mesmo | Onde já aparece |
+|---|---|
+| painéis solares Nampula | `<title>`, meta description, texto |
+| instalação de painéis solares Moçambique | descrição, serviços |
+| energia solar Nampula preço | **não aparece** — ver abaixo |
+| eletricista Nampula | serviços, mas fraco |
+| material elétrico Nampula | serviço 03 |
+| sistema solar off-grid Moçambique | serviço 02, notas técnicas |
+
+Duas coisas a considerar, ambas decisão do negócio:
+
+- **"preço" e "quanto custa"** são das pesquisas mais comuns e o site não lhes
+  responde. Nem que seja uma faixa ("um sistema residencial começa em X"), é o
+  que mais traz gente qualificada. Se não se quiser publicar valores, uma nota
+  do género "o orçamento é gratuito e sai em 24 h" já apanha parte dessas
+  pesquisas.
+- **Google Business Profile** vale mais do que qualquer palavra-chave para uma
+  empresa local. Quem procura "energia solar perto de mim" em Nampula vê o mapa
+  antes dos resultados normais. É gratuito, e a verificação demora semanas —
+  convém começar cedo.
+
+Passadas 4 a 6 semanas, o Search Console → *Desempenho* mostra as expressões
+reais pelas quais as pessoas chegaram. Vale mais do que qualquer suposição
+feita agora, esta incluída.
+
+### 8.7 Abrir no 4G — medido, não estimado
+
+Medido em produção a 23/08/2026, já comprimido pelo Cloudflare:
+
+| Recurso | Transferido |
+|---|---|
+| HTML | 14 KB (brotli) |
+| CSS | 13 KB |
+| JS (traduções + principal) | 23 KB |
+| Logótipo do cabeçalho | 20 KB |
+| Logótipo do rodapé | 18 KB |
+| Primeira fotografia do hero (WebP) | 58 KB |
+| **Total do primeiro ecrã** | **146 KB** |
+
+Tempo só de transferência:
+
+| Ligação | Tempo |
+|---|---|
+| 4G bom (5 Mbps) | 0,2 s |
+| 4G típico (1,5 Mbps) | 0,8 s |
+| 4G fraco, rede cheia (500 kbps) | 2,3 s |
+| 3G (200 kbps) | 5,8 s |
+
+As fontes (~150 KB) vêm **por cima disto, mas não bloqueiam**: o
+`display=swap` faz o texto aparecer logo com a fonte do sistema e trocar
+depois. Por isso a página fica legível nos tempos acima, mesmo que as fontes
+ainda venham a caminho.
+
+**Duas coisas que sobram, ambas verificadas:**
+
+- Os **dois logótipos carregam sempre** — o claro e o escuro, 38 KB, dos quais
+  metade está sempre invisível. São 26 % do primeiro ecrã. O browser transfere
+  imagens com `display: none`. Resolve-se, mas exige mexer no formato do
+  logótipo (hoje é um SVG a embrulhar um WebP em base64, e é por isso que pesa
+  20 KB em vez de 2).
+- Tentei **apertar os eixos** do Archivo (`wdth@100..125` em vez de `62..125`)
+  para reduzir os 90 KB da fonte. **Não funciona**: o Google Fonts serve o mesmo
+  ficheiro binário seja qual for o intervalo pedido — o intervalo só muda o CSS.
+  Medido, 90 104 bytes nos dois casos. A única forma real de cortar aqui é
+  alojar a fonte e criar um subconjunto, o que traz um passo de compilação que
+  este site hoje não tem.
+
+### 8.8 PageSpeed
+
+<https://pagespeed.web.dev> → colar o URL. **Ver sempre o separador *Telemóvel***
+— o de computador dá sempre bom e não diz nada sobre quem visita o site.
+
+O que importa nos números:
+
+- **LCP** (aparecer o conteúdo principal): abaixo de 2,5 s. É a primeira
+  fotografia do hero, e é por isso que tem `preload` no `<head>`.
+- **CLS** (o texto saltar durante o carregamento): abaixo de 0,1. Todas as
+  imagens têm `width`/`height` para isto não acontecer.
+- **INP** (resposta ao toque): abaixo de 200 ms.
+
+Os dados do PageSpeed são de laboratório, com uma ligação simulada. Os **dados
+reais** só aparecem se o site tiver visitas suficientes, e demoram 28 dias a
+acumular. Nas primeiras semanas só há laboratório.
+
+Se o resultado descer de repente depois de uma alteração, comparar com a
+publicação anterior antes de mexer em mais alguma coisa.
+
+### 8.9 Renovações
+
+Estão na secção 1 deste documento. O que mais custa a apanhar:
+
+- O **domínio** é o único que, se falhar, deita o site inteiro abaixo — e em
+  `.mz` a recuperação depois de expirar não é imediata nem barata.
+- Pôr o aviso no calendário **30 dias antes**, e num calendário que mais do que
+  uma pessoa veja.
+
+### 8.10 Atualizações
+
+O site não tem dependências, `node_modules` nem passo de compilação, portanto
+não há nada que fique desatualizado por si. O que precisa de revisão periódica
+é o **conteúdo**:
+
+| Quando | O quê |
+|---|---|
+| Cada instalação nova | `TOTAL_INSTALACOES` no `main.js` (ver EDITOR.md, secção 2) |
+| Trimestral | Fotografias da galeria — as de obra recente valem mais que as antigas |
+| Trimestral | Search Console → *Desempenho*: que expressões trazem gente |
+| Semestral | Preços e prazos no texto, para não prometer o que já não se cumpre |
+| Anual | Horário, morada, contactos, e o ano no rodapé |
+
+Antes de cada publicação, a lista da secção 7.
+
+Há dois ficheiros de verificação no repositório:
+
+```bash
+python verificar-dns.py
+```
+
+Confirma SPF, DKIM, DMARC e MX nulo. Devolve código 1 enquanto faltar algum,
+portanto também serve para automatizar.
